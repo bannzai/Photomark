@@ -40,7 +40,6 @@ struct ContentView: View {
     private var items: FetchedResults<Photo>
     @StateObject var viewModel = ContentViewModel()
 
-
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
