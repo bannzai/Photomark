@@ -1,6 +1,7 @@
 import Foundation
 import Photos
-import UIKit
+import class UIKit.UIImage
+import SwiftUI
 import os.log
 
 private let logger = Logger(subsystem: "com.photomark.log", category: "photoLibrary")
@@ -33,4 +34,17 @@ struct PhotoLibrary {
     }
 }
 
+struct PhotoLibraryKey: SwiftUI.EnvironmentKey {
+    static var defaultValue: PhotoLibrary = .init()
+}
 
+extension EnvironmentValues {
+    var photoLibrary: PhotoLibrary {
+        get {
+            self[PhotoLibraryKey.self]
+        }
+        set {
+            self[PhotoLibraryKey.self] = newValue
+        }
+    }
+}
