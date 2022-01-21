@@ -19,6 +19,8 @@
 		2086F76E279AD67600BBA8D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2086F757279AD67600BBA8D4 /* Assets.xcassets */; };
 		2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */; };
 		2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */; };
+		2086F788279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
+		2086F789279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,7 @@
 		2086F762279AD67600BBA8D4 /* Photomark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photomark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2086F764279AD67600BBA8D4 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModelFactory.swift; sourceTree = "<group>"; };
+		2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,7 @@
 			children = (
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				2086F755279AD67600BBA8D4 /* ContentView.swift */,
+				2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */,
 				2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */,
 				2086F756279AD67600BBA8D4 /* Persistence.swift */,
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
@@ -192,6 +196,7 @@
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
+				2086F788279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */,
 				2086F769279AD67600BBA8D4 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,6 +209,7 @@
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F768279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
+				2086F789279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */,
 				2086F76A279AD67600BBA8D4 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +268,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -315,6 +323,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -332,6 +342,7 @@
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "タグ付けするために画像を取得します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -362,6 +373,7 @@
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "タグ付けするために画像を取得します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

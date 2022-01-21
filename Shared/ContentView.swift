@@ -16,6 +16,10 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Photo>
 
+    init() {
+        retrieveAllPhoto()
+    }
+
     var body: some View {
         NavigationView {
             List {
