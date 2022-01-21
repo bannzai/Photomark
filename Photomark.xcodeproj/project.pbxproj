@@ -17,6 +17,8 @@
 		2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F756279AD67600BBA8D4 /* Persistence.swift */; };
 		2086F76D279AD67600BBA8D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2086F757279AD67600BBA8D4 /* Assets.xcassets */; };
 		2086F76E279AD67600BBA8D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2086F757279AD67600BBA8D4 /* Assets.xcassets */; };
+		2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */; };
+		2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,7 @@
 		2086F75C279AD67600BBA8D4 /* Photomark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photomark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2086F762279AD67600BBA8D4 /* Photomark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photomark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2086F764279AD67600BBA8D4 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModelFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,7 @@
 			children = (
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				2086F755279AD67600BBA8D4 /* ContentView.swift */,
+				2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */,
 				2086F756279AD67600BBA8D4 /* Persistence.swift */,
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
 				2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */,
@@ -186,6 +190,7 @@
 			files = (
 				2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
+				2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
 				2086F769279AD67600BBA8D4 /* ContentView.swift in Sources */,
 			);
@@ -197,6 +202,7 @@
 			files = (
 				2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
+				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F768279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
 				2086F76A279AD67600BBA8D4 /* ContentView.swift in Sources */,
 			);
