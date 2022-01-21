@@ -9,42 +9,58 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @Environment(\.photoLibrary) private var photoLibrary
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Photo>
+    @State private var assets: [PhotoLibrary.AssetResponse] = []
 
-    init() {
-        retrieveAllPhoto()
-    }
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.createdDate!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.createdDate!, formatter: itemFormatter)
+            GeometryReader { geometry in
+                let edge = geometry.size.width / 3
+
+                List {
+                    ForEach(assets) { asset in
+                        if let image = asset.image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .frame(width: edge, height: edge)
+                        } else {
+                            Text("Image Not found")
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+
+                    Text("Select an item")
+                }
+                .task {
+                    for asset in photoLibrary.fetchAssets().assets().reversed()[0..<40] {
+                        Task { @MainActor in
+                            for await response in photoLibrary.imageStream(for: asset, edge: edge) {
+                                print("[DEBUG]", "response: ", response)
+                                assets.append(response)
+                            }
+                        }
                     }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
+                .toolbar {
 #if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
 #endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    ToolbarItem {
+                        Button(action: addItem) {
+                            Label("Add Item", systemImage: "plus")
+                        }
                     }
                 }
             }
-            Text("Select an item")
         }
     }
 
