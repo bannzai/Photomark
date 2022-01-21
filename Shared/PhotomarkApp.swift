@@ -1,10 +1,3 @@
-//
-//  PhotomarkApp.swift
-//  Shared
-//
-//  Created by 廣瀬雄大 on 2022/01/21.
-//
-
 import SwiftUI
 
 @main

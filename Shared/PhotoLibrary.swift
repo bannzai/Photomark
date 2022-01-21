@@ -22,15 +22,14 @@ struct PhotoLibrary {
             "asset: \(asset), image: \(String(describing: image)), info: \(String(describing: info))"
         }
     }
-    func imageStream(for asset: PHAsset, edge: CGFloat) -> AsyncStream<AssetResponse> {
+    func imageStream(for asset: PHAsset, imageLength: CGFloat) -> AsyncStream<AssetResponse> {
         AsyncStream { continuation in
             let options = PHImageRequestOptions()
             options.isSynchronous = true
 
             // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
-            PHImageManager.default().requestImage(for: asset, targetSize: .init(width: edge, height: edge), contentMode: .default, options: options) { image, info in
+            PHImageManager.default().requestImage(for: asset, targetSize: .init(width: imageLength, height: imageLength), contentMode: .default, options: options) { image, info in
                 let response = AssetResponse(asset: asset, image: image, info: info)
-                logger.debug("[DEBUG], \(response)")
                 continuation.yield(response)
             }
         }

@@ -1,12 +1,31 @@
-//
-//  ContentView.swift
-//  Shared
-//
-//  Created by 廣瀬雄大 on 2022/01/21.
-//
-
 import SwiftUI
 import CoreData
+import Photos
+
+@MainActor final class ContentViewModel: ObservableObject {
+    @Environment(\.photoLibrary) private var photoLibrary
+
+    @Published var assets: [PhotoLibrary.AssetResponse] = []
+
+    private var phAssets: [PHAsset] = []
+
+    func prefetch() {
+        if !phAssets.isEmpty {
+            return
+        }
+        phAssets = photoLibrary.fetchAssets().assets()
+    }
+
+    func fetch(imageLength: CGFloat) {
+        Task {
+            for phAsset in phAssets {
+                for await response in photoLibrary.imageStream(for: phAsset, imageLength: imageLength) {
+                    assets.append(response)
+                }
+            }
+        }
+    }
+}
 
 struct ContentView: View {
     @Environment(\.photoLibrary) private var photoLibrary
@@ -16,20 +35,20 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Photo>
-    @State private var assets: [PhotoLibrary.AssetResponse] = []
+    @StateObject var viewModel = ContentViewModel()
 
 
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
-                let edge = geometry.size.width / 3
+                let imageLength = geometry.size.width / 3
 
                 List {
-                    ForEach(assets) { asset in
+                    ForEach(viewModel.assets) { asset in
                         if let image = asset.image {
                             Image(uiImage: image)
                                 .resizable()
-                                .frame(width: edge, height: edge)
+                                .frame(width: imageLength, height: imageLength)
                         } else {
                             Text("Image Not found")
                         }
@@ -39,14 +58,8 @@ struct ContentView: View {
                     Text("Select an item")
                 }
                 .task {
-                    for asset in photoLibrary.fetchAssets().assets().reversed()[0..<40] {
-                        Task { @MainActor in
-                            for await response in photoLibrary.imageStream(for: asset, edge: edge) {
-                                print("[DEBUG]", "response: ", response)
-                                assets.append(response)
-                            }
-                        }
-                    }
+                    viewModel.prefetch()
+                    viewModel.fetch(imageLength: imageLength)
                 }
                 .toolbar {
 #if os(iOS)
