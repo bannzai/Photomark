@@ -13,7 +13,10 @@ import Photos
         if !phAssets.isEmpty {
             return
         }
-        phAssets = photoLibrary.fetchAssets().assets()
+        #if DEBUG
+        // TODO: Remove range
+        phAssets = Array(photoLibrary.fetchAssets().assets()[0..<40])
+        #endif
     }
 
     func fetch(imageLength: CGFloat) {
