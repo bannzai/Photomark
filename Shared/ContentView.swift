@@ -17,7 +17,7 @@ struct ContentView: View {
     animation: .default)
   private var tags: FetchedResults<Tag>
 
-  @State var showsPhotoLibraryPicker: Bool = false
+  @State var assets: [Asset] = []
   @State var editingPhoto: Photo? = nil
   @State var error: Error?
   @State var searchText: String = ""
@@ -28,46 +28,42 @@ struct ContentView: View {
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
   ]
-  private var filteredPhotos: [Photo] {
+  private var filteredAssets: [Asset] {
     if selectedTags.isEmpty {
-      return photos.toArray()
+      return assets
     } else {
-      return photos.filter { photo in
-        guard let photoTagIDs = photo.tagIDs else {
-          return false
-        }
+      return assets.filter { asset in
+        photos.filter { photo in
+          guard let photoTagIDs = photo.tagIDs else {
+            return false
+          }
 
-        return photoTagIDs.contains { photoTagID in
-          selectedTags.contains { tag in
-            tag.id?.uuidString == photoTagID
+          return photoTagIDs.contains { photoTagID in
+            selectedTags.contains { tag in
+              tag.id?.uuidString == photoTagID
+            }
           }
         }
+        .contains { $0.phAssetIdentifier == asset.id }
       }
     }
   }
 
   var body: some View {
-    Group {
-      if photos.isEmpty {
-        VStack(alignment: .center, spacing: 10) {
-          Button(action: {
-            showsPhotoLibraryPicker = true
-          }, label: {
-            Image(systemName: "plus")
-              .font(.system(size: 40))
-              .padding()
-              .foregroundColor(.black)
-              .overlay(Circle().stroke(Color.black))
-          })
+    GeometryReader { viewGeometry in
+      Group {
+        if assets.isEmpty {
+          VStack(alignment: .center, spacing: 10) {
+            Spacer()
+            Text("写真が存在しません")
+            Spacer()
+          }
+          .ignoresSafeArea()
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
+          .navigationBarHidden(true)
 
-          Text("画像を追加しよう")
-        }
-        .ignoresSafeArea()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationBarHidden(true)
-
-      } else {
-        ScrollView(.vertical) {
+        } else {
+          ScrollView(.vertical) {
             VStack {
               TagLine(tags: tags.toArray()) { tag in
                 TagView(tag: tag, isSelected: selectedTags.contains(tag))
@@ -81,11 +77,19 @@ struct ContentView: View {
               }
 
               LazyVGrid(columns: gridItems, spacing: 1) {
-                ForEach(filteredPhotos) { photo in
-                  if let imageData = photo.imageData, let image = UIImage(data: imageData) {
+                ForEach(filteredAssets) { asset in
+                  if let image = asset.image {
                     GridImage(image: image)
                       .onTapGesture {
-                        editingPhoto = photo
+                        if let photo = photos.first(where: { $0.phAssetIdentifier == asset.id }) {
+                          editingPhoto = photo
+                        } else {
+                          do {
+                            editingPhoto = try Photo.createAndSave(context: viewContext, asset: asset)
+                          } catch {
+                            self.error = error
+                          }
+                        }
                       }
                       .sheet(item: $editingPhoto) { photo in
                         PhotoEditPage(image: image, photo: photo, tags: tags.toArray())
@@ -95,69 +99,22 @@ struct ContentView: View {
               }
             }
           }
-          .toolbar {
-          ToolbarItem {
-            Button(action: {
-              showsPhotoLibraryPicker = true
-            }) {
-              Label("Add Item", systemImage: "plus")
+          .navigationTitle("保存済み")
+          .navigationBarTitleDisplayMode(.inline)
+          .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
+        }
+      }
+      .task {
+        let phAssets = photoLibrary.fetchAssets().assets()
+        for phAsset in phAssets {
+          Task { @MainActor in
+            for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: viewGeometry.size.width / 3) {
+              assets.append(response)
             }
           }
         }
-        .navigationTitle("保存済み")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
       }
-    }
-    .sheet(isPresented: $showsPhotoLibraryPicker) {
-      PhotoLibraryPicker(error: $error) { results in
-        assert(results.count == 1)
-        guard let result = results.first else {
-          return
-        }
-
-        addPhoto(with: result)
-      }
-    }
-    .handle(error: $error)
-  }
-
-  private func addPhoto(with result: PHPickerResult) {
-    result.itemProvider.registeredTypeIdentifiers.forEach { identifier in
-      // See also: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html
-      guard let utType = UTType.init(identifier) else {
-        assertionFailure()
-        return
-      }
-
-      if utType.conforms(to: .image) {
-        result.itemProvider.loadObject(ofClass: UIImage.self) { itemProviderReading, error in
-          switch (itemProviderReading, error) {
-          case (nil, let error?):
-            self.error = error
-          case (let image as UIImage, _):
-            let imageData: Data?
-            if utType.conforms(to: .png) {
-              imageData = image.pngData()
-            } else if (utType.conforms(to: .jpeg)) {
-              imageData = image.jpegData(compressionQuality: 1.0)
-            } else {
-              return
-            }
-            guard let imageData = imageData else {
-              return
-            }
-
-            do {
-              try Photo.createAndSave(context: viewContext, imageData: imageData)
-            } catch {
-              self.error = error
-            }
-          case _:
-            fatalError()
-          }
-        }
-      }
+      .handle(error: $error)
     }
   }
 }

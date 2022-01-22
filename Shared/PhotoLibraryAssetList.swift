@@ -3,7 +3,7 @@ import SwiftUI
 struct PhotoLibraryAssetList: View {
   @Environment(\.photoLibrary) private var photoLibrary
 
-  @State var assets: [PhotoLibrary.AssetResponse] = []
+  @State var assets: [Asset] = []
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
