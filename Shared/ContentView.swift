@@ -14,6 +14,7 @@ struct ContentView: View {
   private var photos: FetchedResults<Photo>
 
   @State var showsPhotoLibraryPicker: Bool = false
+  @State var editingPhoto: Photo? = nil
   @State var error: Error?
 
   private let gridItems: [GridItem] = [
@@ -48,6 +49,12 @@ struct ContentView: View {
             ForEach(photos) { photo in
               if let imageData = photo.imageData, let image = UIImage(data: imageData) {
                 GridImage(image: image)
+                  .onTapGesture {
+                    editingPhoto = photo
+                  }
+                  .sheet(item: $editingPhoto) { photo in
+
+                  }
               }
             }
           }
