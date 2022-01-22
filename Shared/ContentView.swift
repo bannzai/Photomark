@@ -68,7 +68,7 @@ struct ContentView: View {
                       editingPhoto = photo
                     }
                     .sheet(item: $editingPhoto) { photo in
-                      PhotoEditPage(image: image, photo: photo, tags: tags.map { $0 })
+                      PhotoEditPage(image: image, photo: photo, tags: tags.toArray())
                     }
                 }
               }
