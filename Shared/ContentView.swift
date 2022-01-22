@@ -2,6 +2,7 @@ import SwiftUI
 import CoreData
 import Photos
 import UniformTypeIdentifiers
+import PhotosUI
 
 struct ContentView: View {
   @Environment(\.photoLibrary) private var photoLibrary
@@ -67,40 +68,44 @@ struct ContentView: View {
           return
         }
 
-        result.itemProvider.registeredTypeIdentifiers.forEach { identifier in
-          // See also: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html
-          guard let utType = UTType.init(identifier) else {
-            assertionFailure()
-            return
-          }
+        addPhoto(with: result)
+      }
+    }
+  }
 
-          if utType.conforms(to: .image) {
-            result.itemProvider.loadObject(ofClass: UIImage.self) { itemProviderReading, error in
-              switch (itemProviderReading, error) {
-              case (nil, let error?):
-                self.error = error
-              case (let image as UIImage, _):
-                let imageData: Data?
-                if utType.conforms(to: .png) {
-                  imageData = image.pngData()
-                } else if (utType.conforms(to: .jpeg)) {
-                  imageData = image.jpegData(compressionQuality: 1.0)
-                } else {
-                  return
-                }
-                guard let imageData = imageData else {
-                  return
-                }
+  private func addPhoto(with result: PHPickerResult) {
+    result.itemProvider.registeredTypeIdentifiers.forEach { identifier in
+      // See also: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html
+      guard let utType = UTType.init(identifier) else {
+        assertionFailure()
+        return
+      }
 
-                do {
-                  try Photo.createAndSave(context: viewContext, imageData: imageData)
-                } catch {
-                  self.error = error
-                }
-              case _:
-                fatalError()
-              }
+      if utType.conforms(to: .image) {
+        result.itemProvider.loadObject(ofClass: UIImage.self) { itemProviderReading, error in
+          switch (itemProviderReading, error) {
+          case (nil, let error?):
+            self.error = error
+          case (let image as UIImage, _):
+            let imageData: Data?
+            if utType.conforms(to: .png) {
+              imageData = image.pngData()
+            } else if (utType.conforms(to: .jpeg)) {
+              imageData = image.jpegData(compressionQuality: 1.0)
+            } else {
+              return
             }
+            guard let imageData = imageData else {
+              return
+            }
+
+            do {
+              try Photo.createAndSave(context: viewContext, imageData: imageData)
+            } catch {
+              self.error = error
+            }
+          case _:
+            fatalError()
           }
         }
       }
