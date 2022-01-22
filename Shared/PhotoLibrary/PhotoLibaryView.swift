@@ -10,8 +10,7 @@ struct PhotoLibraryPicker: UIViewControllerRepresentable {
 
   @Binding var error: Error?
 
-  let photoLibrary: PhotoLibrary
-  let selected: (PHPickerResult) -> Void
+  let selected: ([PHPickerResult]) -> Void
 
   func makeUIViewController(context: Context) -> PHPickerViewController {
     let configuration: PHPickerConfiguration = {
@@ -41,12 +40,7 @@ struct PhotoLibraryPicker: UIViewControllerRepresentable {
     }
 
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-      guard let result = results.first else {
-        parent.dismiss()
-        return
-      }
-
-      parent.selected(result)
+      parent.selected(results)
       parent.dismiss()
     }
   }

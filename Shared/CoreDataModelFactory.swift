@@ -9,6 +9,13 @@ extension Photo {
     photo.imageData = imageData
     return photo
   }
+
+  @discardableResult
+  static func createAndSave(context: NSManagedObjectContext, imageData: Data) throws -> Photo {
+    let photo = create(context: context, imageData: imageData)
+    try context.save()
+    return photo
+  }
 }
 
 extension Tag {

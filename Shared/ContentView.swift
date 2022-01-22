@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreData
 import Photos
+import UniformTypeIdentifiers
 
 struct ContentView: View {
   @Environment(\.photoLibrary) private var photoLibrary
@@ -11,7 +12,8 @@ struct ContentView: View {
     animation: .default)
   private var photos: FetchedResults<Photo>
 
-  @State var showsPhotoLibraryAssetList: Bool = false
+  @State var showsPhotoLibraryPicker: Bool = false
+  @State var error: Error?
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -24,7 +26,7 @@ struct ContentView: View {
       if photos.isEmpty {
         VStack(alignment: .center, spacing: 10) {
           Button(action: {
-            showsPhotoLibraryAssetList = true
+            showsPhotoLibraryPicker = true
           }, label: {
             Image(systemName: "plus")
               .font(.system(size: 40))
@@ -50,7 +52,7 @@ struct ContentView: View {
         .toolbar {
           ToolbarItem {
             Button(action: {
-              showsPhotoLibraryAssetList = true
+              showsPhotoLibraryPicker = true
             }) {
               Label("Add Item", systemImage: "plus")
             }
@@ -58,8 +60,50 @@ struct ContentView: View {
         }
       }
     }
-    .sheet(isPresented: $showsPhotoLibraryAssetList) {
-      PhotoLibraryAssetList()
+    .sheet(isPresented: $showsPhotoLibraryPicker) {
+      PhotoLibraryPicker(error: $error) { results in
+        assert(results.count == 1)
+        guard let result = results.first else {
+          return
+        }
+
+        result.itemProvider.registeredTypeIdentifiers.forEach { identifier in
+          // See also: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html
+          guard let utType = UTType.init(identifier) else {
+            assertionFailure()
+            return
+          }
+
+          if utType.conforms(to: .image) {
+            result.itemProvider.loadObject(ofClass: UIImage.self) { itemProviderReading, error in
+              switch (itemProviderReading, error) {
+              case (nil, let error?):
+                self.error = error
+              case (let image as UIImage, _):
+                let imageData: Data?
+                if utType.conforms(to: .png) {
+                  imageData = image.pngData()
+                } else if (utType.conforms(to: .jpeg)) {
+                  imageData = image.jpegData(compressionQuality: 1.0)
+                } else {
+                  return
+                }
+                guard let imageData = imageData else {
+                  return
+                }
+
+                do {
+                  try Photo.createAndSave(context: viewContext, imageData: imageData)
+                } catch {
+                  self.error = error
+                }
+              case _:
+                fatalError()
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
