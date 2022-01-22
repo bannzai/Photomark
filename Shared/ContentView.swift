@@ -101,19 +101,19 @@ struct ContentView: View {
               }
             }
           }
-          .toolbar {
-            ToolbarItem {
-              Button(action: {
-                showsPhotoLibraryPicker = true
-              }) {
-                Label("Add Item", systemImage: "plus")
-              }
+        }
+        .toolbar {
+          ToolbarItem {
+            Button(action: {
+              showsPhotoLibraryPicker = true
+            }) {
+              Label("Add Item", systemImage: "plus")
             }
           }
-          .navigationTitle("保存済み")
-          .navigationBarTitleDisplayMode(.inline)
-          .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
         }
+        .navigationTitle("保存済み")
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
       }
     }
     .sheet(isPresented: $showsPhotoLibraryPicker) {
