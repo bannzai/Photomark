@@ -2,34 +2,6 @@ import SwiftUI
 import CoreData
 import Photos
 
-@MainActor final class ContentViewModel: ObservableObject {
-    @Environment(\.photoLibrary) private var photoLibrary
-
-    @Published var assets: [PhotoLibrary.AssetResponse] = []
-
-    private var phAssets: [PHAsset] = []
-
-    func prefetch() {
-        if !phAssets.isEmpty {
-            return
-        }
-        #if DEBUG
-        // TODO: Remove range
-        phAssets = Array(photoLibrary.fetchAssets().assets()[0..<40])
-        #endif
-    }
-
-    func fetch(imageLength: CGFloat) {
-        Task {
-            for phAsset in phAssets {
-                for await response in photoLibrary.imageStream(for: phAsset, imageLength: imageLength) {
-                    assets.append(response)
-                }
-            }
-        }
-    }
-}
-
 struct ContentView: View {
     @Environment(\.photoLibrary) private var photoLibrary
     @Environment(\.managedObjectContext) private var viewContext
@@ -37,8 +9,8 @@ struct ContentView: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Photo>
-    @StateObject var viewModel = ContentViewModel()
+    private var photos: FetchedResults<Photo>
+    @State var assets: [PhotoLibrary.AssetResponse] = []
 
     var body: some View {
         NavigationView {
@@ -46,7 +18,7 @@ struct ContentView: View {
                 let imageLength = geometry.size.width / 3
 
                 List {
-                    ForEach(viewModel.assets) { asset in
+                    ForEach(assets) { asset in
                         if let image = asset.image {
                             Image(uiImage: image)
                                 .resizable()
@@ -60,8 +32,14 @@ struct ContentView: View {
                     Text("Select an item")
                 }
                 .task {
-                    viewModel.prefetch()
-                    viewModel.fetch(imageLength: imageLength)
+                    let phAssets = Array(photoLibrary.fetchAssets().assets()[0..<40])
+                    for phAsset in phAssets {
+                        Task { @MainActor in
+                            for await response in photoLibrary.imageStream(for: phAsset, imageLength: imageLength) {
+                                assets.append(response)
+                            }
+                        }
+                    }
                 }
                 .toolbar {
 #if os(iOS)
@@ -97,7 +75,7 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { photos[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
