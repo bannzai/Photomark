@@ -40,6 +40,8 @@ struct ContentView: View {
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .navigationBarHidden(true)
+
       } else {
         ScrollView(.vertical) {
           LazyVGrid(columns: gridItems, spacing: 1) {
@@ -59,6 +61,9 @@ struct ContentView: View {
             }
           }
         }
+        .navigationBarTitle("保存済み")
+        .navigationBarTitleDisplayMode(.inline)
+
       }
     }
     .sheet(isPresented: $showsPhotoLibraryPicker) {
@@ -71,7 +76,6 @@ struct ContentView: View {
         addPhoto(with: result)
       }
     }
-    .navigationBarTitle("保存済み")
   }
 
   private func addPhoto(with result: PHPickerResult) {
