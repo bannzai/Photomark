@@ -2,12 +2,7 @@ import SwiftUI
 
 struct PhotoLibraryAssetList: View {
   @Environment(\.photoLibrary) private var photoLibrary
-  @Environment(\.managedObjectContext) private var viewContext
 
-  @FetchRequest(
-    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: true)],
-    animation: .default)
-  private var photos: FetchedResults<Photo>
   @State var assets: [PhotoLibrary.AssetResponse] = []
 
   private let gridItems: [GridItem] = [
