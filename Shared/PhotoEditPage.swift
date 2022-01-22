@@ -12,8 +12,6 @@ struct PhotoEditPage: View {
   @State var tagName: String = ""
   @State var error: Error?
 
-  @StateObject var publisher = Publisher()
-
   var body: some View {
     ScrollView(.vertical) {
       VStack(spacing: 10) {

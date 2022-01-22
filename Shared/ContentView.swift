@@ -20,6 +20,7 @@ struct ContentView: View {
   @State var showsPhotoLibraryPicker: Bool = false
   @State var editingPhoto: Photo? = nil
   @State var error: Error?
+  @State var searchText: String = ""
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -72,9 +73,9 @@ struct ContentView: View {
             }
           }
         }
-        .navigationBarTitle("保存済み")
+        .navigationTitle("保存済み")
         .navigationBarTitleDisplayMode(.inline)
-
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
       }
     }
     .sheet(isPresented: $showsPhotoLibraryPicker) {
