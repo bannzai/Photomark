@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		201C2AC9279BDC47006B135B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
+		201C2ACD279CA5FE006B135B /* FetchedResults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		201C2AC8279BDC47006B135B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchedResults+Extension.swift"; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomarkApp.swift; sourceTree = "<group>"; };
 		2086F755279AD67600BBA8D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				201C2AC8279BDC47006B135B /* String+Extension.swift */,
+				201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */,
 			);
 			path = StdLib;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				2086F795279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				2086F7CF279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
+				201C2ACD279CA5FE006B135B /* FetchedResults+Extension.swift in Sources */,
 				2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F7C7279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
 				2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,

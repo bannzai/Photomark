@@ -21,6 +21,7 @@ struct ContentView: View {
   @State var editingPhoto: Photo? = nil
   @State var error: Error?
   @State var searchText: String = ""
+  @State var selectedTags: [Tag] = []
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -50,16 +51,26 @@ struct ContentView: View {
 
       } else {
         ScrollView(.vertical) {
-          LazyVGrid(columns: gridItems, spacing: 1) {
-            ForEach(photos) { photo in
-              if let imageData = photo.imageData, let image = UIImage(data: imageData) {
-                GridImage(image: image)
-                  .onTapGesture {
-                    editingPhoto = photo
-                  }
-                  .sheet(item: $editingPhoto) { photo in
-                    PhotoEditPage(image: image, photo: photo, tags: tags.map { $0 })
-                  }
+          VStack {
+            TagLine(tags: tags.toArray()) { tag in
+              if selectedTags.contains(tag) {
+                selectedTags.removeAll { $0.id == tag.id }
+              } else {
+                selectedTags.append(tag)
+              }
+            }
+
+            LazyVGrid(columns: gridItems, spacing: 1) {
+              ForEach(photos) { photo in
+                if let imageData = photo.imageData, let image = UIImage(data: imageData) {
+                  GridImage(image: image)
+                    .onTapGesture {
+                      editingPhoto = photo
+                    }
+                    .sheet(item: $editingPhoto) { photo in
+                      PhotoEditPage(image: image, photo: photo, tags: tags.map { $0 })
+                    }
+                }
               }
             }
           }
@@ -139,7 +150,17 @@ private let itemFormatter: DateFormatter = {
 }()
 
 struct ContentView_Previews: PreviewProvider {
+  static var viewContext: NSManagedObjectContext { PersistenceController.preview.container.viewContext }
+
   static var previews: some View {
-    ContentView()
+    Group {
+      ContentView()
+      ContentView()
+        .onAppear {
+          let photo = Photo(context: viewContext)
+          photo.id = .init()
+          try! viewContext.save()
+        }
+    }
   }
 }
