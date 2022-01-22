@@ -4,6 +4,7 @@
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="phAssetIdentifier" optional="YES" attributeType="String"/>
         <attribute name="tagIDs" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[String]"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
@@ -12,7 +13,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Photo" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Photo" positionX="-63" positionY="-18" width="128" height="104"/>
         <element name="Tag" positionX="-63" positionY="-9" width="128" height="74"/>
     </elements>
 </model>
