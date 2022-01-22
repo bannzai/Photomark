@@ -25,6 +25,8 @@
 		2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
 		2086F791279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */; };
 		2086F792279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */; };
+		2086F795279B8C6C00BBA8D4 /* GridImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridImage.swift */; };
+		2086F796279B8C6C00BBA8D4 /* GridImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,7 @@
 		2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Extension.swift"; sourceTree = "<group>"; };
 		2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAssetList.swift; sourceTree = "<group>"; };
+		2086F794279B8C6C00BBA8D4 /* GridImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,7 @@
 		2086F751279AD67600BBA8D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2086F793279B8C6600BBA8D4 /* View */,
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				2086F755279AD67600BBA8D4 /* ContentView.swift */,
 				2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */,
@@ -102,6 +106,14 @@
 				2086F764279AD67600BBA8D4 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		2086F793279B8C6600BBA8D4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2086F794279B8C6C00BBA8D4 /* GridImage.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +216,7 @@
 			files = (
 				2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F791279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */,
+				2086F795279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
@@ -219,6 +232,7 @@
 			files = (
 				2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F792279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */,
+				2086F796279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,

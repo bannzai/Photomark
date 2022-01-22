@@ -23,41 +23,36 @@ struct ContentView: View {
   var body: some View {
     NavigationView {
       GeometryReader { viewGeometry in
-        LazyVGrid(columns: gridItems) {
-          ForEach(assets) { asset in
-            if let image = asset.image {
-              Image(uiImage: image)
-                .resizable()
-                .scaledToFill()
-                .frame(maxWidth: .infinity)
-                .aspectRatio(1, contentMode: .fill)
-                .clipped()
-            } else {
-              Text("Image Not found")
-            }
-          }
-          .task {
-            let phAssets = Array(photoLibrary.fetchAssets().assets()[0..<40])
-            for phAsset in phAssets {
-              Task { @MainActor in
-                for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: viewGeometry.size.width / 3) {
-                  assets.append(response)
-                }
+        ScrollView(.vertical) {
+          LazyVGrid(columns: gridItems, spacing: 1) {
+            ForEach(assets) { asset in
+              if let image = asset.image {
+                GridImage(image: image)
               }
             }
           }
-          .toolbar {
-            ToolbarItem {
-              Button(action: {
-                isPhotoLibraryAssetListPresented = true
-              }) {
-                Label("Add Item", systemImage: "plus")
+        }
+        .task {
+          let phAssets = Array(photoLibrary.fetchAssets().assets()[0..<40])
+          for phAsset in phAssets {
+            Task { @MainActor in
+              for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: viewGeometry.size.width / 3) {
+                assets.append(response)
               }
             }
           }
-          .sheet(isPresented: $isPhotoLibraryAssetListPresented) {
-            PhotoLibraryAssetList()
+        }
+        .toolbar {
+          ToolbarItem {
+            Button(action: {
+              isPhotoLibraryAssetListPresented = true
+            }) {
+              Label("Add Item", systemImage: "plus")
+            }
           }
+        }
+        .sheet(isPresented: $isPhotoLibraryAssetListPresented) {
+          PhotoLibraryAssetList()
         }
       }
     }
