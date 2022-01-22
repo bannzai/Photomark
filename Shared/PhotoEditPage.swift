@@ -12,6 +12,8 @@ struct PhotoEditPage: View {
   @State var tagName: String = ""
   @State var error: Error?
 
+  @StateObject var publisher = Publisher()
+
   var body: some View {
     ScrollView(.vertical) {
       VStack(spacing: 10) {
@@ -28,7 +30,15 @@ struct PhotoEditPage: View {
             tagName = ""
           }
 
-        TagLine(photo: photo, tags: tags, onTap: { _ in })
+        TagLine(photo: photo, tags: tags, onTap: { tag in
+          photo.tagIDs!.append(tag.id!.uuidString)
+
+          do {
+            try viewContext.save()
+          } catch {
+            self.error = error
+          }
+        })
 
         Image(uiImage: image)
           .resizable()

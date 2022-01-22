@@ -7,6 +7,7 @@ extension Photo {
     photo.id = .init()
     photo.createdDate = .init()
     photo.imageData = imageData
+    photo.tagIDs = []
     return photo
   }
 
@@ -19,17 +20,25 @@ extension Photo {
 }
 
 extension Tag {
-  static func create(context: NSManagedObjectContext, name: String) -> Tag {
+  static func create(context: NSManagedObjectContext, name _name: String) -> Tag? {
+    let name = _name.trimmed
+    if name.isEmpty {
+      return nil
+    }
+
     let tag = Tag(context: context)
     tag.id = .init()
-    tag.name = name
+    tag.name = name.trimmed
     tag.createdDate = .init()
     return tag
   }
 
   @discardableResult
-  static func createAndSave(context: NSManagedObjectContext, name: String) throws -> Tag {
-    let tag = Tag.create(context: context, name: name)
+  static func createAndSave(context: NSManagedObjectContext, name: String) throws -> Tag? {
+    guard let tag = Tag.create(context: context, name: name) else {
+      return nil
+    }
+
     try context.save()
     return tag
   }

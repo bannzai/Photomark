@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201C2AC9279BDC47006B135B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		201C2AC8279BDC47006B135B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomarkApp.swift; sourceTree = "<group>"; };
 		2086F755279AD67600BBA8D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		201C2AC7279BDC41006B135B /* StdLib */ = {
+			isa = PBXGroup;
+			children = (
+				201C2AC8279BDC47006B135B /* String+Extension.swift */,
+			);
+			path = StdLib;
+			sourceTree = "<group>";
+		};
 		2086F74C279AD67600BBA8D4 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +102,7 @@
 		2086F751279AD67600BBA8D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				201C2AC7279BDC41006B135B /* StdLib */,
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F7C9279BCFA700BBA8D4 /* Tag */,
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
@@ -271,6 +282,7 @@
 				2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
 				2086F788279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */,
 				2086F7C4279BBFAD00BBA8D4 /* PhotoLibaryView.swift in Sources */,
+				201C2AC9279BDC47006B135B /* String+Extension.swift in Sources */,
 				2086F769279AD67600BBA8D4 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
