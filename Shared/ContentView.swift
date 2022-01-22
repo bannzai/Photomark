@@ -28,7 +28,7 @@ struct ContentView: View {
   ]
 
   var body: some View {
-    GeometryReader { viewGeometry in
+    Group {
       if photos.isEmpty {
         VStack(alignment: .center, spacing: 10) {
           Button(action: {
