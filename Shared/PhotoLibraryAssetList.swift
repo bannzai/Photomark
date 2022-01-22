@@ -18,27 +18,23 @@ struct PhotoLibraryAssetList: View {
 
   var body: some View {
     GeometryReader { geometry in
-      let imageLength = geometry.size.width / 3
-
-      LazyVGrid(columns: gridItems) {
-        ForEach(assets) { asset in
-          if let image = asset.image {
-            Image(uiImage: image)
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: imageLength, height: imageLength)
-          } else {
-            Text("Image Not found")
+      GeometryReader { viewGeometry in
+        ScrollView(.vertical) {
+          LazyVGrid(columns: gridItems, spacing: 1) {
+            ForEach(assets) { asset in
+              if let image = asset.image {
+                GridImage(image: image)
+              }
+            }
           }
         }
-
-      }
-      .task {
-        let phAssets = Array(photoLibrary.fetchAssets().assets()[0..<40])
-        for phAsset in phAssets {
-          Task { @MainActor in
-            for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: imageLength) {
-              assets.append(response)
+        .task {
+          let phAssets = Array(photoLibrary.fetchAssets().assets()[0..<40])
+          for phAsset in phAssets {
+            Task { @MainActor in
+              for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: viewGeometry.size.width / 3) {
+                assets.append(response)
+              }
             }
           }
         }
