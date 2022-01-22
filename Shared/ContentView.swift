@@ -30,7 +30,7 @@ struct ContentView: View {
   ]
   private var filteredPhotos: [Photo] {
     if selectedTags.isEmpty {
-      return photos
+      return photos.toArray()
     } else {
       return photos.filter { photo in
         guard let photoTagIDs = photo.tagIDs else {
