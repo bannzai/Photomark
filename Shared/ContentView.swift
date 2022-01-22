@@ -26,7 +26,9 @@ struct ContentView: View {
         ScrollView(.vertical) {
           LazyVGrid(columns: gridItems, spacing: 1) {
             ForEach(assets) { asset in
-              GridImage(response: asset)
+              if let image = asset.image {
+                GridImage(image: image)
+              }
             }
           }
         }
