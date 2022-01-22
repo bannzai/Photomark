@@ -67,7 +67,9 @@
 				2086F763279AD67600BBA8D4 /* macOS */,
 				2086F75D279AD67600BBA8D4 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		2086F751279AD67600BBA8D4 /* Shared */ = {
 			isa = PBXGroup;
