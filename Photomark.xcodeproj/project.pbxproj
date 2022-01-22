@@ -33,6 +33,10 @@
 		2086F7C8279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */; };
 		2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
 		2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
+		2086F7CF279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
+		2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
+		2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
+		2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +56,8 @@
 		2086F7C3279BBFAD00BBA8D4 /* PhotoLibaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibaryView.swift; sourceTree = "<group>"; };
 		2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditPage.swift; sourceTree = "<group>"; };
 		2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLine.swift; sourceTree = "<group>"; };
+		2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
+		2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 		2086F751279AD67600BBA8D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F7C9279BCFA700BBA8D4 /* Tag */,
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
 				2086F793279B8C6600BBA8D4 /* View */,
@@ -142,6 +149,15 @@
 				2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */,
 			);
 			path = Tag;
+			sourceTree = "<group>";
+		};
+		2086F7CD279BDA2100BBA8D4 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */,
+				2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,8 +260,10 @@
 			files = (
 				2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F791279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */,
+				2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
 				2086F795279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
+				2086F7CF279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
 				2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F7C7279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
 				2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
@@ -263,8 +281,10 @@
 			files = (
 				2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F792279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */,
+				2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
 				2086F796279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
+				2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F7C8279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
 				2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,

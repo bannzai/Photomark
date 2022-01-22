@@ -87,6 +87,7 @@ struct ContentView: View {
         addPhoto(with: result)
       }
     }
+    .handle(error: $error)
   }
 
   private func addPhoto(with result: PHPickerResult) {

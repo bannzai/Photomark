@@ -35,6 +35,7 @@ struct PhotoEditPage: View {
           .aspectRatio(contentMode: .fill)
       }
     }
+    .handle(error: $error)
   }
 }
 
