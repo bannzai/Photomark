@@ -28,6 +28,19 @@ struct ContentView: View {
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
   ]
+  private var filteredPhotos: [Photo] {
+    photos.filter { photo in
+      guard let photoTagIDs = photo.tagIDs else {
+        return false
+      }
+
+      return photoTagIDs.contains { photoTagID in
+        selectedTags.contains { tag in
+          tag.id?.uuidString == photoTagID
+        }
+      }
+    }
+  }
 
   var body: some View {
     Group {
@@ -50,46 +63,57 @@ struct ContentView: View {
         .navigationBarHidden(true)
 
       } else {
-        ScrollView(.vertical) {
-          VStack {
-            TagLine(tags: tags.toArray()) { tag in
-              TagView(tag: tag, isSelected: selectedTags.contains(tag))
-                .onTapGesture {
-                  if selectedTags.contains(tag) {
-                    selectedTags.removeAll { $0.id == tag.id }
-                  } else {
-                    selectedTags.append(tag)
-                  }
-                }
+        Group {
+          if filteredPhotos.isEmpty {
+            VStack(alignment: .center, spacing: 10) {
+              Text("対象となる画像が存在しません")
             }
+            .ignoresSafeArea()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            LazyVGrid(columns: gridItems, spacing: 1) {
-              ForEach(photos) { photo in
-                if let imageData = photo.imageData, let image = UIImage(data: imageData) {
-                  GridImage(image: image)
+          } else {
+            ScrollView(.vertical) {
+              VStack {
+                TagLine(tags: tags.toArray()) { tag in
+                  TagView(tag: tag, isSelected: selectedTags.contains(tag))
                     .onTapGesture {
-                      editingPhoto = photo
+                      if selectedTags.contains(tag) {
+                        selectedTags.removeAll { $0.id == tag.id }
+                      } else {
+                        selectedTags.append(tag)
+                      }
                     }
-                    .sheet(item: $editingPhoto) { photo in
-                      PhotoEditPage(image: image, photo: photo, tags: tags.toArray())
+                }
+
+                LazyVGrid(columns: gridItems, spacing: 1) {
+                  ForEach(filteredPhotos) { photo in
+                    if let imageData = photo.imageData, let image = UIImage(data: imageData) {
+                      GridImage(image: image)
+                        .onTapGesture {
+                          editingPhoto = photo
+                        }
+                        .sheet(item: $editingPhoto) { photo in
+                          PhotoEditPage(image: image, photo: photo, tags: tags.toArray())
+                        }
                     }
+                  }
                 }
               }
             }
           }
-        }
-        .toolbar {
-          ToolbarItem {
-            Button(action: {
-              showsPhotoLibraryPicker = true
-            }) {
-              Label("Add Item", systemImage: "plus")
+          .toolbar {
+            ToolbarItem {
+              Button(action: {
+                showsPhotoLibraryPicker = true
+              }) {
+                Label("Add Item", systemImage: "plus")
+              }
             }
           }
+          .navigationTitle("保存済み")
+          .navigationBarTitleDisplayMode(.inline)
+          .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
         }
-        .navigationTitle("保存済み")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
       }
     }
     .sheet(isPresented: $showsPhotoLibraryPicker) {
