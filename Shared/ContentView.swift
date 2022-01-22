@@ -63,46 +63,35 @@ struct ContentView: View {
         .navigationBarHidden(true)
 
       } else {
-        Group {
-          if filteredPhotos.isEmpty {
-            VStack(alignment: .center, spacing: 10) {
-              Text("対象となる画像が存在しません")
-            }
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        ScrollView(.vertical) {
+            VStack {
+              TagLine(tags: tags.toArray()) { tag in
+                TagView(tag: tag, isSelected: selectedTags.contains(tag))
+                  .onTapGesture {
+                    if selectedTags.contains(tag) {
+                      selectedTags.removeAll { $0.id == tag.id }
+                    } else {
+                      selectedTags.append(tag)
+                    }
+                  }
+              }
 
-          } else {
-            ScrollView(.vertical) {
-              VStack {
-                TagLine(tags: tags.toArray()) { tag in
-                  TagView(tag: tag, isSelected: selectedTags.contains(tag))
-                    .onTapGesture {
-                      if selectedTags.contains(tag) {
-                        selectedTags.removeAll { $0.id == tag.id }
-                      } else {
-                        selectedTags.append(tag)
+              LazyVGrid(columns: gridItems, spacing: 1) {
+                ForEach(filteredPhotos) { photo in
+                  if let imageData = photo.imageData, let image = UIImage(data: imageData) {
+                    GridImage(image: image)
+                      .onTapGesture {
+                        editingPhoto = photo
                       }
-                    }
-                }
-
-                LazyVGrid(columns: gridItems, spacing: 1) {
-                  ForEach(filteredPhotos) { photo in
-                    if let imageData = photo.imageData, let image = UIImage(data: imageData) {
-                      GridImage(image: image)
-                        .onTapGesture {
-                          editingPhoto = photo
-                        }
-                        .sheet(item: $editingPhoto) { photo in
-                          PhotoEditPage(image: image, photo: photo, tags: tags.toArray())
-                        }
-                    }
+                      .sheet(item: $editingPhoto) { photo in
+                        PhotoEditPage(image: image, photo: photo, tags: tags.toArray())
+                      }
                   }
                 }
               }
             }
           }
-        }
-        .toolbar {
+          .toolbar {
           ToolbarItem {
             Button(action: {
               showsPhotoLibraryPicker = true
