@@ -28,15 +28,18 @@ struct PhotoEditPage: View {
             tagName = ""
           }
 
-        TagLine(photo: photo, tags: tags, onTap: { tag in
-          photo.tagIDs!.append(tag.id!.uuidString)
+        TagLine(tags: tags) { tag in
+          TagView(tag: tag, isSelected: photo.hasTag(tag))
+            .onTapGesture {
+              photo.tagIDs!.append(tag.id!.uuidString)
 
-          do {
-            try viewContext.save()
-          } catch {
-            self.error = error
-          }
-        })
+              do {
+                try viewContext.save()
+              } catch {
+                self.error = error
+              }
+            }
+        }
 
         Image(uiImage: image)
           .resizable()

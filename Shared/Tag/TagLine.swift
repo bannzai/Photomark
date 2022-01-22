@@ -2,19 +2,15 @@ import Foundation
 import SwiftUI
 import CoreData
 
-struct TagLine: View {
-  var photo: Photo?
+struct TagLine<Content: View>: View {
   let tags: [Tag]
-  let onTap: (Tag) -> Void
+  @ViewBuilder let content: (Tag) -> (Content)
 
   var body: some View {
     ScrollView(.horizontal) {
       HStack(alignment: .center, spacing: 10) {
         ForEach(tags) { tag in
-          TagView(photo: photo, tag: tag)
-            .onTapGesture {
-              onTap(tag)
-            }
+          content(tag)
         }
       }
     }
@@ -22,8 +18,8 @@ struct TagLine: View {
 }
 
 struct TagView: View {
-  var photo: Photo?
   let tag: Tag
+  let isSelected: Bool
 
   var body: some View {
     if let name = tag.name {
@@ -32,17 +28,10 @@ struct TagView: View {
         .padding(8)
         .background(
           RoundedRectangle(cornerRadius: 16)
-            .fill(tagIsAssociatedPhoto ? Color.pink.opacity(0.4) : Color.gray.opacity(0.2))
+            .fill(isSelected ? Color.pink.opacity(0.4) : Color.gray.opacity(0.2))
         )
         .frame(minWidth: 60)
     }
-  }
-
-  var tagIsAssociatedPhoto: Bool {
-    guard let photoTagIDs = photo?.tagIDs else {
-      return false
-    }
-    return photoTagIDs.contains { $0 == tag.id?.uuidString }
   }
 }
 
@@ -56,6 +45,8 @@ struct TagLine_Previews: PreviewProvider {
   }
 
   static var previews: some View {
-    TagLine(tags: tags, onTap: { _ in })
+    TagLine(tags: tags) { tag in
+      TagView(tag: tag, isSelected: tag.name == "A")
+    }
   }
 }

@@ -53,11 +53,14 @@ struct ContentView: View {
         ScrollView(.vertical) {
           VStack {
             TagLine(tags: tags.toArray()) { tag in
-              if selectedTags.contains(tag) {
-                selectedTags.removeAll { $0.id == tag.id }
-              } else {
-                selectedTags.append(tag)
-              }
+              TagView(tag: tag, isSelected: selectedTags.contains(tag))
+                .onTapGesture {
+                  if selectedTags.contains(tag) {
+                    selectedTags.removeAll { $0.id == tag.id }
+                  } else {
+                    selectedTags.append(tag)
+                  }
+                }
             }
 
             LazyVGrid(columns: gridItems, spacing: 1) {
