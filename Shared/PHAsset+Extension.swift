@@ -10,7 +10,7 @@ extension PHFetchResult where ObjectType == PHAsset {
         return assets.sorted { lhs, rhs in
             if let l = lhs.creationDate?.timeIntervalSinceReferenceDate,
                 let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
-                return l < r
+                return l > r
             } else {
                 assertionFailure()
                 return false
