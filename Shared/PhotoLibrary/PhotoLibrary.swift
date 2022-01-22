@@ -11,6 +11,18 @@ struct PhotoLibrary {
     PHAsset.fetchAssets(with: nil)
   }
 
+  // NOTE: Nullable, because there is a possibility that phAssetIdentifier remains only in Photo DB.
+  // Sinario: User deleted asset on Photo.app.
+  func fetch(phIdentifier: String) -> PHAsset? {
+    PHAsset.fetchAssets(withLocalIdentifiers: [phIdentifier], options: nil).firstObject
+  }
+
+  func firstAsset(phAsset: PHAsset, maxImageLength: CGFloat) async -> AssetResponse? {
+    await imageStream(for: phAsset, maxImageLength: maxImageLength).first { assetResponse in
+      return true
+    }
+  }
+
   struct AssetResponse: CustomStringConvertible, Identifiable {
     var id: String { asset.localIdentifier }
 
