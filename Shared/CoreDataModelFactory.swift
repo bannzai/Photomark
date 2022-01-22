@@ -19,10 +19,18 @@ extension Photo {
 }
 
 extension Tag {
-  static func create(context: NSManagedObjectContext) -> Tag {
+  static func create(context: NSManagedObjectContext, name: String) -> Tag {
     let tag = Tag(context: context)
     tag.id = .init()
+    tag.name = name
     tag.createdDate = .init()
+    return tag
+  }
+
+  @discardableResult
+  static func createAndSave(context: NSManagedObjectContext, name: String) throws -> Tag {
+    let tag = Tag.create(context: context, name: name)
+    try context.save()
     return tag
   }
 }

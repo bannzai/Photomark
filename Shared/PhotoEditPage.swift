@@ -3,11 +3,14 @@ import class UIKit.UIImage
 import CoreData
 
 struct PhotoEditPage: View {
+  @Environment(\.managedObjectContext) private var viewContext
+
   let image: UIImage
   let photo: Photo
   let tags: [Tag]
 
   @State var tagName: String = ""
+  @State var error: Error?
 
   var body: some View {
     ScrollView(.vertical) {
@@ -15,11 +18,21 @@ struct PhotoEditPage: View {
         TextField("Input tag name and press Enter",text: $tagName)
           .padding(8)
           .textFieldStyle(RoundedBorderTextFieldStyle())
+          .onSubmit {
+            do {
+              try Tag.createAndSave(context: viewContext, name: tagName)
+            } catch {
+              self.error = error
+            }
 
-        TagLine(tags: tags, onTap: { _ in })
+            tagName = ""
+          }
+
+        TagLine(photo: photo, tags: tags, onTap: { _ in })
 
         Image(uiImage: image)
-          .frame(maxWidth: .infinity)
+          .resizable()
+          .aspectRatio(contentMode: .fill)
       }
     }
   }

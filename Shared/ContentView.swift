@@ -9,9 +9,13 @@ struct ContentView: View {
   @Environment(\.managedObjectContext) private var viewContext
 
   @FetchRequest(
-    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: true)],
+    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
     animation: .default)
   private var photos: FetchedResults<Photo>
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
+    animation: .default)
+  private var tags: FetchedResults<Tag>
 
   @State var showsPhotoLibraryPicker: Bool = false
   @State var editingPhoto: Photo? = nil
@@ -53,7 +57,7 @@ struct ContentView: View {
                     editingPhoto = photo
                   }
                   .sheet(item: $editingPhoto) { photo in
-
+                    PhotoEditPage(image: image, photo: photo, tags: tags.map { $0 })
                   }
               }
             }
