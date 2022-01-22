@@ -71,6 +71,7 @@ struct ContentView: View {
         addPhoto(with: result)
       }
     }
+    .navigationBarTitle("保存済み")
   }
 
   private func addPhoto(with result: PHPickerResult) {
