@@ -19,6 +19,34 @@ struct Asset: CustomStringConvertible, Identifiable {
 }
 
 struct PhotoLibrary {
+  enum AuthorizationAction {
+    case openSettingApp
+    case requestAuthorization
+  }
+
+  func authorizationAction() -> AuthorizationAction? {
+    let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+    switch status {
+    case .authorized, .limited:
+      return nil
+    case .restricted, .denied:
+      return .openSettingApp
+    case .notDetermined:
+      return .requestAuthorization
+    @unknown default:
+      assertionFailure("unexpected authorization status \(status):\(status.rawValue)")
+      return nil
+    }
+  }
+
+  func requestAuthorization() async -> PHAuthorizationStatus {
+    await withCheckedContinuation { continuation in
+      PHPhotoLibrary.requestAuthorization { (status) in
+        continuation.resume(returning: status)
+      }
+    }
+  }
+
   func fetchAssets() -> PHFetchResult<PHAsset> {
     PHAsset.fetchAssets(with: nil)
   }

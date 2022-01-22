@@ -22,6 +22,14 @@ struct ContentView: View {
   @State var error: Error?
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
+  @State var alertType: AlertType?
+
+  enum AlertType: Identifiable {
+    case openSetting
+    case noPermission
+
+    var id: Self { self }
+  }
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -105,26 +113,63 @@ struct ContentView: View {
         }
       }
       .task {
-        let phAssets = photoLibrary.fetchAssets().assets()
-        for phAsset in phAssets {
-          Task { @MainActor in
-            for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: viewGeometry.size.width / 3) {
-              assets.append(response)
-            }
+        switch photoLibrary.authorizationAction() {
+        case .requestAuthorization:
+          let status = await photoLibrary.requestAuthorization()
+          switch status {
+          case .authorized, .limited:
+            watch(viewGeometry: viewGeometry)
+          case .notDetermined, .restricted, .denied:
+            alertType = .noPermission
+          @unknown default:
+            assertionFailure("New case \(status)")
           }
+        case .openSettingApp:
+          alertType = .openSetting
+        case nil:
+          watch(viewGeometry: viewGeometry)
         }
       }
+      .alert(item: $alertType, content: { alertType in
+        switch alertType {
+        case .openSetting:
+          return Alert(
+            title: Text("画像を選択できません"),
+            message: Text("フォトライブラリのアクセスが許可されていません。設定アプリから許可をしてください"),
+            primaryButton: .default(Text("設定を開く"), action: openSetting),
+            secondaryButton: .cancel()
+          )
+        case .noPermission:
+          return Alert(
+            title: Text("アクセスを拒否しました"),
+            message: Text("フォトライブラリのアクセスが拒否されました。操作を続ける場合は設定アプリから許可をしてください"),
+            primaryButton: .default(Text("設定を開く"), action: openSetting),
+            secondaryButton: .cancel()
+          )
+        }
+      })
       .handle(error: $error)
+    }
+  }
+
+  func watch(viewGeometry: GeometryProxy) {
+    let phAssets = photoLibrary.fetchAssets().assets()
+    for phAsset in phAssets {
+      Task { @MainActor in
+        for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: viewGeometry.size.width / 3) {
+          assets.append(response)
+        }
+      }
     }
   }
 }
 
-private let itemFormatter: DateFormatter = {
-  let formatter = DateFormatter()
-  formatter.dateStyle = .short
-  formatter.timeStyle = .medium
-  return formatter
-}()
+private func openSetting() {
+  let settingURL = URL(string: UIApplication.openSettingsURLString)!
+  if UIApplication.shared.canOpenURL(settingURL) {
+    UIApplication.shared.open(settingURL)
+  }
+}
 
 struct ContentView_Previews: PreviewProvider {
   static var viewContext: NSManagedObjectContext { PersistenceController.preview.container.viewContext }
