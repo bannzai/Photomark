@@ -29,14 +29,18 @@ struct ContentView: View {
     .init(.flexible(), spacing: 1),
   ]
   private var filteredPhotos: [Photo] {
-    photos.filter { photo in
-      guard let photoTagIDs = photo.tagIDs else {
-        return false
-      }
+    if selectedTags.isEmpty {
+      return photos
+    } else {
+      return photos.filter { photo in
+        guard let photoTagIDs = photo.tagIDs else {
+          return false
+        }
 
-      return photoTagIDs.contains { photoTagID in
-        selectedTags.contains { tag in
-          tag.id?.uuidString == photoTagID
+        return photoTagIDs.contains { photoTagID in
+          selectedTags.contains { tag in
+            tag.id?.uuidString == photoTagID
+          }
         }
       }
     }
