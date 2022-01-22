@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="PhotoTags" representedClassName="PhotoTags" syncable="YES" codeGenerationType="class">
+    <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="phAssetIdentifier" optional="YES" attributeType="String"/>
@@ -13,6 +13,6 @@
     </entity>
     <elements>
         <element name="Tag" positionX="-63" positionY="-9" width="128" height="74"/>
-        <element name="PhotoTags" positionX="-63" positionY="-27" width="128" height="89"/>
+        <element name="Photo" positionX="-63" positionY="-27" width="128" height="89"/>
     </elements>
 </model>
