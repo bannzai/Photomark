@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201C2AC9279BDC47006B135B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
+		201C2ACD279CA5FE006B135B /* FetchedResults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */; };
+		201C2AD0279CB4F9006B135B /* Photo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACF279CB4F9006B135B /* Photo+Extension.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -17,9 +20,32 @@
 		2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F756279AD67600BBA8D4 /* Persistence.swift */; };
 		2086F76D279AD67600BBA8D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2086F757279AD67600BBA8D4 /* Assets.xcassets */; };
 		2086F76E279AD67600BBA8D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2086F757279AD67600BBA8D4 /* Assets.xcassets */; };
+		2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */; };
+		2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */; };
+		2086F788279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
+		2086F789279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
+		2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
+		2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
+		2086F791279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */; };
+		2086F792279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */; };
+		2086F795279B8C6C00BBA8D4 /* GridImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridImage.swift */; };
+		2086F796279B8C6C00BBA8D4 /* GridImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridImage.swift */; };
+		2086F7C4279BBFAD00BBA8D4 /* PhotoLibaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C3279BBFAD00BBA8D4 /* PhotoLibaryView.swift */; };
+		2086F7C5279BBFAD00BBA8D4 /* PhotoLibaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C3279BBFAD00BBA8D4 /* PhotoLibaryView.swift */; };
+		2086F7C7279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */; };
+		2086F7C8279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */; };
+		2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
+		2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
+		2086F7CF279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
+		2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
+		2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
+		2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		201C2AC8279BDC47006B135B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchedResults+Extension.swift"; sourceTree = "<group>"; };
+		201C2ACF279CB4F9006B135B /* Photo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+Extension.swift"; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomarkApp.swift; sourceTree = "<group>"; };
 		2086F755279AD67600BBA8D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -28,6 +54,16 @@
 		2086F75C279AD67600BBA8D4 /* Photomark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photomark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2086F762279AD67600BBA8D4 /* Photomark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photomark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2086F764279AD67600BBA8D4 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModelFactory.swift; sourceTree = "<group>"; };
+		2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
+		2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Extension.swift"; sourceTree = "<group>"; };
+		2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAssetList.swift; sourceTree = "<group>"; };
+		2086F794279B8C6C00BBA8D4 /* GridImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImage.swift; sourceTree = "<group>"; };
+		2086F7C3279BBFAD00BBA8D4 /* PhotoLibaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibaryView.swift; sourceTree = "<group>"; };
+		2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditPage.swift; sourceTree = "<group>"; };
+		2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLine.swift; sourceTree = "<group>"; };
+		2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
+		2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +84,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		201C2AC7279BDC41006B135B /* StdLib */ = {
+			isa = PBXGroup;
+			children = (
+				201C2AC8279BDC47006B135B /* String+Extension.swift */,
+				201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */,
+			);
+			path = StdLib;
+			sourceTree = "<group>";
+		};
+		201C2ACE279CB4EB006B135B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */,
+				201C2ACF279CB4F9006B135B /* Photo+Extension.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		2086F74C279AD67600BBA8D4 = {
 			isa = PBXGroup;
 			children = (
@@ -55,13 +109,23 @@
 				2086F763279AD67600BBA8D4 /* macOS */,
 				2086F75D279AD67600BBA8D4 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		2086F751279AD67600BBA8D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				201C2ACE279CB4EB006B135B /* Entity */,
+				201C2AC7279BDC41006B135B /* StdLib */,
+				2086F7CD279BDA2100BBA8D4 /* Error */,
+				2086F7C9279BCFA700BBA8D4 /* Tag */,
+				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
+				2086F793279B8C6600BBA8D4 /* View */,
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				2086F755279AD67600BBA8D4 /* ContentView.swift */,
+				2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */,
+				2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */,
 				2086F756279AD67600BBA8D4 /* Persistence.swift */,
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
 				2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */,
@@ -84,6 +148,41 @@
 				2086F764279AD67600BBA8D4 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		2086F793279B8C6600BBA8D4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2086F794279B8C6C00BBA8D4 /* GridImage.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */,
+				2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */,
+				2086F7C3279BBFAD00BBA8D4 /* PhotoLibaryView.swift */,
+			);
+			path = PhotoLibrary;
+			sourceTree = "<group>";
+		};
+		2086F7C9279BCFA700BBA8D4 /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */,
+			);
+			path = Tag;
+			sourceTree = "<group>";
+		};
+		2086F7CD279BDA2100BBA8D4 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */,
+				2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,8 +284,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
+				2086F791279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */,
+				2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
+				2086F795279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
+				2086F7CF279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
+				201C2ACD279CA5FE006B135B /* FetchedResults+Extension.swift in Sources */,
+				2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
+				201C2AD0279CB4F9006B135B /* Photo+Extension.swift in Sources */,
+				2086F7C7279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
+				2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
 				2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
+				2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
+				2086F788279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */,
+				2086F7C4279BBFAD00BBA8D4 /* PhotoLibaryView.swift in Sources */,
+				201C2AC9279BDC47006B135B /* String+Extension.swift in Sources */,
 				2086F769279AD67600BBA8D4 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,8 +308,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
+				2086F792279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */,
+				2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
+				2086F796279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
+				2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
+				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
+				2086F7C8279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
+				2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
 				2086F768279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
+				2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
+				2086F789279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */,
+				2086F7C5279BBFAD00BBA8D4 /* PhotoLibaryView.swift in Sources */,
 				2086F76A279AD67600BBA8D4 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +378,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -309,6 +433,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -326,6 +452,7 @@
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "タグ付けするために画像を取得します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -356,6 +483,7 @@
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "タグ付けするために画像を取得します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
