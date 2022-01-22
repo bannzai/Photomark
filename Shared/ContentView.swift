@@ -10,9 +10,8 @@ struct ContentView: View {
     sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: true)],
     animation: .default)
   private var photos: FetchedResults<Photo>
-  @State var assets: [PhotoLibrary.AssetResponse] = []
 
-  @State var isPhotoLibraryAssetListPresented: Bool = false
+  @State var showsPhotoLibraryAssetList: Bool = false
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -21,23 +20,29 @@ struct ContentView: View {
   ]
 
   var body: some View {
-    NavigationView {
-      GeometryReader { viewGeometry in
+    GeometryReader { viewGeometry in
+      if photos.isEmpty {
+        VStack(alignment: .center, spacing: 10) {
+          Button(action: {
+            showsPhotoLibraryAssetList = true
+          }, label: {
+            Image(systemName: "plus")
+              .font(.system(size: 40))
+              .padding()
+              .foregroundColor(.black)
+              .overlay(Circle().stroke(Color.black))
+          })
+
+          Text("画像を追加しよう")
+        }
+        .ignoresSafeArea()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+      } else {
         ScrollView(.vertical) {
           LazyVGrid(columns: gridItems, spacing: 1) {
-            ForEach(assets) { asset in
-              if let image = asset.image {
+            ForEach(photos) { photo in
+              if let imageData = photo.imageData, let image = UIImage(data: imageData) {
                 GridImage(image: image)
-              }
-            }
-          }
-        }
-        .task {
-          let phAssets = Array(photoLibrary.fetchAssets().assets()[0..<40])
-          for phAsset in phAssets {
-            Task { @MainActor in
-              for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: viewGeometry.size.width / 3) {
-                assets.append(response)
               }
             }
           }
@@ -45,16 +50,16 @@ struct ContentView: View {
         .toolbar {
           ToolbarItem {
             Button(action: {
-              isPhotoLibraryAssetListPresented = true
+              showsPhotoLibraryAssetList = true
             }) {
               Label("Add Item", systemImage: "plus")
             }
           }
         }
-        .sheet(isPresented: $isPhotoLibraryAssetListPresented) {
-          PhotoLibraryAssetList()
-        }
       }
+    }
+    .sheet(isPresented: $showsPhotoLibraryAssetList) {
+      PhotoLibraryAssetList()
     }
   }
 }
@@ -68,6 +73,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
   }
 }
