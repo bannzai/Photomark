@@ -3,14 +3,18 @@ import class UIKit.UIImage
 import CoreData
 
 struct PhotoEditPage: View {
+  @EnvironmentObject var appViewModel: AppViewModel
   @Environment(\.managedObjectContext) private var viewContext
 
   let image: UIImage
-  let photo: Photo
-  let tags: [Tag]
+  let photoID: Photo.ID
 
   @State var tagName: String = ""
   @State var error: Error?
+
+  var photo: Photo {
+    appViewModel.photo(id: photoID)!
+  }
 
   var body: some View {
     ScrollView(.vertical) {
@@ -28,7 +32,7 @@ struct PhotoEditPage: View {
             tagName = ""
           }
 
-        TagLine(tags: tags) { tag in
+        TagLine(tags: appViewModel.tags.toArray()) { tag in
           TagView(tag: tag, isSelected: photo.hasTag(tag))
             .onTapGesture {
               if photo.hasTag(tag) {
@@ -69,6 +73,7 @@ struct PhotoEditPage_Previews: PreviewProvider {
   }
 
   static var previews: some View {
-    PhotoEditPage(image: UIImage(systemName: "plus")!, photo: photo, tags: tags)
+    PhotoEditPage(image: UIImage(systemName: "plus")!, photoID: photo.id)
+      .environmentObject(AppViewModel())
   }
 }

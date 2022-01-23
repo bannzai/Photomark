@@ -8,6 +8,7 @@ struct PhotomarkApp: App {
     WindowGroup {
       NavigationView {
         PhotoAssetListPage()
+          .environmentObject(AppViewModel())
           .environment(\.managedObjectContext, persistenceController.container.viewContext)
       }
     }

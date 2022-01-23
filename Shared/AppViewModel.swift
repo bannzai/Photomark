@@ -8,14 +8,17 @@ import CoreData
   @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
     animation: .default)
-  private var tags: FetchedResults<Tag>
+  var tags: FetchedResults<Tag>
   @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
     animation: .default)
-  private var photos: FetchedResults<Photo>
+  var photos: FetchedResults<Photo>
 
   func photo(id: Photo.ID) -> Photo? {
     photos.first(where: { $0.id == id })
+  }
+  func photo(asset: Asset) -> Photo? {
+    photos.first(where: { $0.phAssetIdentifier == asset.id })
   }
   func tag(id: Tag.ID) -> Tag? {
     tags.first(where: { $0.id == id })
