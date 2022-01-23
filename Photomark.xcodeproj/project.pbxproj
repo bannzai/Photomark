@@ -78,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		200672D0279D000B00BA9C48 /* PhotoAssetList */ = {
+			isa = PBXGroup;
+			children = (
+				2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */,
+			);
+			path = PhotoAssetList;
+			sourceTree = "<group>";
+		};
 		201C2AC7279BDC41006B135B /* StdLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,7 +125,7 @@
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
 				2086F793279B8C6600BBA8D4 /* View */,
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
-				2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */,
+				200672D0279D000B00BA9C48 /* PhotoAssetList */,
 				2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */,
 				2086F756279AD67600BBA8D4 /* Persistence.swift */,
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
