@@ -38,8 +38,8 @@
 		2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
 		2086F795279B8C6C00BBA8D4 /* GridAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImage.swift */; };
 		2086F796279B8C6C00BBA8D4 /* GridAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImage.swift */; };
-		2086F7C7279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */; };
-		2086F7C8279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */; };
+		2086F7C7279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */; };
+		2086F7C8279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */; };
 		2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
 		2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
 		2086F7CF279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
@@ -69,7 +69,7 @@
 		2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Extension.swift"; sourceTree = "<group>"; };
 		2086F794279B8C6C00BBA8D4 /* GridAssetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridAssetImage.swift; sourceTree = "<group>"; };
-		2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditPage.swift; sourceTree = "<group>"; };
+		2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailPage.swift; sourceTree = "<group>"; };
 		2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLine.swift; sourceTree = "<group>"; };
 		2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
 		2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 				2086F793279B8C6600BBA8D4 /* Components */,
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				200672D0279D000B00BA9C48 /* PhotoAssetList */,
-				2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */,
+				2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */,
 				2086F756279AD67600BBA8D4 /* Persistence.swift */,
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
 				2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */,
@@ -321,7 +321,7 @@
 				201C2ACD279CA5FE006B135B /* FetchedResults+Extension.swift in Sources */,
 				2086F785279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				201C2AD0279CB4F9006B135B /* Photo+Extension.swift in Sources */,
-				2086F7C7279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
+				2086F7C7279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */,
 				2059463D279D335800F5726C /* AlertError.swift in Sources */,
 				2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
 				20594654279D85EC00F5726C /* ActivityView.swift in Sources */,
@@ -347,7 +347,7 @@
 				2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
 				20594641279D35E100F5726C /* Tag+Extension.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
-				2086F7C8279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
+				2086F7C8279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */,
 				200672D3279D018500BA9C48 /* PhotoAssetImage.swift in Sources */,
 				20594655279D85EC00F5726C /* ActivityView.swift in Sources */,
 				2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,

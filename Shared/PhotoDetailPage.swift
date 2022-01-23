@@ -2,7 +2,7 @@ import SwiftUI
 import class UIKit.UIImage
 import CoreData
 
-struct PhotoEditPage: View {
+struct PhotoDetailPage: View {
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.photoLibrary) var photoLibrary
 

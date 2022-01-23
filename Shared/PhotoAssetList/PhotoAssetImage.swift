@@ -24,7 +24,7 @@ struct PhotoAssetImage: View {
         }
       }
       .sheet(item: $editingPhoto) { photo in
-        PhotoEditPage(asset: asset, photo: photo, tags: tags)
+        PhotoDetailPage(asset: asset, photo: photo, tags: tags)
       }
       .handle(error: $error)
   }
