@@ -26,8 +26,6 @@
 		2086F789279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
 		2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
 		2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
-		2086F791279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */; };
-		2086F792279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */; };
 		2086F795279B8C6C00BBA8D4 /* GridImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridImage.swift */; };
 		2086F796279B8C6C00BBA8D4 /* GridImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridImage.swift */; };
 		2086F7C7279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */; };
@@ -55,7 +53,6 @@
 		2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModelFactory.swift; sourceTree = "<group>"; };
 		2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Extension.swift"; sourceTree = "<group>"; };
-		2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAssetList.swift; sourceTree = "<group>"; };
 		2086F794279B8C6C00BBA8D4 /* GridImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImage.swift; sourceTree = "<group>"; };
 		2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditPage.swift; sourceTree = "<group>"; };
 		2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLine.swift; sourceTree = "<group>"; };
@@ -122,7 +119,6 @@
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				2086F755279AD67600BBA8D4 /* ContentView.swift */,
 				2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */,
-				2086F790279B821C00BBA8D4 /* PhotoLibraryAssetList.swift */,
 				2086F756279AD67600BBA8D4 /* Persistence.swift */,
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
 				2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */,
@@ -280,7 +276,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
-				2086F791279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */,
 				2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
 				2086F795279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
@@ -303,7 +298,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
-				2086F792279B821C00BBA8D4 /* PhotoLibraryAssetList.swift in Sources */,
 				2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
 				2086F796279B8C6C00BBA8D4 /* GridImage.swift in Sources */,
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
