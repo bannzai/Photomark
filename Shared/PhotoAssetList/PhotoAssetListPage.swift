@@ -107,8 +107,11 @@ struct PhotoAssetListPage: View {
                           PhotoAssetImage(
                             asset: asset,
                             photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                            tags: tags.toArray()
+                            tags: tags.toArray(),
+                            maxImageLength: 100
                           )
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
                         }
                       }
                     }
@@ -116,11 +119,16 @@ struct PhotoAssetListPage: View {
                   }
                   LazyVGrid(columns: gridItems, spacing: 1) {
                     ForEach(filteredAssets) { asset in
-                      PhotoAssetImage(
-                        asset: asset,
-                        photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                        tags: tags.toArray()
-                      )
+                      GridAssetImageFrame { gridItemGeometry in
+                        PhotoAssetImage(
+                          asset: asset,
+                          photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                          tags: tags.toArray(),
+                          maxImageLength: gridItemGeometry.size.width
+                        )
+                          .scaledToFill()
+                          .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
+                      }
                     }
                   }
                 }
