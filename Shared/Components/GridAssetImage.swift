@@ -6,7 +6,7 @@ struct GridAssetImage: View {
   // NOTE: Workaround for avoid the problem of images retrieved from phasset being overflowed.
   var body: some View {
     GeometryReader { gridItemGeometry in
-      AsyncAssetImage<_ConditionalContent<Image, Image>>(asset: asset) { phase in
+      AsyncAssetImage<_ConditionalContent<Image, Image>>(asset: asset, maxImageLength: gridItemGeometry.size.width) { phase in
         switch phase {
         case .empty:
           Image(systemName: "photo")

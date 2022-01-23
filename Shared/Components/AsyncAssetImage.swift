@@ -10,7 +10,7 @@ struct AsyncAssetImage<Content: View>: View {
   let maxImageLength: CGFloat
   let content: (AssetAsyncImagePhase) -> Content
 
-  init(asset: Asset, maxImageLength: CGFloat = .infinity, @ViewBuilder content: @escaping (AssetAsyncImagePhase) -> Content) {
+  init(asset: Asset, maxImageLength: CGFloat, @ViewBuilder content: @escaping (AssetAsyncImagePhase) -> Content) {
     self.asset = asset
     self.maxImageLength = maxImageLength
     self.content = content

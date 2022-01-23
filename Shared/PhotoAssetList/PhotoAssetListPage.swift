@@ -97,13 +97,15 @@ struct PhotoAssetListPage: View {
                   }
               }
 
-              LazyVGrid(columns: gridItems, spacing: 1) {
-                ForEach(filteredAssets) { asset in
-                  PhotoAssetImage(
-                    asset: asset,
-                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                    tags: tags.toArray()
-                  )
+              ScrollView(.vertical) {
+                LazyVGrid(columns: gridItems, spacing: 1) {
+                  ForEach(filteredAssets) { asset in
+                    PhotoAssetImage(
+                      asset: asset,
+                      photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                      tags: tags.toArray()
+                    )
+                  }
                 }
               }
             }
@@ -154,7 +156,7 @@ struct PhotoAssetListPage: View {
   }
 
   func fetchFirst(viewGeometry: GeometryProxy) async {
-    let phAssets = photoLibrary.fetchAssets().toArray()
+    let phAssets = Array(photoLibrary.fetchAssets().toArray())
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
         return l > r
@@ -166,7 +168,7 @@ struct PhotoAssetListPage: View {
     assets = sortedAssets.map(Asset.init)
 
     // prefetch first view
-    for asset in assets[0..<min(assets.count, 40)] {
+    for asset in assets[0..<min(assets.count, 30)] {
       Task { @MainActor in
         if let image = await photoLibrary.firstImage(asset: asset, maxImageLength: viewGeometry.size.width / 3) {
           asset.image = image
