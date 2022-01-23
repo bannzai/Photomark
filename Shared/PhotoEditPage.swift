@@ -6,7 +6,7 @@ struct PhotoEditPage: View {
   @Environment(\.managedObjectContext) private var viewContext
 
   let image: UIImage
-  let photo: Photo
+  @StateObject var photo: Photo
   let tags: [Tag]
 
   @State var tagName: String = ""
@@ -19,19 +19,28 @@ struct PhotoEditPage: View {
           .padding(8)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .onSubmit {
-            do {
-              try Tag.createAndSave(context: viewContext, name: tagName)
-            } catch {
-              self.error = error
+            if tags.contains(where: { $0.name == tagName }) {
+              error = AlertError("既に存在しています", "他のタグ名を入力してください")
+            } else {
+              do {
+                if let tag = try Tag.createAndSave(context: viewContext, name: tagName), let tagID = tag.id {
+                  photo.tagIDs?.append(tagID.uuidString)
+                  tagName = ""
+                }
+              } catch {
+                self.error = error
+              }
             }
-
-            tagName = ""
           }
 
-        TagLine(tags: tags) { tag in
+        TagLine(tags: tags.filtered(tagName: tagName)) { tag in
           TagView(tag: tag, isSelected: photo.hasTag(tag))
             .onTapGesture {
-              photo.tagIDs!.append(tag.id!.uuidString)
+              if photo.hasTag(tag) {
+                photo.tagIDs?.removeAll(where: { $0 == tag.id!.uuidString })
+              } else {
+                photo.tagIDs?.append(tag.id!.uuidString)
+              }
 
               do {
                 try viewContext.save()
