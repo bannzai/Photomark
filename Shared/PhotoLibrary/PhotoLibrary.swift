@@ -74,10 +74,6 @@ struct PhotoLibrary {
       }
     }
   }
-
-  func fetch(from phAsset: PHAsset) {
-    
-  }
 }
 
 struct PhotoLibraryKey: SwiftUI.EnvironmentKey {

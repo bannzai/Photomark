@@ -69,7 +69,6 @@ struct ContentView: View {
           .ignoresSafeArea()
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .navigationBarHidden(true)
-
         } else {
           ScrollView(.vertical) {
             VStack {
@@ -118,7 +117,7 @@ struct ContentView: View {
           let status = await photoLibrary.requestAuthorization()
           switch status {
           case .authorized, .limited:
-            watch(viewGeometry: viewGeometry)
+            await fetchAll(viewGeometry: viewGeometry)
           case .notDetermined, .restricted, .denied:
             alertType = .noPermission
           @unknown default:
@@ -127,7 +126,7 @@ struct ContentView: View {
         case .openSettingApp:
           alertType = .openSetting
         case nil:
-          watch(viewGeometry: viewGeometry)
+          await fetchAll(viewGeometry: viewGeometry)
         }
       }
       .alert(item: $alertType, content: { alertType in
@@ -152,13 +151,21 @@ struct ContentView: View {
     }
   }
 
-  func watch(viewGeometry: GeometryProxy) {
+  // TODO: No blocking code
+  func fetchAll(viewGeometry: GeometryProxy) async {
     let phAssets = photoLibrary.fetchAssets().assets()
-    for phAsset in phAssets {
-      Task { @MainActor in
-        for await response in photoLibrary.imageStream(for: phAsset, maxImageLength: viewGeometry.size.width / 3) {
-          assets.append(response)
-        }
+    let sortedAssets = phAssets.sorted { lhs, rhs in
+      if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
+        return l > r
+      } else {
+        assertionFailure()
+        return false
+      }
+    }
+
+    for phAsset in sortedAssets {
+      if let response = await photoLibrary.firstAsset(phAsset: phAsset, maxImageLength: viewGeometry.size.width / 3) {
+        assets.append(response)
       }
     }
   }
