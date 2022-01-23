@@ -60,11 +60,7 @@ struct PhotoEditPage: View {
       }
     }
     .task {
-      if let image = asset.image {
-        self.image = image
-      } else {
-        image = await photoLibrary.firstImage(asset: asset, maxImageLength: UIScreen.main.bounds.width)
-      }
+      image = await photoLibrary.firstImage(asset: asset, maxImageLength: UIScreen.main.bounds.width)
     }
     .handle(error: $error)
   }
