@@ -6,7 +6,7 @@ struct PhotoEditPage: View {
   @Environment(\.managedObjectContext) private var viewContext
 
   let image: UIImage
-  @ObservedObject var photo: Photo
+  @StateObject var photo: Photo
   let tags: [Tag]
 
   @State var tagName: String = ""
