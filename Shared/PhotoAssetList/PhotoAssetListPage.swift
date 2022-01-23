@@ -48,9 +48,9 @@ struct PhotoAssetListPage: View {
       }.filter { tuple in
         if !searchText.isEmpty {
           let filteredTags = tags.toArray().filtered(tagName: searchText)
+          
           return tuple.photoTagIDs.contains { photoTagID in
-            filteredTags.contains { $0.id?.uuidString == photoTagID
-            }
+            filteredTags.contains { $0.id?.uuidString == photoTagID }
           }
         } else {
           return true
@@ -58,14 +58,12 @@ struct PhotoAssetListPage: View {
       }.filter { tuple in
         if !selectedTags.isEmpty {
           return tuple.photoTagIDs.contains { photoTagID in
-            selectedTags.contains { $0.id?.uuidString == photoTagID
-            }
+            selectedTags.contains { $0.id?.uuidString == photoTagID }
           }
         } else {
           return true
         }
       }
-
 
       return assets.filter { asset in
         filteredPhotos.contains { tuple in tuple.photo.phAssetIdentifier == asset.id }
