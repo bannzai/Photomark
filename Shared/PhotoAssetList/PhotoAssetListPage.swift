@@ -48,7 +48,7 @@ struct PhotoAssetListPage: View {
       }.filter { tuple in
         if !searchText.isEmpty {
           let filteredTags = tags.toArray().filtered(tagName: searchText)
-          
+
           return tuple.photoTagIDs.contains { photoTagID in
             filteredTags.contains { $0.id?.uuidString == photoTagID }
           }
@@ -58,7 +58,7 @@ struct PhotoAssetListPage: View {
       }.filter { tuple in
         if !selectedTags.isEmpty {
           return tuple.photoTagIDs.contains { photoTagID in
-            selectedTags.contains { $0.id?.uuidString == photoTagID }
+            selectedTags.allSatisfy { $0.id?.uuidString == photoTagID }
           }
         } else {
           return true
