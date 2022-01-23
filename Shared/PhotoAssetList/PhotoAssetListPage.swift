@@ -71,7 +71,7 @@ struct PhotoAssetListPage: View {
         } else {
           ScrollView(.vertical) {
             VStack {
-              TagLine(tags: tags.toArray()) { tag in
+              TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
                 TagView(tag: tag, isSelected: selectedTags.contains(tag))
                   .onTapGesture {
                     if selectedTags.contains(tag) {
