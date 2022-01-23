@@ -127,7 +127,7 @@
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F7C9279BCFA700BBA8D4 /* Tag */,
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
-				2086F793279B8C6600BBA8D4 /* View */,
+				2086F793279B8C6600BBA8D4 /* Components */,
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				200672D0279D000B00BA9C48 /* PhotoAssetList */,
 				2086F7C6279BCEB300BBA8D4 /* PhotoEditPage.swift */,
@@ -155,12 +155,12 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		2086F793279B8C6600BBA8D4 /* View */ = {
+		2086F793279B8C6600BBA8D4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				2086F794279B8C6C00BBA8D4 /* GridImage.swift */,
 			);
-			path = View;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */ = {
