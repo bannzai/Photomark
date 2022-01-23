@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import Photos
 
-struct AssetAsyncImage<Content: View>: View {
+struct AsyncAssetImage<Content: View>: View {
   @Environment(\.photoLibrary) var photoLibrary
   @State var phase: AssetAsyncImagePhase
 
