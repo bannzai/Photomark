@@ -22,7 +22,6 @@ struct PhotoAssetListPage: View {
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
   @State var alertType: AlertType?
-  @State var dragAmount: (startLocation: CGPoint, transiton: CGSize) = (.zero, .zero)
 
   enum AlertType: Identifiable {
     case openSetting
@@ -100,29 +99,13 @@ struct PhotoAssetListPage: View {
 
               LazyVGrid(columns: gridItems, spacing: 1) {
                 ForEach(filteredAssets) { asset in
-                  GeometryReader { geometry in
-                    // TODO: Coordinate to Parent
-                    let globalFrame = geometry.frame(in: .global)
-
-                    PhotoAssetImage(
-                      asset: asset,
-                      photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                      tags: tags.toArray(),
-                      isSelected: {
-                        let selected = globalFrame.intersects(.init(origin: dragAmount.startLocation, size: dragAmount.transiton))
-                        print("[DEBUG], drag: ", dragAmount, "geometry frame: ", globalFrame, "selected: ", selected)
-                        return selected
-                      }()
-                    )
-                  }
-                  // Workaround. see GridImage comment
-                  .clipped()
-                  .aspectRatio(1, contentMode: .fit)
+                  PhotoAssetImage(
+                    asset: asset,
+                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                    tags: tags.toArray()
+                  )
                 }
               }
-              .gesture(DragGesture().onChanged({ value in
-                dragAmount = (value.startLocation, value.translation)
-              }))
             }
           }
           .navigationTitle("保存済み")

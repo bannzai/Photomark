@@ -4,13 +4,15 @@ import CoreData
 
 struct PhotoEditPage: View {
   @Environment(\.managedObjectContext) private var viewContext
+  @Environment(\.photoLibrary) var photoLibrary
 
-  let image: UIImage
+  let asset: Asset
   @StateObject var photo: Photo
   let tags: [Tag]
 
   @State var tagName: String = ""
   @State var error: Error?
+  @State var image: UIImage?
 
   var body: some View {
     ScrollView(.vertical) {
@@ -50,30 +52,20 @@ struct PhotoEditPage: View {
             }
         }
 
-        Image(uiImage: image)
-          .resizable()
-          .aspectRatio(contentMode: .fill)
+        if let image = image {
+          Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+        }
+      }
+    }
+    .task {
+      if let image = asset.image {
+        self.image = image
+      } else {
+        image = await photoLibrary.firstImage(asset: asset, maxImageLength: .infinity)
       }
     }
     .handle(error: $error)
-  }
-}
-
-struct PhotoEditPage_Previews: PreviewProvider {
-  static var viewContext: NSManagedObjectContext { PersistenceController.preview.container.viewContext }
-  static let photo: Photo = {
-    let photo = Photo(context: viewContext)
-    photo.id = .init()
-    return photo
-  }()
-  static let tags: [Tag] = ["A", "B", "C", "D", "E", "F", "G"].map {
-    let tag = Tag(context: viewContext)
-    tag.id = .init()
-    tag.name = $0
-    return tag
-  }
-
-  static var previews: some View {
-    PhotoEditPage(image: UIImage(systemName: "plus")!, photo: photo, tags: tags)
   }
 }
