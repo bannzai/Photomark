@@ -6,6 +6,7 @@ struct PhotoAssetImage: View {
   let asset: Asset
   let photo: Photo?
   let tags: [Tag]
+  @Binding var dragAmount: (startLocation: CGPoint, transiton: CGSize)
 
   @State var editingPhoto: Photo? = nil
   @State var error: Error?

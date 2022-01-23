@@ -22,6 +22,7 @@ struct PhotoAssetListPage: View {
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
   @State var alertType: AlertType?
+  @State var dragAmount: (startLocation: CGPoint, transiton: CGSize) = (.zero, .zero)
 
   enum AlertType: Identifiable {
     case openSetting
@@ -84,7 +85,7 @@ struct PhotoAssetListPage: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .navigationBarHidden(true)
         } else {
-          ScrollView(.vertical) {
+          VStack {
             VStack {
               TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
                 TagView(tag: tag, isSelected: selectedTags.contains(tag))
@@ -99,13 +100,30 @@ struct PhotoAssetListPage: View {
 
               LazyVGrid(columns: gridItems, spacing: 1) {
                 ForEach(filteredAssets) { asset in
-                  PhotoAssetImage(
-                    asset: asset,
-                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                    tags: tags.toArray()
-                  )
+                  GeometryReader { geometry in
+                    let globalFrame = geometry.frame(in: .global)
+
+                    PhotoAssetImage(
+                      asset: asset,
+                      photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                      tags: tags.toArray(),
+                      dragAmount: .init(get: {
+                      let contain = globalFrame.intersects(.init(origin: dragAmount.startLocation, size: dragAmount.transiton))
+                      print("[DEBUG], drag: ", dragAmount, "geometry frame: ", globalFrame, "contain: ", contain)
+                        return self.dragAmount
+                      }, set: { self.dragAmount = $0 })
+                    ).onAppear {
+                      let contain = globalFrame.intersects(.init(origin: dragAmount.startLocation, size: dragAmount.transiton))
+                      print("[DEBUG], drag: ", dragAmount, "geometry frame: ", globalFrame, "contain: ", contain)
+                    }
+                  }
+                  .clipped()
+                  .aspectRatio(1, contentMode: .fit)
                 }
               }
+              .gesture(DragGesture().onChanged({ value in
+                dragAmount = (value.startLocation, value.translation)
+              }))
             }
           }
           .navigationTitle("保存済み")
