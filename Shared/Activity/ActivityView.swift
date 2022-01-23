@@ -4,17 +4,17 @@ import UIKit
 struct ActivityView: UIViewControllerRepresentable {
 
   let images: [UIImage]
-  let onCancel: () -> Void
-  let onComplete: (UIActivity.ActivityType?) -> Void
+  var onCancel: (() -> Void)?
+  var onComplete: ((UIActivity.ActivityType?) -> Void)?
 
   public func makeUIViewController(context: Context) -> UIActivityViewController {
     let activityController = UIActivityViewController(activityItems: images, applicationActivities: nil)
     activityController.completionWithItemsHandler = {
       (activityType, completed, returnedItems, error) in
       if !completed {
-        onCancel()
+        onCancel?()
       } else {
-        onComplete(activityType)
+        onComplete?(activityType)
       }
     }
     return activityController
