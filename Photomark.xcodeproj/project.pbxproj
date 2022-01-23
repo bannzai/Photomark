@@ -18,6 +18,8 @@
 		20594641279D35E100F5726C /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059463F279D35E100F5726C /* Tag+Extension.swift */; };
 		20594650279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */; };
 		20594651279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */; };
+		20594654279D85EC00F5726C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594653279D85EC00F5726C /* ActivityView.swift */; };
+		20594655279D85EC00F5726C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594653279D85EC00F5726C /* ActivityView.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -54,6 +56,7 @@
 		2059463C279D335800F5726C /* AlertError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertError.swift; sourceTree = "<group>"; };
 		2059463F279D35E100F5726C /* Tag+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Extension.swift"; sourceTree = "<group>"; };
 		2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAssetImage.swift; sourceTree = "<group>"; };
+		20594653279D85EC00F5726C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomarkApp.swift; sourceTree = "<group>"; };
 		2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetListPage.swift; sourceTree = "<group>"; };
@@ -118,6 +121,14 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		20594652279D85E700F5726C /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				20594653279D85EC00F5726C /* ActivityView.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
 		2086F74C279AD67600BBA8D4 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +143,7 @@
 		2086F751279AD67600BBA8D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				20594652279D85E700F5726C /* Activity */,
 				201C2ACE279CB4EB006B135B /* Entity */,
 				201C2AC7279BDC41006B135B /* StdLib */,
 				2086F7CD279BDA2100BBA8D4 /* Error */,
@@ -312,6 +324,7 @@
 				2086F7C7279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
 				2059463D279D335800F5726C /* AlertError.swift in Sources */,
 				2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
+				20594654279D85EC00F5726C /* ActivityView.swift in Sources */,
 				20594640279D35E100F5726C /* Tag+Extension.swift in Sources */,
 				2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
 				2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
@@ -336,6 +349,7 @@
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F7C8279BCEB300BBA8D4 /* PhotoEditPage.swift in Sources */,
 				200672D3279D018500BA9C48 /* PhotoAssetImage.swift in Sources */,
+				20594655279D85EC00F5726C /* ActivityView.swift in Sources */,
 				2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
 				2086F768279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
 				2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
