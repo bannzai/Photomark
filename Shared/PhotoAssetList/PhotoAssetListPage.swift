@@ -18,7 +18,6 @@ struct PhotoAssetListPage: View {
   private var tags: FetchedResults<Tag>
 
   @State var assets: [Asset] = []
-  @State var editingPhoto: Photo? = nil
   @State var error: Error?
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
@@ -85,23 +84,11 @@ struct PhotoAssetListPage: View {
 
               LazyVGrid(columns: gridItems, spacing: 1) {
                 ForEach(filteredAssets) { asset in
-                  if let image = asset.image {
-                    GridImage(image: image)
-                      .onTapGesture {
-                        if let photo = photos.first(where: { $0.phAssetIdentifier == asset.id }) {
-                          editingPhoto = photo
-                        } else {
-                          do {
-                            editingPhoto = try Photo.createAndSave(context: viewContext, asset: asset)
-                          } catch {
-                            self.error = error
-                          }
-                        }
-                      }
-                      .sheet(item: $editingPhoto) { photo in
-                        PhotoEditPage(image: image, photo: photo, tags: tags.toArray())
-                      }
-                  }
+                  PhotoAssetImage(
+                    asset: asset,
+                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                    tags: tags.toArray()
+                  )
                 }
               }
             }
