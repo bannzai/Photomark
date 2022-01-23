@@ -31,7 +31,11 @@ struct PhotoEditPage: View {
         TagLine(tags: tags) { tag in
           TagView(tag: tag, isSelected: photo.hasTag(tag))
             .onTapGesture {
-              photo.tagIDs!.append(tag.id!.uuidString)
+              if photo.hasTag(tag) {
+                photo.tagIDs?.removeAll(where: { $0 == tag.id!.uuidString })
+              } else {
+                photo.tagIDs?.append(tag.id!.uuidString)
+              }
 
               do {
                 try viewContext.save()
