@@ -18,6 +18,7 @@ struct PhotoAssetListPage: View {
   private var tags: FetchedResults<Tag>
 
   @State var assets: [Asset] = []
+  @State var assetCollections: [(collection: PHAssetCollection, asset: Asset?)] = []
   @State var error: Error?
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
@@ -98,13 +99,29 @@ struct PhotoAssetListPage: View {
               }
 
               ScrollView(.vertical) {
-                LazyVGrid(columns: gridItems, spacing: 1) {
-                  ForEach(filteredAssets) { asset in
-                    PhotoAssetImage(
-                      asset: asset,
-                      photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                      tags: tags.toArray()
-                    )
+                VStack {
+                  ScrollView(.horizontal) {
+                    HStack {
+                      ForEach(0..<assetCollections.count) { i in
+                        if let asset = assetCollections[i].asset {
+                          PhotoAssetImage(
+                            asset: asset,
+                            photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                            tags: tags.toArray()
+                          )
+                        }
+                      }
+                    }
+                    .frame(alignment: .leading)
+                  }
+                  LazyVGrid(columns: gridItems, spacing: 1) {
+                    ForEach(filteredAssets) { asset in
+                      PhotoAssetImage(
+                        asset: asset,
+                        photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                        tags: tags.toArray()
+                      )
+                    }
                   }
                 }
               }
@@ -121,7 +138,7 @@ struct PhotoAssetListPage: View {
           let status = await photoLibrary.requestAuthorization()
           switch status {
           case .authorized, .limited:
-            await fetchFirst(viewGeometry: viewGeometry)
+            fetchFirst(viewGeometry: viewGeometry)
           case .notDetermined, .restricted, .denied:
             alertType = .noPermission
           @unknown default:
@@ -130,7 +147,7 @@ struct PhotoAssetListPage: View {
         case .openSettingApp:
           alertType = .openSetting
         case nil:
-          await fetchFirst(viewGeometry: viewGeometry)
+          fetchFirst(viewGeometry: viewGeometry)
         }
       }
       .alert(item: $alertType, content: { alertType in
@@ -155,8 +172,8 @@ struct PhotoAssetListPage: View {
     }
   }
 
-  func fetchFirst(viewGeometry: GeometryProxy) async {
-    let phAssets = Array(photoLibrary.fetchAssets().toArray())
+  func fetchFirst(viewGeometry: GeometryProxy) {
+    let phAssets = photoLibrary.fetchAssets().toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
         return l > r
@@ -167,12 +184,13 @@ struct PhotoAssetListPage: View {
     }
     assets = sortedAssets.map(Asset.init)
 
-    // prefetch first view
-    for asset in assets[0..<min(assets.count, 30)] {
-      Task { @MainActor in
-        if let image = await photoLibrary.firstImage(asset: asset, maxImageLength: viewGeometry.size.width / 3) {
-          asset.image = image
-        }
+    let phAssetCollections = photoLibrary.fetchAssetCollection().toArray()
+    let assetsInCollection = phAssetCollections.map(photoLibrary.fetchFirstAsset(in:))
+    zip(phAssetCollections, assetsInCollection).forEach { (collection, asset) in
+      if let asset = asset {
+        assetCollections.append((collection, Asset(phAsset: asset)))
+      } else {
+        assetCollections.append((collection, nil))
       }
     }
   }

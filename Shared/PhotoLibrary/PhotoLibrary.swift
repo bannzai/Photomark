@@ -54,6 +54,15 @@ struct PhotoLibrary {
   func fetchAssets() -> PHFetchResult<PHAsset> {
     PHAsset.fetchAssets(with: nil)
   }
+  func fetchFirstAsset(in assetCollection: PHAssetCollection) -> PHAsset? {
+    let options = PHFetchOptions()
+    options.fetchLimit = 1
+    return PHAsset.fetchAssets(in: assetCollection, options: options).firstObject
+  }
+
+  func fetchAssetCollection() -> PHFetchResult<PHAssetCollection> {
+    PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+  }
 
   // NOTE: Nullable, because there is a possibility that phAssetIdentifier remains only in Photo DB.
   // Sinario: User deleted asset on Photo.app.
