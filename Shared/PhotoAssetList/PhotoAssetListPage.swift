@@ -36,22 +36,37 @@ struct PhotoAssetListPage: View {
     .init(.flexible(), spacing: 1),
   ]
   private var filteredAssets: [Asset] {
-    if selectedTags.isEmpty {
+    if selectedTags.isEmpty && searchText.isEmpty {
       return assets
     } else {
-      return assets.filter { asset in
-        photos.filter { photo in
-          guard let photoTagIDs = photo.tagIDs else {
-            return false
-          }
+      var filteredPhotos: [(photo: Photo, photoTagIDs: [String])] = photos.toArray().compactMap { photo in
+        if let tagIDs = photo.tagIDs {
+          return (photo: photo, photoTagIDs: tagIDs)
+        } else {
+          return nil
+        }
+      }
 
-          return photoTagIDs.contains { photoTagID in
-            selectedTags.contains { tag in
-              tag.id?.uuidString == photoTagID
+      if !searchText.isEmpty {
+        let filteredTags = tags.toArray().filtered(tagName: searchText)
+
+        filteredPhotos = filteredPhotos.filter { tuple in
+          tuple.photoTagIDs.contains { photoTagID in
+            filteredTags.contains { $0.id?.uuidString == photoTagID
             }
           }
         }
-        .contains { $0.phAssetIdentifier == asset.id }
+      }
+
+      if !selectedTags.isEmpty {
+        filteredPhotos = filteredPhotos.filter { tuple in
+          tuple.photoTagIDs.contains { photoTagID in selectedTags.contains { $0.id?.uuidString == photoTagID }
+          }
+        }
+      }
+
+      return assets.filter { asset in
+        filteredPhotos.contains { tuple in tuple.photo.phAssetIdentifier == asset.id }
       }
     }
   }
