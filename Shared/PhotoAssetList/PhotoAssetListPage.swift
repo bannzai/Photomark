@@ -39,31 +39,33 @@ struct PhotoAssetListPage: View {
     if selectedTags.isEmpty && searchText.isEmpty {
       return assets
     } else {
-      var filteredPhotos: [(photo: Photo, photoTagIDs: [String])] = photos.toArray().compactMap { photo in
+      let filteredPhotos: [(photo: Photo, photoTagIDs: [String])] = photos.toArray().compactMap { photo in
         if let tagIDs = photo.tagIDs {
           return (photo: photo, photoTagIDs: tagIDs)
         } else {
           return nil
         }
-      }
-
-      if !searchText.isEmpty {
-        let filteredTags = tags.toArray().filtered(tagName: searchText)
-
-        filteredPhotos = filteredPhotos.filter { tuple in
-          tuple.photoTagIDs.contains { photoTagID in
+      }.filter { tuple in
+        if !searchText.isEmpty {
+          let filteredTags = tags.toArray().filtered(tagName: searchText)
+          return tuple.photoTagIDs.contains { photoTagID in
             filteredTags.contains { $0.id?.uuidString == photoTagID
             }
           }
+        } else {
+          return true
+        }
+      }.filter { tuple in
+        if !selectedTags.isEmpty {
+          return tuple.photoTagIDs.contains { photoTagID in
+            selectedTags.contains { $0.id?.uuidString == photoTagID
+            }
+          }
+        } else {
+          return true
         }
       }
 
-      if !selectedTags.isEmpty {
-        filteredPhotos = filteredPhotos.filter { tuple in
-          tuple.photoTagIDs.contains { photoTagID in selectedTags.contains { $0.id?.uuidString == photoTagID }
-          }
-        }
-      }
 
       return assets.filter { asset in
         filteredPhotos.contains { tuple in tuple.photo.phAssetIdentifier == asset.id }
