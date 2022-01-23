@@ -36,8 +36,8 @@
 		2086F789279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
 		2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
 		2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
-		2086F795279B8C6C00BBA8D4 /* GridAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImage.swift */; };
-		2086F796279B8C6C00BBA8D4 /* GridAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImage.swift */; };
+		2086F795279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */; };
+		2086F796279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */; };
 		2086F7C7279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */; };
 		2086F7C8279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */; };
 		2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
@@ -68,7 +68,7 @@
 		2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModelFactory.swift; sourceTree = "<group>"; };
 		2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Extension.swift"; sourceTree = "<group>"; };
-		2086F794279B8C6C00BBA8D4 /* GridAssetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridAssetImage.swift; sourceTree = "<group>"; };
+		2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridAssetImageGeometryReader.swift; sourceTree = "<group>"; };
 		2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailPage.swift; sourceTree = "<group>"; };
 		2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLine.swift; sourceTree = "<group>"; };
 		2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		2086F793279B8C6600BBA8D4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2086F794279B8C6C00BBA8D4 /* GridAssetImage.swift */,
+				2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */,
 				2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */,
 			);
 			path = Components;
@@ -313,7 +313,7 @@
 			files = (
 				2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
-				2086F795279B8C6C00BBA8D4 /* GridAssetImage.swift in Sources */,
+				2086F795279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				20594650279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */,
 				2086F7CF279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
@@ -341,7 +341,7 @@
 				2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				20594651279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */,
 				2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
-				2086F796279B8C6C00BBA8D4 /* GridAssetImage.swift in Sources */,
+				2086F796279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */,
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				2059463E279D335800F5726C /* AlertError.swift in Sources */,
 				2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,

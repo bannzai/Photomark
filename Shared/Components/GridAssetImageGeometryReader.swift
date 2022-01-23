@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GridAssetImageFrame<Content: View>: View {
+struct GridAssetImageGeometryReader<Content: View>: View {
   @ViewBuilder let content: (GeometryProxy) -> Content
 
   var body: some View {

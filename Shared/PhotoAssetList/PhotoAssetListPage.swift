@@ -119,7 +119,7 @@ struct PhotoAssetListPage: View {
                   }
                   LazyVGrid(columns: gridItems, spacing: 1) {
                     ForEach(filteredAssets) { asset in
-                      GridAssetImageFrame { gridItemGeometry in
+                      GridAssetImageGeometryReader { gridItemGeometry in
                         PhotoAssetImage(
                           asset: asset,
                           photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
