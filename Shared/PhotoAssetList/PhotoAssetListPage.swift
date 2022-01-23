@@ -101,22 +101,21 @@ struct PhotoAssetListPage: View {
               LazyVGrid(columns: gridItems, spacing: 1) {
                 ForEach(filteredAssets) { asset in
                   GeometryReader { geometry in
+                    // TODO: Coordinate to Parent
                     let globalFrame = geometry.frame(in: .global)
 
                     PhotoAssetImage(
                       asset: asset,
                       photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
                       tags: tags.toArray(),
-                      dragAmount: .init(get: {
-                      let contain = globalFrame.intersects(.init(origin: dragAmount.startLocation, size: dragAmount.transiton))
-                      print("[DEBUG], drag: ", dragAmount, "geometry frame: ", globalFrame, "contain: ", contain)
-                        return self.dragAmount
-                      }, set: { self.dragAmount = $0 })
-                    ).onAppear {
-                      let contain = globalFrame.intersects(.init(origin: dragAmount.startLocation, size: dragAmount.transiton))
-                      print("[DEBUG], drag: ", dragAmount, "geometry frame: ", globalFrame, "contain: ", contain)
-                    }
+                      isSelected: {
+                        let selected = globalFrame.intersects(.init(origin: dragAmount.startLocation, size: dragAmount.transiton))
+                        print("[DEBUG], drag: ", dragAmount, "geometry frame: ", globalFrame, "selected: ", selected)
+                        return selected
+                      }()
+                    )
                   }
+                  // Workaround. see GridImage comment
                   .clipped()
                   .aspectRatio(1, contentMode: .fit)
                 }
