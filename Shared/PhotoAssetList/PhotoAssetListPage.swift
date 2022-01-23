@@ -136,7 +136,7 @@ struct PhotoAssetListPage: View {
           let status = await photoLibrary.requestAuthorization()
           switch status {
           case .authorized, .limited:
-            await fetchAll(viewGeometry: viewGeometry)
+            await fetchFirst(viewGeometry: viewGeometry)
           case .notDetermined, .restricted, .denied:
             alertType = .noPermission
           @unknown default:
@@ -145,7 +145,7 @@ struct PhotoAssetListPage: View {
         case .openSettingApp:
           alertType = .openSetting
         case nil:
-          await fetchAll(viewGeometry: viewGeometry)
+          await fetchFirst(viewGeometry: viewGeometry)
         }
       }
       .alert(item: $alertType, content: { alertType in
@@ -170,9 +170,8 @@ struct PhotoAssetListPage: View {
     }
   }
 
-  // TODO: No blocking code
-  func fetchAll(viewGeometry: GeometryProxy) async {
-    let phAssets = photoLibrary.fetchAssets().assets()
+  func fetchFirst(viewGeometry: GeometryProxy) async {
+    let phAssets = photoLibrary.fetchAssets().toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
         return l > r
@@ -181,10 +180,14 @@ struct PhotoAssetListPage: View {
         return false
       }
     }
+    assets = sortedAssets.map(Asset.init)
 
-    for phAsset in sortedAssets {
-      if let response = await photoLibrary.firstAsset(phAsset: phAsset, maxImageLength: viewGeometry.size.width / 3) {
-        assets.append(response)
+    // prefetch first view
+    for asset in assets[0..<min(assets.count, 40)] {
+      Task { @MainActor in
+        if let image = await photoLibrary.firstImage(asset: asset, maxImageLength: viewGeometry.size.width / 3) {
+          asset.image = image
+        }
       }
     }
   }

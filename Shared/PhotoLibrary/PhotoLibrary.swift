@@ -6,12 +6,16 @@ import os.log
 
 private let logger = Logger(subsystem: "com.photomark.log", category: "photoLibrary")
 
-struct Asset: CustomStringConvertible, Identifiable {
+final class Asset: CustomStringConvertible, Identifiable {
   var id: String { asset.localIdentifier }
 
   let asset: PHAsset
-  let image: UIImage?
-  let info: [AnyHashable: Any]?
+  var image: UIImage?
+  var info: [AnyHashable: Any]?
+
+  init(phAsset: PHAsset) {
+    self.asset = phAsset
+  }
 
   var description: String {
     "asset: \(asset), image: \(String(describing: image)), info: \(String(describing: info))"
@@ -57,20 +61,20 @@ struct PhotoLibrary {
     PHAsset.fetchAssets(withLocalIdentifiers: [phIdentifier], options: nil).firstObject
   }
 
-  func firstAsset(phAsset: PHAsset, maxImageLength: CGFloat) async -> Asset? {
-    await imageStream(for: phAsset, maxImageLength: maxImageLength).first { assetResponse in
+  func firstImage(asset: Asset, maxImageLength: CGFloat) async -> UIImage? {
+    await imageStream(for: asset, maxImageLength: maxImageLength).first { _ in
       return true
-    }
+    } ?? nil
   }
 
-  func imageStream(for asset: PHAsset, maxImageLength: CGFloat) -> AsyncStream<Asset> {
+  func imageStream(for asset: Asset, maxImageLength: CGFloat) -> AsyncStream<UIImage?> {
     AsyncStream { continuation in
       let options = PHImageRequestOptions()
       options.isSynchronous = true
 
       // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
-      PHImageManager.default().requestImage(for: asset, targetSize: .init(width: maxImageLength, height: maxImageLength), contentMode: .default, options: options) { image, info in
-        continuation.yield(.init(asset: asset, image: image, info: info))
+      PHImageManager.default().requestImage(for: asset.asset, targetSize: .init(width: maxImageLength, height: maxImageLength), contentMode: .default, options: options) { image, info in
+        continuation.yield(image)
       }
     }
   }
