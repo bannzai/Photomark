@@ -5,9 +5,17 @@ import UniformTypeIdentifiers
 import PhotosUI
 
 struct PhotoAssetListPage: View {
-  @EnvironmentObject var appViewModel: AppViewModel
   @Environment(\.photoLibrary) private var photoLibrary
   @Environment(\.managedObjectContext) private var viewContext
+
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
+    animation: .default)
+  private var photos: FetchedResults<Photo>
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
+    animation: .default)
+  private var tags: FetchedResults<Tag>
 
   @State var assets: [Asset] = []
   @State var error: Error?
@@ -32,7 +40,7 @@ struct PhotoAssetListPage: View {
       return assets
     } else {
       return assets.filter { asset in
-        appViewModel.photos.filter { photo in
+        photos.filter { photo in
           guard let photoTagIDs = photo.tagIDs else {
             return false
           }
@@ -63,7 +71,7 @@ struct PhotoAssetListPage: View {
         } else {
           ScrollView(.vertical) {
             VStack {
-              TagLine(tags: appViewModel.tags.toArray()) { tag in
+              TagLine(tags: tags.toArray()) { tag in
                 TagView(tag: tag, isSelected: selectedTags.contains(tag))
                   .onTapGesture {
                     if selectedTags.contains(tag) {
@@ -78,7 +86,8 @@ struct PhotoAssetListPage: View {
                 ForEach(filteredAssets) { asset in
                   PhotoAssetImage(
                     asset: asset,
-                    photoID: appViewModel.photo(asset: asset)?.id
+                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                    tags: tags.toArray()
                   )
                 }
               }

@@ -1,21 +1,14 @@
 import SwiftUI
 
 struct PhotoAssetImage: View {
-  @EnvironmentObject var appViewModel: AppViewModel
   @Environment(\.managedObjectContext) private var viewContext
 
   let asset: Asset
-  let photoID: Photo.ID?
+  let photo: Photo?
+  let tags: [Tag]
 
   @State var editingPhoto: Photo? = nil
   @State var error: Error?
-
-  var photo: Photo? {
-    guard let photoID = photoID else {
-      return nil
-    }
-    return appViewModel.photo(id: photoID)
-  }
 
   var body: some View {
     if let image = asset.image {
@@ -32,7 +25,7 @@ struct PhotoAssetImage: View {
           }
         }
         .sheet(item: $editingPhoto) { photo in
-          PhotoEditPage(image: image, photoID: photo.id)
+          PhotoEditPage(image: image, photo: photo, tags: tags)
         }
         .handle(error: $error)
     }
