@@ -7,7 +7,7 @@ struct PhotomarkApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        ContentView()
+        PhotoAssetListPage()
           .environment(\.managedObjectContext, persistenceController.container.viewContext)
       }
     }

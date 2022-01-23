@@ -4,7 +4,7 @@ import Photos
 import UniformTypeIdentifiers
 import PhotosUI
 
-struct ContentView: View {
+struct PhotoAssetListPage: View {
   @Environment(\.photoLibrary) private var photoLibrary
   @Environment(\.managedObjectContext) private var viewContext
 
@@ -183,8 +183,8 @@ struct ContentView_Previews: PreviewProvider {
 
   static var previews: some View {
     Group {
-      ContentView()
-      ContentView()
+      PhotoAssetListPage()
+      PhotoAssetListPage()
         .onAppear {
           let photo = Photo(context: viewContext)
           photo.id = .init()
