@@ -12,6 +12,26 @@ struct PhotoEditPage: View {
   @State var tagName: String = ""
   @State var error: Error?
 
+  var filteredTags: [Tag] {
+    if tagName.isEmpty {
+      return tags
+    }
+
+    let filtered = tags.filter { tag in
+      if let name = tag.name {
+        return name.lowercased().contains(tagName.lowercased()) || tagName.lowercased().contains(name.lowercased())
+      } else {
+        return false
+      }
+    }
+
+    if filtered.isEmpty {
+      return tags
+    } else {
+      return filtered
+    }
+  }
+
   var body: some View {
     ScrollView(.vertical) {
       VStack(spacing: 10) {
@@ -33,7 +53,7 @@ struct PhotoEditPage: View {
             }
           }
 
-        TagLine(tags: tags) { tag in
+        TagLine(tags: filteredTags) { tag in
           TagView(tag: tag, isSelected: photo.hasTag(tag))
             .onTapGesture {
               if photo.hasTag(tag) {
