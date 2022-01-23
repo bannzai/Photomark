@@ -12,11 +12,19 @@ struct ErrorHandleModifier: ViewModifier {
       }, set: { identifiableError in
         error = identifiableError?.error
       }), content: { identifiableError in
-        Alert(
-          title: Text("予期せぬエラーが発生しました"),
-          message: Text(identifiableError.localizedDescription),
-          dismissButton: .default(Text("OK"))
-        )
+        if let alertError = identifiableError.error as? AlertError {
+          return Alert(
+            title: Text(alertError.title),
+            message: Text(alertError.message),
+            dismissButton: .default(Text("OK"))
+          )
+        } else {
+          return Alert(
+            title: Text("予期せぬエラーが発生しました"),
+            message: Text(identifiableError.localizedDescription),
+            dismissButton: .default(Text("OK"))
+          )
+        }
       }))
   }
 }

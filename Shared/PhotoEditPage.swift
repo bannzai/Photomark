@@ -19,13 +19,18 @@ struct PhotoEditPage: View {
           .padding(8)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .onSubmit {
-            do {
-              try Tag.createAndSave(context: viewContext, name: tagName)
-            } catch {
-              self.error = error
+            if tags.contains(where: { $0.name == tagName }) {
+              error = AlertError("既に存在しています", "他のタグ名を入力してください")
+            } else {
+              do {
+                if let tag = try Tag.createAndSave(context: viewContext, name: tagName), let tagID = tag.id {
+                  photo.tagIDs?.append(tagID.uuidString)
+                  tagName = ""
+                }
+              } catch {
+                self.error = error
+              }
             }
-
-            tagName = ""
           }
 
         TagLine(tags: tags) { tag in
