@@ -16,7 +16,6 @@ struct PhotoAssetImage: View {
       switch phase {
       case .empty:
         Image(systemName: "photo")
-          .resizable()
       case let .success(image):
         image
           .resizable()
