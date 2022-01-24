@@ -115,6 +115,7 @@ struct PhotoAssetListPage: View {
                         }
                       }
                     }
+                    .padding()
                     .frame(alignment: .leading)
                   }
                   LazyVGrid(columns: gridItems, spacing: 1) {
