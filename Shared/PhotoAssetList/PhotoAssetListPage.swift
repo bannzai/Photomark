@@ -78,7 +78,7 @@ struct PhotoAssetListPage: View {
         if assets.isEmpty {
           VStack(alignment: .center, spacing: 10) {
             Spacer()
-            Text("写真が存在しません")
+            ProgressView("読み込み中...")
             Spacer()
           }
           .ignoresSafeArea()
