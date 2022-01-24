@@ -8,7 +8,7 @@ struct AsyncAssetImage<Content: View>: View {
 
   let asset: Asset
   let maxImageLength: CGFloat
-  let content: (AssetAsyncImagePhase) -> Content
+  @ViewBuilder let content: (AssetAsyncImagePhase) -> Content
 
   init(asset: Asset, maxImageLength: CGFloat, @ViewBuilder content: @escaping (AssetAsyncImagePhase) -> Content) {
     self.asset = asset
@@ -22,6 +22,16 @@ struct AsyncAssetImage<Content: View>: View {
     }
   }
 
+  public init<I: View, P: View>(asset: Asset, maxImageLength: CGFloat, @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P> {
+    self.init(asset: asset, maxImageLength: maxImageLength) { phase in
+      if let image = phase.image {
+        content(image)
+      } else {
+        placeholder()
+      }
+    }
+  }
+
   enum AssetAsyncImagePhase {
     /// No image is loaded.
     case empty
@@ -31,10 +41,10 @@ struct AsyncAssetImage<Content: View>: View {
 
     var image: Image? {
       switch self {
-      case .empty:
-        return nil
       case let .success(image):
         return image
+      case _:
+        return nil
       }
     }
   }
@@ -58,3 +68,4 @@ struct AsyncAssetImage<Content: View>: View {
   }
 
 }
+

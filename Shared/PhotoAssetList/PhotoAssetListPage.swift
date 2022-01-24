@@ -18,7 +18,7 @@ struct PhotoAssetListPage: View {
   private var tags: FetchedResults<Tag>
 
   @State var assets: [Asset] = []
-  @State var assetCollections: [(collection: PHAssetCollection, asset: Asset?)] = []
+  @State var albums: [Album] = []
   @State var error: Error?
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
@@ -100,29 +100,8 @@ struct PhotoAssetListPage: View {
 
               ScrollView(.vertical) {
                 VStack {
-                  ScrollView(.horizontal) {
-                    HStack {
-                      ForEach(0..<assetCollections.count) { i in
-                        let assetCollection = assetCollections[i].collection
-                        if let asset = assetCollections[i].asset {
-                          VStack(spacing: 8) {
-                            PhotoAssetImage(
-                              asset: asset,
-                              photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                              tags: tags.toArray(),
-                              maxImageLength: 100
-                            )
-                              .scaledToFill()
-                              .frame(width: 100, height: 100)
-                              .clipped()
+                  PhotoAssetAlbumList(albums: albums)
 
-                            Text(verbatim: assetCollection.localizedTitle ?? "No Title")
-                          }
-                        }
-                      }
-                    }
-                    .padding(.horizontal, 10)
-                  }
                   LazyVGrid(columns: gridItems, spacing: 1) {
                     ForEach(filteredAssets) { asset in
                       GridAssetImageGeometryReader { gridItemGeometry in
@@ -202,9 +181,9 @@ struct PhotoAssetListPage: View {
     let assetsInCollection = phAssetCollections.map(photoLibrary.fetchFirstAsset(in:))
     zip(phAssetCollections, assetsInCollection).forEach { (collection, asset) in
       if let asset = asset {
-        assetCollections.append((collection, Asset(phAsset: asset)))
+        albums.append(Album(collection: collection, firstAsset: Asset(phAsset: asset)))
       } else {
-        assetCollections.append((collection, nil))
+        albums.append(Album(collection: collection, firstAsset: nil))
       }
     }
   }
