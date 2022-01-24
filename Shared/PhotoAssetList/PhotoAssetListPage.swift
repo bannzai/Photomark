@@ -110,8 +110,8 @@ struct PhotoAssetListPage: View {
                             tags: tags.toArray(),
                             maxImageLength: 100
                           )
-                            .scaledToFill()
-                            .frame(width: 100, height: 100)
+                          .scaledToFill()
+                          .frame(width: 100, height: 100)
                         }
                       }
                     }
@@ -126,8 +126,8 @@ struct PhotoAssetListPage: View {
                           tags: tags.toArray(),
                           maxImageLength: gridItemGeometry.size.width
                         )
-                          .scaledToFill()
-                          .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
+                        .scaledToFill()
+                        .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
                       }
                     }
                   }
