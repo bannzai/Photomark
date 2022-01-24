@@ -116,7 +116,7 @@ struct PhotoAssetListPage: View {
                       }
                     }
                     .padding()
-                    .frame(alignment: .leading)
+                    .frame(height: 100, alignment: .leading)
                   }
                   LazyVGrid(columns: gridItems, spacing: 1) {
                     ForEach(filteredAssets) { asset in
