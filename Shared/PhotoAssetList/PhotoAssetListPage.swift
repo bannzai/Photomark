@@ -103,20 +103,25 @@ struct PhotoAssetListPage: View {
                   ScrollView(.horizontal) {
                     HStack {
                       ForEach(0..<assetCollections.count) { i in
+                        let assetCollection = assetCollections[i].collection
                         if let asset = assetCollections[i].asset {
-                          PhotoAssetImage(
-                            asset: asset,
-                            photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                            tags: tags.toArray(),
-                            maxImageLength: 100
-                          )
-                          .scaledToFill()
-                          .frame(width: 100, height: 100)
+                          VStack(spacing: 8) {
+                            PhotoAssetImage(
+                              asset: asset,
+                              photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                              tags: tags.toArray(),
+                              maxImageLength: 100
+                            )
+                              .scaledToFill()
+                              .frame(width: 100, height: 100)
+                              .clipped()
+
+                            Text(verbatim: assetCollection.localizedTitle ?? "No Title")
+                          }
                         }
                       }
                     }
-                    .padding()
-                    .frame(height: 100, alignment: .leading)
+                    .padding(.horizontal, 10)
                   }
                   LazyVGrid(columns: gridItems, spacing: 1) {
                     ForEach(filteredAssets) { asset in
