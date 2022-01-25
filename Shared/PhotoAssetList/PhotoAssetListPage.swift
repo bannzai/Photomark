@@ -68,85 +68,83 @@ struct PhotoAssetListPage: View {
   }
 
   var body: some View {
-    GeometryReader { viewGeometry in
-      Group {
-        if assets.isEmpty {
-          VStack(alignment: .center, spacing: 10) {
-            Spacer()
-            ProgressView("読み込み中...")
-            Spacer()
-          }
-          .ignoresSafeArea()
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .navigationBarHidden(true)
-        } else {
-          VStack(spacing: 12) {
-            VStack(spacing: 8) {
-              TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
-                TagView(tag: tag, isSelected: selectedTags.contains(tag))
-                  .onTapGesture {
-                    if selectedTags.contains(tag) {
-                      selectedTags.removeAll { $0.id == tag.id }
-                    } else {
-                      selectedTags.append(tag)
-                    }
+    Group {
+      if assets.isEmpty {
+        VStack(alignment: .center, spacing: 10) {
+          Spacer()
+          ProgressView("読み込み中...")
+          Spacer()
+        }
+        .ignoresSafeArea()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .navigationBarHidden(true)
+      } else {
+        VStack(spacing: 12) {
+          VStack(spacing: 8) {
+            TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
+              TagView(tag: tag, isSelected: selectedTags.contains(tag))
+                .onTapGesture {
+                  if selectedTags.contains(tag) {
+                    selectedTags.removeAll { $0.id == tag.id }
+                  } else {
+                    selectedTags.append(tag)
                   }
-              }
-
-              ScrollView(.vertical) {
-                VStack(spacing: 12) {
-                  PhotoAssetAlbumList(albums: albums)
-                  PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
                 }
+            }
+
+            ScrollView(.vertical) {
+              VStack(spacing: 12) {
+                PhotoAssetAlbumList(albums: albums)
+                PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
               }
             }
           }
-          .navigationTitle("保存済み")
-          .navigationBarTitleDisplayMode(.inline)
-          .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
         }
+        .navigationTitle("保存済み")
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
       }
-      .task {
-        switch photoLibrary.authorizationAction() {
-        case .requestAuthorization:
-          let status = await photoLibrary.requestAuthorization()
-          switch status {
-          case .authorized, .limited:
-            fetchFirst(viewGeometry: viewGeometry)
-          case .notDetermined, .restricted, .denied:
-            alertType = .noPermission
-          @unknown default:
-            assertionFailure("New case \(status)")
-          }
-        case .openSettingApp:
-          alertType = .openSetting
-        case nil:
-          fetchFirst(viewGeometry: viewGeometry)
-        }
-      }
-      .alert(item: $alertType, content: { alertType in
-        switch alertType {
-        case .openSetting:
-          return Alert(
-            title: Text("画像を選択できません"),
-            message: Text("フォトライブラリのアクセスが許可されていません。設定アプリから許可をしてください"),
-            primaryButton: .default(Text("設定を開く"), action: openSetting),
-            secondaryButton: .cancel()
-          )
-        case .noPermission:
-          return Alert(
-            title: Text("アクセスを拒否しました"),
-            message: Text("フォトライブラリのアクセスが拒否されました。操作を続ける場合は設定アプリから許可をしてください"),
-            primaryButton: .default(Text("設定を開く"), action: openSetting),
-            secondaryButton: .cancel()
-          )
-        }
-      })
-      .handle(error: $error)
     }
+    .task {
+      switch photoLibrary.authorizationAction() {
+      case .requestAuthorization:
+        let status = await photoLibrary.requestAuthorization()
+        switch status {
+        case .authorized, .limited:
+          fetchFirst()
+        case .notDetermined, .restricted, .denied:
+          alertType = .noPermission
+        @unknown default:
+          assertionFailure("New case \(status)")
+        }
+      case .openSettingApp:
+        alertType = .openSetting
+      case nil:
+        fetchFirst()
+      }
+    }
+    .alert(item: $alertType, content: { alertType in
+      switch alertType {
+      case .openSetting:
+        return Alert(
+          title: Text("画像を選択できません"),
+          message: Text("フォトライブラリのアクセスが許可されていません。設定アプリから許可をしてください"),
+          primaryButton: .default(Text("設定を開く"), action: openSetting),
+          secondaryButton: .cancel()
+        )
+      case .noPermission:
+        return Alert(
+          title: Text("アクセスを拒否しました"),
+          message: Text("フォトライブラリのアクセスが拒否されました。操作を続ける場合は設定アプリから許可をしてください"),
+          primaryButton: .default(Text("設定を開く"), action: openSetting),
+          secondaryButton: .cancel()
+        )
+      }
+    })
+    .handle(error: $error)
   }
 
-  func fetchFirst(viewGeometry: GeometryProxy) {
+  func fetchFirst() {
     let phAssets = photoLibrary.fetchAssets().toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
