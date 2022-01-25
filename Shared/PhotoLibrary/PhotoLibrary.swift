@@ -54,16 +54,17 @@ struct PhotoLibrary {
     PHAsset.fetchAssets(withLocalIdentifiers: [phIdentifier], options: nil).firstObject
   }
 
-  func firstImage(asset: Asset, maxImageLength: CGFloat) async -> UIImage? {
-    await imageStream(for: asset, maxImageLength: maxImageLength).first { _ in
+  func firstImage(asset: Asset, maxImageLength: CGFloat, deliveryMode: PHImageRequestOptionsDeliveryMode) async -> UIImage? {
+    await imageStream(for: asset, maxImageLength: maxImageLength, deliveryMode: deliveryMode).first { _ in
       return true
     } ?? nil
   }
 
-  func imageStream(for asset: Asset, maxImageLength: CGFloat) -> AsyncStream<UIImage?> {
+  func imageStream(for asset: Asset, maxImageLength: CGFloat, deliveryMode: PHImageRequestOptionsDeliveryMode) -> AsyncStream<UIImage?> {
     AsyncStream { continuation in
       let options = PHImageRequestOptions()
       options.isSynchronous = true
+      options.deliveryMode = deliveryMode
 
       // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
       PHImageManager.default().requestImage(for: asset.asset, targetSize: .init(width: maxImageLength, height: maxImageLength), contentMode: .default, options: options) { image, info in

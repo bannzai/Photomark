@@ -8,12 +8,14 @@ struct AsyncAssetImage<Content: View>: View {
 
   let asset: Asset
   let maxImageLength: CGFloat
+  let deliveryMode: PHImageRequestOptionsDeliveryMode
   @ViewBuilder let content: (AssetAsyncImagePhase) -> Content
 
-  init(asset: Asset, maxImageLength: CGFloat, @ViewBuilder content: @escaping (AssetAsyncImagePhase) -> Content) {
+  init(asset: Asset, maxImageLength: CGFloat, deliveryMode: PHImageRequestOptionsDeliveryMode = .fastFormat, @ViewBuilder content: @escaping (AssetAsyncImagePhase) -> Content) {
     self.asset = asset
     self.maxImageLength = maxImageLength
     self.content = content
+    self.deliveryMode = deliveryMode
 
     phase = .empty
   }
@@ -54,7 +56,7 @@ struct AsyncAssetImage<Content: View>: View {
   }
 
   private func load() async {
-    guard let image = await photoLibrary.firstImage(asset: asset, maxImageLength: maxImageLength) else {
+    guard let image = await photoLibrary.firstImage(asset: asset, maxImageLength: maxImageLength, deliveryMode: deliveryMode) else {
       phase = .empty
       return
     }

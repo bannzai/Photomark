@@ -77,7 +77,7 @@ struct PhotoDetailPage: View {
     } else {
       ProgressView()
         .task {
-          image = await photoLibrary.firstImage(asset: asset, maxImageLength: UIScreen.main.bounds.width)
+          image = await photoLibrary.firstImage(asset: asset, maxImageLength: UIScreen.main.bounds.width, deliveryMode: .highQualityFormat)
         }
     }
   }
