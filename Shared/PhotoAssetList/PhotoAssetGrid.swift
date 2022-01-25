@@ -45,7 +45,6 @@ struct PhotoAssetGrid: View {
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
   ]
 
   struct AssetSection {
@@ -82,8 +81,6 @@ struct PhotoAssetGrid: View {
                     tags: tags,
                     maxImageLength: gridItemGeometry.size.width
                   )
-                    .scaledToFill()
-                    .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
                 }
               }
             }

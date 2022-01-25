@@ -77,10 +77,8 @@ struct PhotoDetailPage: View {
     } else {
       ProgressView()
         .task {
-          for await image in photoLibrary.imageStream(for: asset) {
-            if let image = image {
+          if let image = await photoLibrary.highQualityImage(for: asset) {
               self.image = image
-            }
           }
         }
     }

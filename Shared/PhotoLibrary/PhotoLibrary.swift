@@ -56,7 +56,7 @@ struct PhotoLibrary {
 
   // Doc: https://developer.apple.com/documentation/photokit/phimagemanager/1616964-requestimage
   // For an asynchronous request, Photos may call your result handler block more than once. Photos first calls the block to provide a low-quality image suitable for displaying temporarily while it prepares a high-quality image. (If low-quality image data is immediately available, the first call may occur before the method returns.) When the high-quality image is ready, Photos calls your result handler again to provide it. If the image manager has already cached the requested image at full quality, Photos calls your result handler only once. The PHImageResultIsDegradedKey key in the result handler’s info parameter indicates when Photos is providing a temporary low-quality image.
-  func imageStream(for asset: Asset, maxImageLength: CGFloat? = nil) -> AsyncStream<UIImage?> {
+  func imageStream(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic) -> AsyncStream<UIImage?> {
     let targetSize: CGSize
     if let maxImageLength = maxImageLength {
       targetSize = .init(width: maxImageLength, height: maxImageLength)
@@ -65,7 +65,7 @@ struct PhotoLibrary {
     }
 
     let options = PHImageRequestOptions()
-    options.deliveryMode = .highQualityFormat
+    options.deliveryMode = deliveryMode
 
     // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
     return AsyncStream { continuation in
@@ -73,6 +73,12 @@ struct PhotoLibrary {
         continuation.yield(image)
       }
     }
+  }
+
+  func highQualityImage(for asset: Asset) async -> UIImage? {
+    await imageStream(for: asset, maxImageLength: nil, deliveryMode: .highQualityFormat).first { image in
+      return true
+    } ?? nil
   }
 }
 

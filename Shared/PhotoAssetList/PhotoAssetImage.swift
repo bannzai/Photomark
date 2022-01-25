@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PhotoAssetImage: View {
+  @Environment(\.photoLibrary) private var photoLibrary
   @Environment(\.managedObjectContext) private var viewContext
 
   let asset: Asset
@@ -10,16 +11,42 @@ struct PhotoAssetImage: View {
 
   @State var editingPhoto: Photo? = nil
   @State var error: Error?
+  @State var isDownloading: Bool = false
 
   var body: some View {
-    AsyncAssetImage<_ConditionalContent<Image, Image>>(asset: asset, maxImageLength: maxImageLength) { phase in
-      switch phase {
-      case .empty:
-        Image(systemName: "photo")
-      case let .success(image):
-        image
-          .resizable()
+    ZStack(alignment: .bottomTrailing) {
+      AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
+          image
+            .resizable()
+            .scaledToFill()
+            .frame(width: maxImageLength, height: maxImageLength)
+            .clipped()
+      } placeholder: {
+          Image(systemName: "photo")
       }
+      .frame(width: maxImageLength, height: maxImageLength)
+
+      Group {
+        if isDownloading {
+          ProgressView()
+        } else {
+          Button(action: {
+            isDownloading = true
+            Task { @MainActor in
+              if let image = await photoLibrary.highQualityImage(for: asset) {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                isDownloading = false
+              } else {
+                error = AlertError("画像を保存できませんでした", "再度お試しください")
+              }
+            }
+          }) {
+            Image(systemName: "arrow.down.circle")
+              .padding(4)
+          }
+        }
+      }
+      .frame(width: 32, height: 32)
     }
     .onTapGesture {
       if let photo = photo {
