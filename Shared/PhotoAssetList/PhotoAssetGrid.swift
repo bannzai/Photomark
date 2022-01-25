@@ -66,12 +66,12 @@ struct PhotoAssetGrid: View {
   }()
 
   var body: some View {
-    VStack(spacing: 4) {
+    VStack(spacing: 8) {
       ForEach(0..<sections.count) { i in
         let section = sections[i]
 
         LazyVGrid(columns: gridItems, spacing: 1) {
-          Section(header: Text(section.interval, formatter: sectionHeaderFomatter)) {
+          Section(header: sectionHeader(section)) {
             ForEach(section.assets) { asset in
               GridAssetImageGeometryReader { gridItemGeometry in
                 PhotoAssetImage(
@@ -88,5 +88,16 @@ struct PhotoAssetGrid: View {
         }
       }
     }
+  }
+
+  private func sectionHeader(_ section: AssetSection) -> some View {
+    HStack {
+      Text(section.interval, formatter: sectionHeaderFomatter)
+        .font(.system(size: 16))
+        .bold()
+      Spacer()
+    }
+    .padding(.top, 12)
+    .padding(.bottom, 8)
   }
 }
