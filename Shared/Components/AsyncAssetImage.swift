@@ -15,11 +15,7 @@ struct AsyncAssetImage<Content: View>: View {
     self.maxImageLength = maxImageLength
     self.content = content
 
-    if let image = asset.image {
-      phase = .success(Image(uiImage: image))
-    } else {
-      phase = .empty
-    }
+    phase = .empty
   }
 
   public init<I: View, P: View>(asset: Asset, maxImageLength: CGFloat, @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P> {
@@ -63,7 +59,6 @@ struct AsyncAssetImage<Content: View>: View {
       return
     }
 
-    asset.image = image
     phase = .success(Image(uiImage: image))
   }
 
