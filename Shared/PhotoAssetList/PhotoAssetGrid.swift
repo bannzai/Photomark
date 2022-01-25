@@ -4,6 +4,42 @@ struct PhotoAssetGrid: View {
   let assets: [Asset]
   let photos: [Photo]
   let tags: [Tag]
+  let sections: [AssetSection]
+
+  init(assets: [Asset], photos: [Photo], tags: [Tag]) {
+    self.assets = assets
+    self.photos = photos
+    self.tags = tags
+
+    sections = assets.reduce(into: [AssetSection]()) { partialResult, asset in
+      guard let assetCreationDate = asset.asset.creationDate else {
+        return
+      }
+
+      if let lastSection = partialResult.last {
+        var section = lastSection
+
+        if section.end < assetCreationDate {
+          section.end = assetCreationDate
+        }
+
+        if !Calendar.current.isDate(section.start, inSameDayAs: assetCreationDate) {
+          if section.assets.count > 8 {
+            let newSection = AssetSection(start: assetCreationDate, end: assetCreationDate, assets: [asset])
+            partialResult.append(newSection)
+            return
+          }
+        }
+
+        section.assets.append(asset)
+        partialResult[partialResult.count - 1] = section
+
+      } else {
+        let section = AssetSection(start: assetCreationDate, end: assetCreationDate, assets: [asset])
+        partialResult.append(section)
+      }
+    }
+  }
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -12,18 +48,43 @@ struct PhotoAssetGrid: View {
     .init(.flexible(), spacing: 1),
   ]
 
+  struct AssetSection {
+    var start: Date
+    var end: Date
+    var assets: [Asset]
+
+    var interval: DateInterval {
+      .init(start: start, end: end)
+    }
+  }
+
+  let sectionHeaderFomatter: DateIntervalFormatter = {
+    let formatter = DateIntervalFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+    return formatter
+  }()
+
   var body: some View {
-    LazyVGrid(columns: gridItems, spacing: 1) {
-      ForEach(assets) { asset in
-        GridAssetImageGeometryReader { gridItemGeometry in
-          PhotoAssetImage(
-            asset: asset,
-            photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-            tags: tags,
-            maxImageLength: gridItemGeometry.size.width
-          )
-            .scaledToFill()
-            .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
+    VStack(spacing: 4) {
+      ForEach(0..<sections.count) { i in
+        let section = sections[i]
+
+        LazyVGrid(columns: gridItems, spacing: 1) {
+          Section(header: Text(section.interval, formatter: sectionHeaderFomatter)) {
+            ForEach(section.assets) { asset in
+              GridAssetImageGeometryReader { gridItemGeometry in
+                PhotoAssetImage(
+                  asset: asset,
+                  photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                  tags: tags,
+                  maxImageLength: gridItemGeometry.size.width
+                )
+                  .scaledToFill()
+                  .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
+              }
+            }
+          }
         }
       }
     }
