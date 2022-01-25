@@ -6,18 +6,6 @@ import os.log
 
 private let logger = Logger(subsystem: "com.photomark.log", category: "photoLibrary")
 
-struct Asset: CustomStringConvertible, Identifiable {
-  var id: String { asset.localIdentifier }
-
-  let asset: PHAsset
-  let image: UIImage?
-  let info: [AnyHashable: Any]?
-
-  var description: String {
-    "asset: \(asset), image: \(String(describing: image)), info: \(String(describing: info))"
-  }
-}
-
 struct PhotoLibrary {
   enum AuthorizationAction {
     case openSettingApp
@@ -50,6 +38,15 @@ struct PhotoLibrary {
   func fetchAssets() -> PHFetchResult<PHAsset> {
     PHAsset.fetchAssets(with: nil)
   }
+  func fetchFirstAsset(in assetCollection: PHAssetCollection) -> PHAsset? {
+    let options = PHFetchOptions()
+    options.fetchLimit = 1
+    return PHAsset.fetchAssets(in: assetCollection, options: options).firstObject
+  }
+
+  func fetchAssetCollection() -> PHFetchResult<PHAssetCollection> {
+    PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+  }
 
   // NOTE: Nullable, because there is a possibility that phAssetIdentifier remains only in Photo DB.
   // Sinario: User deleted asset on Photo.app.
@@ -57,22 +54,31 @@ struct PhotoLibrary {
     PHAsset.fetchAssets(withLocalIdentifiers: [phIdentifier], options: nil).firstObject
   }
 
-  func firstAsset(phAsset: PHAsset, maxImageLength: CGFloat) async -> Asset? {
-    await imageStream(for: phAsset, maxImageLength: maxImageLength).first { assetResponse in
-      return true
+  // Doc: https://developer.apple.com/documentation/photokit/phimagemanager/1616964-requestimage
+  // For an asynchronous request, Photos may call your result handler block more than once. Photos first calls the block to provide a low-quality image suitable for displaying temporarily while it prepares a high-quality image. (If low-quality image data is immediately available, the first call may occur before the method returns.) When the high-quality image is ready, Photos calls your result handler again to provide it. If the image manager has already cached the requested image at full quality, Photos calls your result handler only once. The PHImageResultIsDegradedKey key in the result handler’s info parameter indicates when Photos is providing a temporary low-quality image.
+  func imageStream(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic) -> AsyncStream<UIImage?> {
+    let targetSize: CGSize
+    if let maxImageLength = maxImageLength {
+      targetSize = .init(width: maxImageLength, height: maxImageLength)
+    } else {
+      targetSize = PHImageManagerMaximumSize
+    }
+
+    let options = PHImageRequestOptions()
+    options.deliveryMode = deliveryMode
+
+    // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
+    return AsyncStream { continuation in
+      PHImageManager.default().requestImage(for: asset.asset, targetSize: targetSize, contentMode: .default, options: options) { image, info in
+        continuation.yield(image)
+      }
     }
   }
 
-  func imageStream(for asset: PHAsset, maxImageLength: CGFloat) -> AsyncStream<Asset> {
-    AsyncStream { continuation in
-      let options = PHImageRequestOptions()
-      options.isSynchronous = true
-
-      // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
-      PHImageManager.default().requestImage(for: asset, targetSize: .init(width: maxImageLength, height: maxImageLength), contentMode: .default, options: options) { image, info in
-        continuation.yield(.init(asset: asset, image: image, info: info))
-      }
-    }
+  func highQualityImage(for asset: Asset) async -> UIImage? {
+    await imageStream(for: asset, maxImageLength: nil, deliveryMode: .highQualityFormat).first { image in
+      return true
+    } ?? nil
   }
 }
 

@@ -2,12 +2,22 @@ import Foundation
 import Photos
 
 extension PHFetchResult where ObjectType == PHAsset {
-  func assets() -> [PHAsset] {
-    var assets: [PHAsset] = []
+  func toArray() -> [ObjectType] {
+    var array: [ObjectType] = []
     for i in (0..<count) {
-      assets.append(object(at: i))
+      array.append(object(at: i))
     }
-    return assets
+    return array
+  }
+}
+
+extension PHFetchResult where ObjectType == PHAssetCollection {
+  func toArray() -> [ObjectType] {
+    var array: [ObjectType] = []
+    for i in (0..<count) {
+      array.append(object(at: i))
+    }
+    return array
   }
 }
 
