@@ -79,24 +79,22 @@ struct PhotoAssetListPage: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationBarHidden(true)
       } else {
-        VStack(spacing: 12) {
-          VStack(spacing: 8) {
-            TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
-              TagView(tag: tag, isSelected: selectedTags.contains(tag))
-                .onTapGesture {
-                  if selectedTags.contains(tag) {
-                    selectedTags.removeAll { $0.id == tag.id }
-                  } else {
-                    selectedTags.append(tag)
-                  }
+        VStack(spacing: 8) {
+          TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
+            TagView(tag: tag, isSelected: selectedTags.contains(tag))
+              .onTapGesture {
+                if selectedTags.contains(tag) {
+                  selectedTags.removeAll { $0.id == tag.id }
+                } else {
+                  selectedTags.append(tag)
                 }
-            }
-
-            ScrollView(.vertical) {
-              VStack(spacing: 12) {
-                PhotoAssetAlbumList(albums: albums)
-                PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
               }
+          }
+
+          ScrollView(.vertical) {
+            VStack(spacing: 12) {
+              PhotoAssetAlbumList(albums: albums)
+              PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
             }
           }
         }
