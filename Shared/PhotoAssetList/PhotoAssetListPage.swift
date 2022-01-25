@@ -31,11 +31,6 @@ struct PhotoAssetListPage: View {
     var id: Self { self }
   }
 
-  private let gridItems: [GridItem] = [
-    .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
-  ]
   private var filteredAssets: [Asset] {
     if selectedTags.isEmpty && searchText.isEmpty {
       return assets
@@ -101,21 +96,7 @@ struct PhotoAssetListPage: View {
               ScrollView(.vertical) {
                 VStack {
                   PhotoAssetAlbumList(albums: albums)
-
-                  LazyVGrid(columns: gridItems, spacing: 1) {
-                    ForEach(filteredAssets) { asset in
-                      GridAssetImageGeometryReader { gridItemGeometry in
-                        PhotoAssetImage(
-                          asset: asset,
-                          photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                          tags: tags.toArray(),
-                          maxImageLength: gridItemGeometry.size.width
-                        )
-                        .scaledToFill()
-                        .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
-                      }
-                    }
-                  }
+                  PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
                 }
               }
             }
