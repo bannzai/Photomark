@@ -80,8 +80,8 @@ struct PhotoAssetListPage: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .navigationBarHidden(true)
         } else {
-          VStack {
-            VStack {
+          VStack(spacing: 12) {
+            VStack(spacing: 8) {
               TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
                 TagView(tag: tag, isSelected: selectedTags.contains(tag))
                   .onTapGesture {
@@ -94,7 +94,7 @@ struct PhotoAssetListPage: View {
               }
 
               ScrollView(.vertical) {
-                VStack {
+                VStack(spacing: 12) {
                   PhotoAssetAlbumList(albums: albums)
                   PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
                 }

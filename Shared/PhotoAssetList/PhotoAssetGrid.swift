@@ -9,6 +9,7 @@ struct PhotoAssetGrid: View {
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1),
   ]
 
   var body: some View {

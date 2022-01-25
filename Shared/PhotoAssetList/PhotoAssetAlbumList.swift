@@ -4,11 +4,11 @@ struct PhotoAssetAlbumList: View {
   let albums: [Album]
 
   var body: some View {
-    ScrollView(.horizontal) {
-      HStack {
+    ScrollView(.horizontal, showsIndicators: false) {
+      HStack(spacing: 10) {
         ForEach(albums) { album in
           if let asset = album.firstAsset {
-            VStack(spacing: 8) {
+            VStack(spacing: 4) {
               AsyncAssetImage(
                 asset: asset,
                 maxImageLength: 100,
@@ -24,6 +24,7 @@ struct PhotoAssetAlbumList: View {
                 .clipped()
 
               Text(verbatim: album.collection.localizedTitle ?? "No Title")
+                .font(.system(size: 12))
             }
           }
         }
