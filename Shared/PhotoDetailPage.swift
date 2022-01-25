@@ -69,6 +69,9 @@ struct PhotoDetailPage: View {
             Image(systemName: "square.and.arrow.up")
           }
         }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          AssetDownloadButton(asset: asset)
+        }
       }
       .sheet(isPresented: $activitySheetIsPresented, content: {
         ActivityView(images: [image])

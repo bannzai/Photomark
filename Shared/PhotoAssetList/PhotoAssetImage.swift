@@ -11,7 +11,6 @@ struct PhotoAssetImage: View {
 
   @State var editingPhoto: Photo? = nil
   @State var error: Error?
-  @State var isDownloading: Bool = false
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
@@ -26,27 +25,8 @@ struct PhotoAssetImage: View {
       }
       .frame(width: maxImageLength, height: maxImageLength)
 
-      Group {
-        if isDownloading {
-          ProgressView()
-        } else {
-          Button(action: {
-            isDownloading = true
-            Task { @MainActor in
-              if let image = await photoLibrary.highQualityImage(for: asset) {
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                isDownloading = false
-              } else {
-                error = AlertError("画像を保存できませんでした", "再度お試しください")
-              }
-            }
-          }) {
-            Image(systemName: "arrow.down.circle")
-              .padding(4)
-          }
-        }
-      }
-      .frame(width: 32, height: 32)
+      AssetDownloadButton(asset: asset)
+        .frame(width: 32, height: 32)
     }
     .onTapGesture {
       if let photo = photo {

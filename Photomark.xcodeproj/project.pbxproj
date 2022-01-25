@@ -54,6 +54,8 @@
 		2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
 		2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
 		2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
+		2095BC0227A02544008998A2 /* AssetDownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095BC0127A02544008998A2 /* AssetDownloadButton.swift */; };
+		2095BC0327A02544008998A2 /* AssetDownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095BC0127A02544008998A2 /* AssetDownloadButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +87,7 @@
 		2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLine.swift; sourceTree = "<group>"; };
 		2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
 		2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
+		2095BC0127A02544008998A2 /* AssetDownloadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDownloadButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +209,7 @@
 			children = (
 				2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */,
 				2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */,
+				2095BC0127A02544008998A2 /* AssetDownloadButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -347,6 +351,7 @@
 				201C2AD0279CB4F9006B135B /* Photo+Extension.swift in Sources */,
 				2086F7C7279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */,
 				2059463D279D335800F5726C /* AlertError.swift in Sources */,
+				2095BC0227A02544008998A2 /* AssetDownloadButton.swift in Sources */,
 				2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
 				20594654279D85EC00F5726C /* ActivityView.swift in Sources */,
 				20594657279E332000F5726C /* PhotoAssetAlbumList.swift in Sources */,
@@ -378,6 +383,7 @@
 				2059463E279D335800F5726C /* AlertError.swift in Sources */,
 				2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
 				20594641279D35E100F5726C /* Tag+Extension.swift in Sources */,
+				2095BC0327A02544008998A2 /* AssetDownloadButton.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F7C8279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */,
 				200672D3279D018500BA9C48 /* PhotoAssetImage.swift in Sources */,
