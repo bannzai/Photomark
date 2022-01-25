@@ -68,23 +68,27 @@ struct PhotoAssetGrid: View {
   var body: some View {
     VStack(spacing: 8) {
       ForEach(0..<sections.count) { i in
-        let section = sections[i]
+        // FIXME: cause out of index when filtering with photo tags
+        if i <= sections.count - 1 {
+          let section = sections[i]
 
-        LazyVGrid(columns: gridItems, spacing: 1) {
-          Section(header: sectionHeader(section)) {
-            ForEach(section.assets) { asset in
-              GridAssetImageGeometryReader { gridItemGeometry in
-                PhotoAssetImage(
-                  asset: asset,
-                  photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                  tags: tags,
-                  maxImageLength: gridItemGeometry.size.width
-                )
-                  .scaledToFill()
-                  .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
+          LazyVGrid(columns: gridItems, spacing: 1) {
+            Section(header: sectionHeader(section)) {
+              ForEach(section.assets) { asset in
+                GridAssetImageGeometryReader { gridItemGeometry in
+                  PhotoAssetImage(
+                    asset: asset,
+                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                    tags: tags,
+                    maxImageLength: gridItemGeometry.size.width
+                  )
+                    .scaledToFill()
+                    .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
+                }
               }
             }
           }
+
         }
       }
     }

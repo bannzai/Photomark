@@ -53,8 +53,10 @@ struct PhotoAssetListPage: View {
         }
       }.filter { tuple in
         if !selectedTags.isEmpty {
-          return tuple.photoTagIDs.contains { photoTagID in
-            selectedTags.allSatisfy { $0.id?.uuidString == photoTagID }
+          return selectedTags.contains { selectedTag in
+            tuple.photoTagIDs.allSatisfy { photoTagID in
+              selectedTag.id?.uuidString == photoTagID
+            }
           }
         } else {
           return true
