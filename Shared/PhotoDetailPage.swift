@@ -77,7 +77,11 @@ struct PhotoDetailPage: View {
     } else {
       ProgressView()
         .task {
-          image = await photoLibrary.firstImage(asset: asset, maxImageLength: UIScreen.main.bounds.width)
+          for await image in photoLibrary.imageStream(for: asset, maxImageLength: UIScreen.main.bounds.width) {
+            if let image = image {
+              self.image = image
+            }
+          }
         }
     }
   }

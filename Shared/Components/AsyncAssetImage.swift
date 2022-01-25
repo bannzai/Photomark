@@ -54,13 +54,11 @@ struct AsyncAssetImage<Content: View>: View {
   }
 
   private func load() async {
-    guard let image = await photoLibrary.firstImage(asset: asset, maxImageLength: maxImageLength) else {
-      phase = .empty
-      return
+    for await image in photoLibrary.imageStream(for: asset, maxImageLength: maxImageLength) {
+      if let image = image {
+        phase = .success(Image(uiImage: image))
+      }
     }
-
-    phase = .success(Image(uiImage: image))
   }
-
 }
 
