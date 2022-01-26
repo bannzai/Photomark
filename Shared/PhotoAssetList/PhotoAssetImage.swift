@@ -11,18 +11,23 @@ struct PhotoAssetImage: View {
 
   @State var editingPhoto: Photo? = nil
   @State var error: Error?
-  
+
   var body: some View {
-    AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
-      image
-        .resizable()
-        .scaledToFill()
-        .frame(width: maxImageLength, height: maxImageLength)
-        .clipped()
-    } placeholder: {
-      Image(systemName: "photo")
+    ZStack(alignment: .bottomTrailing) {
+      AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
+          image
+            .resizable()
+            .scaledToFill()
+            .frame(width: maxImageLength, height: maxImageLength)
+            .clipped()
+      } placeholder: {
+          Image(systemName: "photo")
+      }
+      .frame(width: maxImageLength, height: maxImageLength)
+
+      AssetDownloadButton(asset: asset)
+        .frame(width: 32, height: 32)
     }
-    .frame(width: maxImageLength, height: maxImageLength)
     .onTapGesture {
       if let photo = photo {
         editingPhoto = photo
