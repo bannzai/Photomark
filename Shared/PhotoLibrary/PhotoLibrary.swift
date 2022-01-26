@@ -71,6 +71,7 @@ struct PhotoLibrary {
     return AsyncStream { continuation in
       PHImageManager.default().requestImage(for: asset.asset, targetSize: targetSize, contentMode: .default, options: options) { image, info in
         if let maxImageLength = maxImageLength {
+          // SwiftUI.Image to display an image retrieved from PHAsset, since .clipped will cause the tap area to be wrong.
           continuation.yield(cropToBounds(image: image, width: maxImageLength, height: maxImageLength))
         } else {
           continuation.yield(image)
