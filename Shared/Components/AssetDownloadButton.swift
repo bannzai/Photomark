@@ -14,6 +14,7 @@ struct AssetDownloadButton: View {
       } else {
         Button(action: {
           isDownloading = true
+          
           Task { @MainActor in
             if let image = await photoLibrary.highQualityImage(for: asset) {
               UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
