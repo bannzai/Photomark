@@ -23,6 +23,7 @@ struct PhotoAssetListPage: View {
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
   @State var alertType: AlertType?
+  @State var isSelectingMode = false
 
   enum AlertType: Identifiable {
     case openSetting
@@ -62,6 +63,15 @@ struct PhotoAssetListPage: View {
             }
           }
         }
+        .toolbar(content: {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button(action: {
+              isSelectingMode = true
+            }) {
+              Image(systemName: "checklist")
+            }
+          }
+        })
         .navigationTitle("保存済み")
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
