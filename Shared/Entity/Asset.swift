@@ -2,7 +2,7 @@ import Foundation
 import Photos
 import UIKit
 
-struct Asset: CustomStringConvertible, Identifiable {
+struct Asset: CustomStringConvertible, Identifiable, Hashable {
   var id: String { asset.localIdentifier }
 
   let asset: PHAsset
