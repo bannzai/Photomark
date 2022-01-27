@@ -10,35 +10,7 @@ struct PhotoAssetGrid: View {
     self.assets = assets
     self.photos = photos
     self.tags = tags
-
-    sections = assets.reduce(into: [AssetSection]()) { partialResult, asset in
-      guard let assetCreationDate = asset.asset.creationDate else {
-        return
-      }
-
-      if let lastSection = partialResult.last {
-        var section = lastSection
-
-        if section.end < assetCreationDate {
-          section.end = assetCreationDate
-        }
-
-        if !Calendar.current.isDate(section.start, inSameDayAs: assetCreationDate) {
-          if section.assets.count > 8 {
-            let newSection = AssetSection(start: assetCreationDate, end: assetCreationDate, assets: [asset])
-            partialResult.append(newSection)
-            return
-          }
-        }
-
-        section.assets.append(asset)
-        partialResult[partialResult.count - 1] = section
-
-      } else {
-        let section = AssetSection(start: assetCreationDate, end: assetCreationDate, assets: [asset])
-        partialResult.append(section)
-      }
-    }
+    self.sections = createSections(assets: assets, photos: photos, tags: tags)
   }
 
   private let gridItems: [GridItem] = [
@@ -46,16 +18,6 @@ struct PhotoAssetGrid: View {
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
   ]
-
-  struct AssetSection {
-    var start: Date
-    var end: Date
-    var assets: [Asset]
-
-    var interval: DateInterval {
-      .init(start: start, end: end)
-    }
-  }
 
   let sectionHeaderFomatter: DateIntervalFormatter = {
     let formatter = DateIntervalFormatter()
