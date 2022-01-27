@@ -75,7 +75,7 @@ struct PhotoAssetSelectGrid: View {
             Section(header: sectionHeader(section)) {
               ForEach(section.assets) { asset in
                 GridAssetImageGeometryReader { gridItemGeometry in
-                  PhotoAssetImage(
+                  PhotoAssetSelectImage(
                     asset: asset,
                     photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
                     tags: tags,
