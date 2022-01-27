@@ -20,11 +20,16 @@ struct PhotoAssetSelectImage: View {
       }
       .frame(width: maxImageLength, height: maxImageLength)
 
-      if isSelected {
-        Image(systemName: "checkmark.circle.fill")
-      } else {
-        Image(systemName: "circle")
+      Group {
+        if isSelected {
+          Image(systemName: "checkmark.circle.fill")
+        } else {
+          Image(systemName: "circle")
+        }
       }
+      .symbolRenderingMode(.monochrome)
+      .foregroundStyle(.blue)
+      .frame(width: 32, height: 32)
     }
     .onTapGesture {
       isSelected.toggle()

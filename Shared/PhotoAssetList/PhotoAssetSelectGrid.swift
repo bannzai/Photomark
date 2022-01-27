@@ -45,9 +45,9 @@ struct PhotoAssetSelectGrid: View {
                     maxImageLength: gridItemGeometry.size.width,
                     isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
                       if isSelected {
-                        selectedAssets.removeAll(where: { $0 == asset })
-                      } else {
                         selectedAssets.append(asset)
+                      } else {
+                        selectedAssets.removeAll(where: { $0 == asset })
                       }
                     })
                   )
