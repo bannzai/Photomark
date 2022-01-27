@@ -1,9 +1,6 @@
 import SwiftUI
 
 struct PhotoAssetSelectImage: View {
-  @Environment(\.photoLibrary) private var photoLibrary
-  @Environment(\.managedObjectContext) private var viewContext
-
   let asset: Asset
   let photo: Photo?
   let tags: [Tag]
