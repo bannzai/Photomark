@@ -44,34 +44,40 @@ struct PhotoAssetListPage: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationBarHidden(true)
       } else {
-        VStack(spacing: 8) {
-          TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
-            TagView(tag: tag, isSelected: selectedTags.contains(tag))
-              .onTapGesture {
-                if selectedTags.contains(tag) {
-                  selectedTags.removeAll { $0.id == tag.id }
-                } else {
-                  selectedTags.append(tag)
+        Group {
+          if isSelectingMode {
+
+          } else {
+            VStack(spacing: 8) {
+              TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
+                TagView(tag: tag, isSelected: selectedTags.contains(tag))
+                  .onTapGesture {
+                    if selectedTags.contains(tag) {
+                      selectedTags.removeAll { $0.id == tag.id }
+                    } else {
+                      selectedTags.append(tag)
+                    }
+                  }
+              }
+
+              ScrollView(.vertical) {
+                VStack(spacing: 12) {
+                  PhotoAssetAlbumList(albums: albums)
+                  PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
                 }
               }
-          }
-
-          ScrollView(.vertical) {
-            VStack(spacing: 12) {
-              PhotoAssetAlbumList(albums: albums)
-              PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
             }
+            .toolbar(content: {
+              ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                  isSelectingMode = true
+                }) {
+                  Image(systemName: "checklist")
+                }
+              }
+            })
           }
         }
-        .toolbar(content: {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: {
-              isSelectingMode = true
-            }) {
-              Image(systemName: "checklist")
-            }
-          }
-        })
         .navigationTitle("保存済み")
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
