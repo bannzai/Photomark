@@ -20,8 +20,6 @@
 		20594651279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */; };
 		20594654279D85EC00F5726C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594653279D85EC00F5726C /* ActivityView.swift */; };
 		20594655279D85EC00F5726C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594653279D85EC00F5726C /* ActivityView.swift */; };
-		2059465B279E339300F5726C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059465A279E339300F5726C /* Album.swift */; };
-		2059465C279E339300F5726C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059465A279E339300F5726C /* Album.swift */; };
 		2059465E279E33A800F5726C /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059465D279E33A800F5726C /* Asset.swift */; };
 		2059465F279E33A800F5726C /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059465D279E33A800F5726C /* Asset.swift */; };
 		20594661279E390C00F5726C /* PhotoAssetGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594660279E390C00F5726C /* PhotoAssetGrid.swift */; };
@@ -65,7 +63,6 @@
 		2059463F279D35E100F5726C /* Tag+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Extension.swift"; sourceTree = "<group>"; };
 		2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAssetImage.swift; sourceTree = "<group>"; };
 		20594653279D85EC00F5726C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		2059465A279E339300F5726C /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		2059465D279E33A800F5726C /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		20594660279E390C00F5726C /* PhotoAssetGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetGrid.swift; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
@@ -128,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				20594659279E338B00F5726C /* Extensions */,
-				2059465A279E339300F5726C /* Album.swift */,
 				2059465D279E33A800F5726C /* Asset.swift */,
 			);
 			path = Entity;
@@ -355,7 +351,6 @@
 				2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
 				2086F788279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */,
 				2059465E279E33A800F5726C /* Asset.swift in Sources */,
-				2059465B279E339300F5726C /* Album.swift in Sources */,
 				201C2AC9279BDC47006B135B /* String+Extension.swift in Sources */,
 				2086F769279AD67600BBA8D4 /* PhotoAssetListPage.swift in Sources */,
 				20594661279E390C00F5726C /* PhotoAssetGrid.swift in Sources */,
@@ -369,7 +364,6 @@
 				2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				20594651279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */,
 				2059465F279E33A800F5726C /* Asset.swift in Sources */,
-				2059465C279E339300F5726C /* Album.swift in Sources */,
 				2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
 				2086F796279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */,
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
