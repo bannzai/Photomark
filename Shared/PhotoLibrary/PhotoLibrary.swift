@@ -70,7 +70,12 @@ struct PhotoLibrary {
     // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
     return AsyncStream { continuation in
       PHImageManager.default().requestImage(for: asset.asset, targetSize: targetSize, contentMode: .default, options: options) { image, info in
-        continuation.yield(image)
+        if let maxImageLength = maxImageLength {
+          // SwiftUI.Image to display an image retrieved from PHAsset, since .clipped will cause the tap area to be wrong.
+          continuation.yield(cropToBounds(image: image, width: maxImageLength, height: maxImageLength))
+        } else {
+          continuation.yield(image)
+        }
       }
     }
   }
@@ -79,6 +84,28 @@ struct PhotoLibrary {
     await imageStream(for: asset, maxImageLength: nil, deliveryMode: .highQualityFormat).first { image in
       return true
     } ?? nil
+  }
+
+  private func cropToBounds(image: UIImage?, width: Double, height: Double) -> UIImage? {
+    guard let image = image, let cgImage = image.cgImage else {
+      return nil
+    }
+
+    let contextImage = UIImage(cgImage: cgImage)
+    let contextSize = contextImage.size
+
+    let position: CGPoint
+    let size: CGSize
+    if contextSize.width > contextSize.height {
+      position = .init(x: (contextSize.width - contextSize.height) / 2, y: 0)
+      size = .init(width: contextSize.height, height: contextSize.height)
+    } else {
+      position = .init(x: 0, y: (contextSize.height - contextSize.width) / 2)
+      size = .init(width: contextSize.width, height: contextSize.width)
+    }
+
+    let imageRef: CGImage = cgImage.cropping(to: .init(origin: position, size: size))!
+    return .init(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
   }
 }
 
