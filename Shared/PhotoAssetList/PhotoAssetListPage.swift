@@ -93,7 +93,6 @@ struct PhotoAssetListPage: View {
 
           ScrollView(.vertical) {
             VStack(spacing: 12) {
-              PhotoAssetAlbumList(albums: albums)
               PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
             }
           }
