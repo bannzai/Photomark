@@ -18,7 +18,6 @@ struct PhotoAssetListPage: View {
   private var tags: FetchedResults<Tag>
 
   @State var assets: [Asset] = []
-  @State var albums: [Album] = []
   @State var error: Error?
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
@@ -152,16 +151,6 @@ struct PhotoAssetListPage: View {
       }
     }
     assets = sortedAssets.map(Asset.init)
-
-    let phAssetCollections = photoLibrary.fetchAssetCollection().toArray()
-    let assetsInCollection = phAssetCollections.map(photoLibrary.fetchFirstAsset(in:))
-    zip(phAssetCollections, assetsInCollection).forEach { (collection, asset) in
-      if let asset = asset {
-        albums.append(Album(collection: collection, firstAsset: Asset(phAsset: asset)))
-      } else {
-        albums.append(Album(collection: collection, firstAsset: nil))
-      }
-    }
   }
 }
 
