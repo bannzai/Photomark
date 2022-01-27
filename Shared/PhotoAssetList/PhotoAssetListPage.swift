@@ -60,6 +60,8 @@ struct PhotoAssetListPage: View {
             VStack(spacing: 12) {
               PhotoAssetAlbumList(albums: albums)
               if isSelectingMode {
+                PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
+              } else {
                 PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
               }
             }
