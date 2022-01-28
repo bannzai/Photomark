@@ -28,35 +28,39 @@ struct PhotoAssetSelectGrid: View {
   }()
 
   var body: some View {
-    VStack(spacing: 8) {
-      ForEach(0..<sections.count) { i in
-        // FIXME: cause out of index when filtering with photo tags
-        if i <= sections.count - 1 {
-          let section = sections[i]
+    ZStack {
+      VStack(spacing: 8) {
+        ForEach(0..<sections.count) { i in
+          // FIXME: cause out of index when filtering with photo tags
+          if i <= sections.count - 1 {
+            let section = sections[i]
 
-          LazyVGrid(columns: gridItems, spacing: 1) {
-            Section(header: sectionHeader(section)) {
-              ForEach(section.assets) { asset in
-                GridAssetImageGeometryReader { gridItemGeometry in
-                  PhotoAssetSelectImage(
-                    asset: asset,
-                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                    tags: tags,
-                    maxImageLength: gridItemGeometry.size.width,
-                    isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
-                      if isSelected {
-                        selectedAssets.append(asset)
-                      } else {
-                        selectedAssets.removeAll(where: { $0 == asset })
-                      }
-                    })
-                  )
+            LazyVGrid(columns: gridItems, spacing: 1) {
+              Section(header: sectionHeader(section)) {
+                ForEach(section.assets) { asset in
+                  GridAssetImageGeometryReader { gridItemGeometry in
+                    PhotoAssetSelectImage(
+                      asset: asset,
+                      photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
+                      tags: tags,
+                      maxImageLength: gridItemGeometry.size.width,
+                      isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
+                        if isSelected {
+                          selectedAssets.append(asset)
+                        } else {
+                          selectedAssets.removeAll(where: { $0 == asset })
+                        }
+                      })
+                    )
+                  }
                 }
               }
             }
           }
         }
       }
+
+
     }
   }
 
