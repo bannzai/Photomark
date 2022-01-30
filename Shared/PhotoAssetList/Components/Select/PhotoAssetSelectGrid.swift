@@ -5,7 +5,9 @@ struct PhotoAssetSelectGrid: View {
   let photos: [Photo]
   let tags: [Tag]
   let sections: [AssetSection]
+
   @State var selectedAssets: [Asset] = []
+  @State var showsApplyTagPage = false
 
   init(assets: [Asset], photos: [Photo], tags: [Tag]) {
     self.assets = assets
@@ -58,6 +60,15 @@ struct PhotoAssetSelectGrid: View {
         }
       }
     }
+    .toolbar(content: {
+      ToolbarItem(placement: .navigationBarLeading) {
+        Button(action: {
+          showsApplyTagPage = true
+        }) {
+          Image(systemName: "bookmark")
+        }
+      }
+    })
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {
