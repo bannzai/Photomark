@@ -60,6 +60,11 @@ struct PhotoAssetSelectGrid: View {
         }
       }
     }
+    .sheet(isPresented: $showsApplyTagPage, content: {
+      NavigationView {
+        ApplyTagPage()
+      }
+    })
     .toolbar(content: {
       ToolbarItem(placement: .navigationBarLeading) {
         Button(action: {
