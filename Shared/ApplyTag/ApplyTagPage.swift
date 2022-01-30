@@ -30,7 +30,6 @@ struct ApplyTagPage: View {
         }
       }
     }
-    .frame(maxWidth: .infinity)
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: {
