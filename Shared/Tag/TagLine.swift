@@ -24,13 +24,12 @@ struct TagView: View {
   var body: some View {
     if let name = tag.name {
       Text(name)
-        .frame(maxWidth: .infinity)
+        .frame(minWidth: 60, maxWidth: .infinity)
         .padding(8)
         .background(
           RoundedRectangle(cornerRadius: 16)
             .fill(isSelected ? Color.pink.opacity(0.4) : Color.gray.opacity(0.2))
         )
-        .frame(minWidth: 60)
     }
   }
 }
