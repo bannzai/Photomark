@@ -62,7 +62,9 @@ struct PhotoAssetSelectGrid: View {
     }
     .sheet(isPresented: $showsApplyTagPage, content: {
       NavigationView {
-        ApplyTagPage()
+        ApplyTagPage(targetAssets: selectedAssets, onComplete: {
+          selectedAssets = []
+        })
       }
     })
     .toolbar(content: {
