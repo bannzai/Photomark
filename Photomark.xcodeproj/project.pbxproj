@@ -66,6 +66,7 @@
 		2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
 		2095BC0227A02544008998A2 /* AssetDownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095BC0127A02544008998A2 /* AssetDownloadButton.swift */; };
 		2095BC0327A02544008998A2 /* AssetDownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095BC0127A02544008998A2 /* AssetDownloadButton.swift */; };
+		20960C2627A6849F00D6E4F6 /* ApplyTagPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20960C2527A6849F00D6E4F6 /* ApplyTagPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
 		2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
 		2095BC0127A02544008998A2 /* AssetDownloadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDownloadButton.swift; sourceTree = "<group>"; };
+		20960C2527A6849F00D6E4F6 /* ApplyTagPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyTagPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 		2086F751279AD67600BBA8D4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				20960C2427A6849700D6E4F6 /* ApplyTag */,
 				20594652279D85E700F5726C /* Activity */,
 				201C2ACE279CB4EB006B135B /* Entity */,
 				201C2AC7279BDC41006B135B /* StdLib */,
@@ -291,6 +294,14 @@
 				2059463C279D335800F5726C /* AlertError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		20960C2427A6849700D6E4F6 /* ApplyTag */ = {
+			isa = PBXGroup;
+			children = (
+				20960C2527A6849F00D6E4F6 /* ApplyTagPage.swift */,
+			);
+			path = ApplyTag;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +420,7 @@
 				2059463D279D335800F5726C /* AlertError.swift in Sources */,
 				2095BC0227A02544008998A2 /* AssetDownloadButton.swift in Sources */,
 				2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
+				20960C2627A6849F00D6E4F6 /* ApplyTagPage.swift in Sources */,
 				20594654279D85EC00F5726C /* ActivityView.swift in Sources */,
 				20594657279E332000F5726C /* PhotoAssetAlbumList.swift in Sources */,
 				20594640279D35E100F5726C /* Tag+Extension.swift in Sources */,
