@@ -18,7 +18,6 @@ struct PhotoAssetListPage: View {
   var tags: FetchedResults<Tag>
 
   @State var assets: [Asset] = []
-  @State var albums: [Album] = []
   @State var error: Error?
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
