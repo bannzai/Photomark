@@ -18,7 +18,6 @@ struct PhotoAssetListPage: View {
   var tags: FetchedResults<Tag>
 
   @State var assets: [Asset] = []
-  @State var albums: [Album] = []
   @State var error: Error?
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
@@ -58,7 +57,6 @@ struct PhotoAssetListPage: View {
 
           ScrollView(.vertical) {
             VStack(spacing: 12) {
-              PhotoAssetAlbumList(albums: albums)
               if isSelectingMode {
                 PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
               } else {
