@@ -25,7 +25,7 @@ struct PhotoAssetImage: View {
       }
       .frame(width: maxImageLength, height: maxImageLength)
 
-      AssetDownloadButton(asset: asset)
+      AssetCopyButton(asset: asset)
         .frame(width: 32, height: 32)
     }
     .onTapGesture {

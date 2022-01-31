@@ -61,7 +61,6 @@ struct PhotoDetailPage: View {
           }
         }
       }
-      .navigationTitle(Text("詳細ページ"))
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -71,6 +70,9 @@ struct PhotoDetailPage: View {
         }
         ToolbarItem(placement: .navigationBarTrailing) {
           AssetDownloadButton(asset: asset)
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          AssetCopyButton(asset: asset)
         }
       }
       .sheet(isPresented: $activitySheetIsPresented, content: {

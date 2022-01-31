@@ -5,17 +5,17 @@ import UniformTypeIdentifiers
 import PhotosUI
 
 struct PhotoAssetListPage: View {
-  @Environment(\.photoLibrary) private var photoLibrary
-  @Environment(\.managedObjectContext) private var viewContext
+  @Environment(\.photoLibrary) var photoLibrary
+  @Environment(\.managedObjectContext) var viewContext
 
   @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
     animation: .default)
-  private var photos: FetchedResults<Photo>
+  var photos: FetchedResults<Photo>
   @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
     animation: .default)
-  private var tags: FetchedResults<Tag>
+  var tags: FetchedResults<Tag>
 
   @State var assets: [Asset] = []
   @State var albums: [Album] = []
@@ -23,48 +23,13 @@ struct PhotoAssetListPage: View {
   @State var searchText: String = ""
   @State var selectedTags: [Tag] = []
   @State var alertType: AlertType?
+  @State var isSelectingMode = false
 
   enum AlertType: Identifiable {
     case openSetting
     case noPermission
 
     var id: Self { self }
-  }
-
-  private var filteredAssets: [Asset] {
-    if selectedTags.isEmpty && searchText.isEmpty {
-      return assets
-    } else {
-      let filteredPhotos: [(photo: Photo, photoTagIDs: [String])] = photos.toArray().compactMap { photo in
-        if let tagIDs = photo.tagIDs {
-          return (photo: photo, photoTagIDs: tagIDs)
-        } else {
-          return nil
-        }
-      }.filter { tuple in
-        if !searchText.isEmpty {
-          let filteredTags = tags.toArray().filtered(tagName: searchText)
-
-          return tuple.photoTagIDs.contains { photoTagID in
-            filteredTags.contains { $0.id?.uuidString == photoTagID }
-          }
-        } else {
-          return true
-        }
-      }.filter { tuple in
-        if !selectedTags.isEmpty {
-          return tuple.photoTagIDs.contains { photoTagID in
-            selectedTags.allSatisfy { $0.id?.uuidString == photoTagID }
-          }
-        } else {
-          return true
-        }
-      }
-
-      return assets.filter { asset in
-        filteredPhotos.contains { tuple in tuple.photo.phAssetIdentifier == asset.id }
-      }
-    }
   }
 
   var body: some View {
@@ -94,13 +59,26 @@ struct PhotoAssetListPage: View {
           ScrollView(.vertical) {
             VStack(spacing: 12) {
               PhotoAssetAlbumList(albums: albums)
-              PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
+              if isSelectingMode {
+                PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
+              } else {
+                PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
+              }
             }
           }
         }
         .navigationTitle("保存済み")
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
+        .toolbar(content: {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button(action: {
+              isSelectingMode.toggle()
+            }) {
+              Image(systemName: "checklist")
+            }
+          }
+        })
       }
     }
     .task {
@@ -140,29 +118,6 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
-  }
-
-  func fetchFirst() {
-    let phAssets = photoLibrary.fetchAssets().toArray()
-    let sortedAssets = phAssets.sorted { lhs, rhs in
-      if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
-        return l > r
-      } else {
-        assertionFailure()
-        return false
-      }
-    }
-    assets = sortedAssets.map(Asset.init)
-
-    let phAssetCollections = photoLibrary.fetchAssetCollection().toArray()
-    let assetsInCollection = phAssetCollections.map(photoLibrary.fetchFirstAsset(in:))
-    zip(phAssetCollections, assetsInCollection).forEach { (collection, asset) in
-      if let asset = asset {
-        albums.append(Album(collection: collection, firstAsset: Asset(phAsset: asset)))
-      } else {
-        albums.append(Album(collection: collection, firstAsset: nil))
-      }
-    }
   }
 }
 

@@ -1,10 +1,13 @@
 import SwiftUI
 
-struct PhotoAssetGrid: View {
+struct PhotoAssetSelectGrid: View {
   let assets: [Asset]
   let photos: [Photo]
   let tags: [Tag]
   let sections: [AssetSection]
+
+  @State var selectedAssets: [Asset] = []
+  @State var showsApplyTagPage = false
 
   init(assets: [Asset], photos: [Photo], tags: [Tag]) {
     self.assets = assets
@@ -37,20 +40,42 @@ struct PhotoAssetGrid: View {
             Section(header: sectionHeader(section)) {
               ForEach(section.assets) { asset in
                 GridAssetImageGeometryReader { gridItemGeometry in
-                  PhotoAssetImage(
+                  PhotoAssetSelectImage(
                     asset: asset,
                     photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
                     tags: tags,
-                    maxImageLength: gridItemGeometry.size.width
+                    maxImageLength: gridItemGeometry.size.width,
+                    isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
+                      if isSelected {
+                        selectedAssets.append(asset)
+                      } else {
+                        selectedAssets.removeAll(where: { $0 == asset })
+                      }
+                    })
                   )
                 }
               }
             }
           }
-
         }
       }
     }
+    .sheet(isPresented: $showsApplyTagPage, content: {
+      NavigationView {
+        ApplyTagPage(targetAssets: selectedAssets, onComplete: {
+          selectedAssets = []
+        })
+      }
+    })
+    .toolbar(content: {
+      ToolbarItem(placement: .navigationBarLeading) {
+        Button(action: {
+          showsApplyTagPage = true
+        }) {
+          Image(systemName: "bookmark")
+        }
+      }
+    })
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {
