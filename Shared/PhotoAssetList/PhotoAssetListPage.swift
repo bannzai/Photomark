@@ -58,7 +58,6 @@ struct PhotoAssetListPage: View {
 
           ScrollView(.vertical) {
             VStack(spacing: 12) {
-              PhotoAssetAlbumList(albums: albums)
               if isSelectingMode {
                 PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
               } else {
