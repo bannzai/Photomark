@@ -34,7 +34,6 @@
 		2059465F279E33A800F5726C /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059465D279E33A800F5726C /* Asset.swift */; };
 		20594661279E390C00F5726C /* PhotoAssetGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594660279E390C00F5726C /* PhotoAssetGrid.swift */; };
 		20594662279E390C00F5726C /* PhotoAssetGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594660279E390C00F5726C /* PhotoAssetGrid.swift */; };
-		207327CB27B3F909004024A8 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327CA27B3F909004024A8 /* UIImage+.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -82,7 +81,6 @@
 		20594653279D85EC00F5726C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		2059465D279E33A800F5726C /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		20594660279E390C00F5726C /* PhotoAssetGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetGrid.swift; sourceTree = "<group>"; };
-		207327CA27B3F909004024A8 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomarkApp.swift; sourceTree = "<group>"; };
 		2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetListPage.swift; sourceTree = "<group>"; };
@@ -198,21 +196,12 @@
 		207327C927B3F870004024A8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				207327CC27B3F91A004024A8 /* Bridge */,
 				201C2AC7279BDC41006B135B /* StdLib */,
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				2086F756279AD67600BBA8D4 /* Persistence.swift */,
 				201C2ACE279CB4EB006B135B /* Entity */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		207327CC27B3F91A004024A8 /* Bridge */ = {
-			isa = PBXGroup;
-			children = (
-				207327CA27B3F909004024A8 /* UIImage+.swift */,
-			);
-			path = Bridge;
 			sourceTree = "<group>";
 		};
 		2086F74C279AD67600BBA8D4 = {
@@ -426,7 +415,6 @@
 				20960C2627A6849F00D6E4F6 /* ApplyTagPage.swift in Sources */,
 				20594654279D85EC00F5726C /* ActivityView.swift in Sources */,
 				20594640279D35E100F5726C /* Tag+Extension.swift in Sources */,
-				207327CB27B3F909004024A8 /* UIImage+.swift in Sources */,
 				2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
 				2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
 				2026C51E27A2861500310E9F /* PhotoAssetSelectGrid.swift in Sources */,
