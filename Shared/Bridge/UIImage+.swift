@@ -10,13 +10,18 @@ typealias UIImage = AppKit.NSImage
 
 
 extension NSImage {
-  var toCGImage: CGImage? {
+  var cgImage: CGImage? {
     var imageRect = NSRect(origin: .zero, size: size)
     guard let image = cgImage(forProposedRect: &imageRect, context: nil, hints: nil) else {
       return nil
     }
     return image
   }
+
+  convenience init(cgImage: CGImage) {
+    self.init(cgImage: cgImage, size: .init(width: cgImage.width, height: cgImage.height))
+  }
 }
+
 #endif
 
