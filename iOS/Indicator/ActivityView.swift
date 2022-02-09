@@ -1,8 +1,7 @@
 import SwiftUI
 import UIKit
 
-struct IndicatorView: UIViewControllerRepresentable {
-
+struct ActivityView: UIViewControllerRepresentable {
   let images: [UIImage]
   var onCancel: (() -> Void)?
   var onComplete: ((UIActivity.ActivityType?) -> Void)?

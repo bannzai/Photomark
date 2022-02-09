@@ -75,7 +75,7 @@ struct PhotoDetailPage: View {
         }
       }
       .sheet(isPresented: $activitySheetIsPresented, content: {
-        IndicatorView(images: [image])
+        ActivityView(images: [image])
       })
       .handle(error: $error)
     } else {
