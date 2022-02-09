@@ -35,6 +35,8 @@
 		20594661279E390C00F5726C /* PhotoAssetGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594660279E390C00F5726C /* PhotoAssetGrid.swift */; };
 		20594662279E390C00F5726C /* PhotoAssetGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594660279E390C00F5726C /* PhotoAssetGrid.swift */; };
 		207327CB27B3F909004024A8 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327CA27B3F909004024A8 /* UIImage+.swift */; };
+		207327CF27B3F97D004024A8 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327CA27B3F909004024A8 /* UIImage+.swift */; };
+		207327D327B3FAB8004024A8 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327D227B3FAB8004024A8 /* ActivityView.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -83,6 +85,8 @@
 		2059465D279E33A800F5726C /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		20594660279E390C00F5726C /* PhotoAssetGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetGrid.swift; sourceTree = "<group>"; };
 		207327CA27B3F909004024A8 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		207327D227B3FAB8004024A8 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		207327D427B3FC27004024A8 /* Photomark (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Photomark (iOS).entitlements"; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomarkApp.swift; sourceTree = "<group>"; };
 		2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetListPage.swift; sourceTree = "<group>"; };
@@ -215,9 +219,18 @@
 			path = Bridge;
 			sourceTree = "<group>";
 		};
+		207327D127B3FAB8004024A8 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				207327D227B3FAB8004024A8 /* ActivityView.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
 		2086F74C279AD67600BBA8D4 = {
 			isa = PBXGroup;
 			children = (
+				207327D427B3FC27004024A8 /* Photomark (iOS).entitlements */,
 				207327C927B3F870004024A8 /* Shared */,
 				2086F751279AD67600BBA8D4 /* iOS */,
 				2086F763279AD67600BBA8D4 /* macOS */,
@@ -230,8 +243,8 @@
 		2086F751279AD67600BBA8D4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				20960C2427A6849700D6E4F6 /* ApplyTag */,
 				20594652279D85E700F5726C /* Activity */,
+				20960C2427A6849700D6E4F6 /* ApplyTag */,
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F7C9279BCFA700BBA8D4 /* Tag */,
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
@@ -256,6 +269,7 @@
 		2086F763279AD67600BBA8D4 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				207327D127B3FAB8004024A8 /* Activity */,
 				2086F764279AD67600BBA8D4 /* macOS.entitlements */,
 			);
 			path = macOS;
@@ -451,10 +465,12 @@
 				20594662279E390C00F5726C /* PhotoAssetGrid.swift in Sources */,
 				2059463E279D335800F5726C /* AlertError.swift in Sources */,
 				2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
+				207327CF27B3F97D004024A8 /* UIImage+.swift in Sources */,
 				20594641279D35E100F5726C /* Tag+Extension.swift in Sources */,
 				2095BC0327A02544008998A2 /* AssetDownloadButton.swift in Sources */,
 				2026C52527A28BFD00310E9F /* AssetSection.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
+				207327D327B3FAB8004024A8 /* ActivityView.swift in Sources */,
 				2086F7C8279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */,
 				200672D3279D018500BA9C48 /* PhotoAssetImage.swift in Sources */,
 				20594655279D85EC00F5726C /* ActivityView.swift in Sources */,
@@ -593,6 +609,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Photomark (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
@@ -613,6 +630,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bannzai.Photomark;
 				PRODUCT_NAME = Photomark;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -624,6 +642,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Photomark (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
@@ -644,6 +663,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bannzai.Photomark;
 				PRODUCT_NAME = Photomark;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

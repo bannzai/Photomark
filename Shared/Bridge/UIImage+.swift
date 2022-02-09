@@ -1,4 +1,3 @@
-
 #if os(ios)
 import UIKit
 typealias UIImage = UIKit.UIImage
