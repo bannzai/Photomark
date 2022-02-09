@@ -17,7 +17,11 @@ struct AssetDownloadButton: View {
           
           Task { @MainActor in
             if let image = await photoLibrary.highQualityImage(for: asset) {
-              UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+              do {
+                try saveImageToPhotoLibrary(image: image)
+              } catch {
+                self.error = error
+              }
 
               // Delay for user can recognize ProgressView.
               await Task.sleep(2 * (NSEC_PER_SEC / 10))
