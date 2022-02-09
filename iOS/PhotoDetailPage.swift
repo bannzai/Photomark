@@ -1,5 +1,4 @@
 import SwiftUI
-import class UIKit.UIImage
 import CoreData
 
 struct PhotoDetailPage: View {
