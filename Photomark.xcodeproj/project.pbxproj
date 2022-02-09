@@ -39,6 +39,9 @@
 		207327DB27B4641F004024A8 /* PasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327DA27B4641F004024A8 /* PasteBoard.swift */; };
 		207327DC27B46647004024A8 /* PasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327DA27B4641F004024A8 /* PasteBoard.swift */; };
 		207327DE27B47AFB004024A8 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327DD27B47AFB004024A8 /* Image+.swift */; };
+		207327DF27B47B9A004024A8 /* FetchedResults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */; };
+		207327E027B47B9A004024A8 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
+		207327E127B47BA5004024A8 /* Photo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACF279CB4F9006B135B /* Photo+Extension.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -463,6 +466,7 @@
 			files = (
 				2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				20594651279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */,
+				207327E127B47BA5004024A8 /* Photo+Extension.swift in Sources */,
 				2059465F279E33A800F5726C /* Asset.swift in Sources */,
 				2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
 				207327D827B3FF6A004024A8 /* IndicatorView.swift in Sources */,
@@ -470,6 +474,7 @@
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				20594662279E390C00F5726C /* PhotoAssetGrid.swift in Sources */,
 				207327DB27B4641F004024A8 /* PasteBoard.swift in Sources */,
+				207327DF27B47B9A004024A8 /* FetchedResults+Extension.swift in Sources */,
 				2059463E279D335800F5726C /* AlertError.swift in Sources */,
 				207327D927B40006004024A8 /* UIImage+.swift in Sources */,
 				2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
@@ -488,6 +493,7 @@
 				2026C52227A286AA00310E9F /* PhotoAssetSelectImage.swift in Sources */,
 				207327DE27B47AFB004024A8 /* Image+.swift in Sources */,
 				2026C51627A2762C00310E9F /* AssetCopyButton.swift in Sources */,
+				207327E027B47B9A004024A8 /* String+Extension.swift in Sources */,
 				2086F76A279AD67600BBA8D4 /* PhotoAssetListPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
