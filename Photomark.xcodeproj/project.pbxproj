@@ -196,7 +196,7 @@
 		2086F74C279AD67600BBA8D4 = {
 			isa = PBXGroup;
 			children = (
-				2086F751279AD67600BBA8D4 /* Shared */,
+				2086F751279AD67600BBA8D4 /* iOS */,
 				2086F763279AD67600BBA8D4 /* macOS */,
 				2086F75D279AD67600BBA8D4 /* Products */,
 			);
@@ -204,7 +204,7 @@
 			sourceTree = "<group>";
 			tabWidth = 2;
 		};
-		2086F751279AD67600BBA8D4 /* Shared */ = {
+		2086F751279AD67600BBA8D4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				20960C2427A6849700D6E4F6 /* ApplyTag */,
@@ -222,7 +222,7 @@
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
 				2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */,
 			);
-			path = Shared;
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		2086F75D279AD67600BBA8D4 /* Products */ = {
