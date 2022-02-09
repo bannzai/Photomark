@@ -7,8 +7,8 @@ struct IndicatorView: UIViewControllerRepresentable {
   var onCancel: (() -> Void)?
   var onComplete: ((UIActivity.ActivityType?) -> Void)?
 
-  public func makeUIViewController(context: Context) -> UIIndicatorViewController {
-    let activityController = UIIndicatorViewController(activityItems: images, applicationActivities: nil)
+  public func makeUIViewController(context: Context) -> UIActivityViewController {
+    let activityController = UIActivityViewController(activityItems: images, applicationActivities: nil)
     activityController.completionWithItemsHandler = {
       (activityType, completed, returnedItems, error) in
       if !completed {
@@ -20,7 +20,7 @@ struct IndicatorView: UIViewControllerRepresentable {
     return activityController
   }
 
-  public func updateUIViewController(_ uiViewController: UIIndicatorViewController, context: Context) {
+  public func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
     // Noop
   }
 }
