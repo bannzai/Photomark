@@ -10,7 +10,6 @@ struct PhotomarkApp: App {
         PhotoAssetListPage()
           .environment(\.managedObjectContext, persistenceController.container.viewContext)
       }
-      .navigationViewStyle(.stack)
     }
   }
 }
