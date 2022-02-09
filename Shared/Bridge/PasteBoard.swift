@@ -10,7 +10,7 @@ func saveImageToPhotoLibrary(image: UIImage) throws {
 
 #if os(macOS)
 import AppKit
-import Photos
+import Foundation
 typealias Pasteboard = NSPasteboard
 
 extension Pasteboard {
@@ -43,10 +43,10 @@ private extension Data {
   }
 }
 func saveImageToPhotoLibrary(image: UIImage) throws{
-  guard let picturesDirectory = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask), let pngData = image.tiffRepresentation.bitmap.png else {
+  guard let picturesDirectory = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask).first, let pngData = image.tiffRepresentation?.bitmap?.png else {
     return
   }
   let imageUrl = picturesDirectory.appendingPathComponent("image.png", isDirectory: false)
-  try? data.write(to: imageUrl)
+  try? pngData.write(to: imageUrl)
 }
 #endif

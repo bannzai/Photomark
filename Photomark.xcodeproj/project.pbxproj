@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		200672D2279D018500BA9C48 /* PhotoAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200672D1279D018500BA9C48 /* PhotoAssetImage.swift */; };
-		200672D3279D018500BA9C48 /* PhotoAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200672D1279D018500BA9C48 /* PhotoAssetImage.swift */; };
 		201C2AC9279BDC47006B135B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
 		201C2ACD279CA5FE006B135B /* FetchedResults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */; };
 		201C2AD0279CB4F9006B135B /* Photo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACF279CB4F9006B135B /* Photo+Extension.swift */; };
@@ -47,7 +46,6 @@
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
 		2086F768279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
 		2086F769279AD67600BBA8D4 /* PhotoAssetListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */; };
-		2086F76A279AD67600BBA8D4 /* PhotoAssetListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */; };
 		2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F756279AD67600BBA8D4 /* Persistence.swift */; };
 		2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F756279AD67600BBA8D4 /* Persistence.swift */; };
 		2086F76D279AD67600BBA8D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2086F757279AD67600BBA8D4 /* Assets.xcassets */; };
@@ -61,7 +59,6 @@
 		2086F795279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */; };
 		2086F796279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */; };
 		2086F7C7279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */; };
-		2086F7C8279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */; };
 		2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
 		2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
 		2086F7CF279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
@@ -482,8 +479,6 @@
 				2095BC0327A02544008998A2 /* AssetDownloadButton.swift in Sources */,
 				2026C52527A28BFD00310E9F /* AssetSection.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
-				2086F7C8279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */,
-				200672D3279D018500BA9C48 /* PhotoAssetImage.swift in Sources */,
 				2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
 				2026C51F27A2861500310E9F /* PhotoAssetSelectGrid.swift in Sources */,
 				2026C51C27A27CAE00310E9F /* PhotoAssetListPage+.swift in Sources */,
@@ -494,7 +489,6 @@
 				207327DE27B47AFB004024A8 /* Image+.swift in Sources */,
 				2026C51627A2762C00310E9F /* AssetCopyButton.swift in Sources */,
 				207327E027B47B9A004024A8 /* String+Extension.swift in Sources */,
-				2086F76A279AD67600BBA8D4 /* PhotoAssetListPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
