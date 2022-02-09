@@ -1,6 +1,5 @@
 import Foundation
 import Photos
-import class UIKit.UIImage
 import SwiftUI
 import os.log
 
