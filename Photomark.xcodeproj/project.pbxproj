@@ -196,7 +196,6 @@
 		207327C927B3F870004024A8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				201C2AC7279BDC41006B135B /* StdLib */,
 				2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */,
 				2086F756279AD67600BBA8D4 /* Persistence.swift */,
 				201C2ACE279CB4EB006B135B /* Entity */,
@@ -221,6 +220,7 @@
 			children = (
 				20960C2427A6849700D6E4F6 /* ApplyTag */,
 				20594652279D85E700F5726C /* Activity */,
+				201C2AC7279BDC41006B135B /* StdLib */,
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F7C9279BCFA700BBA8D4 /* Tag */,
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
