@@ -1,5 +1,5 @@
 
-#if os(ios)
+#if os(iOS)
 import UIKit
 typealias UIImage = UIKit.UIImage
 #endif
