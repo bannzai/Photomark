@@ -185,12 +185,12 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		20594652279D85E700F5726C /* Indicator */ = {
+		20594652279D85E700F5726C /* Activity */ = {
 			isa = PBXGroup;
 			children = (
 				20594653279D85EC00F5726C /* ActivityView.swift */,
 			);
-			path = Indicator;
+			path = Activity;
 			sourceTree = "<group>";
 		};
 		20594659279E338B00F5726C /* Extensions */ = {
@@ -225,12 +225,12 @@
 			path = Bridge;
 			sourceTree = "<group>";
 		};
-		207327D627B3FF6A004024A8 /* Indicator */ = {
+		207327D627B3FF6A004024A8 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
 				207327D727B3FF6A004024A8 /* ActivityView.swift */,
 			);
-			path = Indicator;
+			path = Activity;
 			sourceTree = "<group>";
 		};
 		2086F74C279AD67600BBA8D4 = {
@@ -249,7 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				20960C2427A6849700D6E4F6 /* ApplyTag */,
-				20594652279D85E700F5726C /* Indicator */,
+				20594652279D85E700F5726C /* Activity */,
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F7C9279BCFA700BBA8D4 /* Tag */,
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
@@ -274,7 +274,7 @@
 		2086F763279AD67600BBA8D4 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				207327D627B3FF6A004024A8 /* Indicator */,
+				207327D627B3FF6A004024A8 /* Activity */,
 				2086F764279AD67600BBA8D4 /* macOS.entitlements */,
 			);
 			path = macOS;
