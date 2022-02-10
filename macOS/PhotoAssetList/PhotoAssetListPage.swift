@@ -55,7 +55,7 @@ struct PhotoAssetListPage: View {
           }
 
           ScrollView(.vertical) {
-            VStack(spacing: 12) {
+            LazyVStack(spacing: 12) {
               if isSelectingMode {
                 PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
               } else {
@@ -115,6 +115,10 @@ struct PhotoAssetListPage: View {
     })
     .handle(error: $error)
   }
+}
+
+private func openSetting() {
+  NSWorkspace.shared.open(.init(string: "x-apple.systempreferences:com.apple.preference.security?Privacy")!)
 }
 
 struct ContentView_Previews: PreviewProvider {
