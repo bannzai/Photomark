@@ -65,7 +65,7 @@ struct PhotoAssetListPage: View {
             }
           }
         }
-        .navigationTitle("保存済み")
+        .navigationTitle("一覧")
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
         .toolbar(content: {
