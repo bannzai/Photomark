@@ -41,7 +41,6 @@ struct PhotoAssetListPage: View {
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationBarHidden(true)
       } else {
         VStack(spacing: 8) {
           TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
@@ -66,10 +65,9 @@ struct PhotoAssetListPage: View {
           }
         }
         .navigationTitle("保存済み")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
+        .searchable(text: $searchText)
         .toolbar(content: {
-          ToolbarItem(placement: .navigationBarTrailing) {
+          ToolbarItem(placement: .navigation) {
             Button(action: {
               isSelectingMode.toggle()
             }) {
@@ -116,13 +114,6 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
-  }
-}
-
-private func openSetting() {
-  let settingURL = URL(string: UIApplication.openSettingsURLString)!
-  if UIApplication.shared.canOpenURL(settingURL) {
-    UIApplication.shared.open(settingURL)
   }
 }
 
