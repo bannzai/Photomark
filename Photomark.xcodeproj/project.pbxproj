@@ -16,7 +16,6 @@
 		2026C51B27A27CAE00310E9F /* PhotoAssetListPage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C51A27A27CAE00310E9F /* PhotoAssetListPage+.swift */; };
 		2026C51C27A27CAE00310E9F /* PhotoAssetListPage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C51A27A27CAE00310E9F /* PhotoAssetListPage+.swift */; };
 		2026C51E27A2861500310E9F /* PhotoAssetSelectGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C51D27A2861500310E9F /* PhotoAssetSelectGrid.swift */; };
-		2026C51F27A2861500310E9F /* PhotoAssetSelectGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C51D27A2861500310E9F /* PhotoAssetSelectGrid.swift */; };
 		2026C52127A286AA00310E9F /* PhotoAssetSelectImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C52027A286AA00310E9F /* PhotoAssetSelectImage.swift */; };
 		2026C52227A286AA00310E9F /* PhotoAssetSelectImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C52027A286AA00310E9F /* PhotoAssetSelectImage.swift */; };
 		2026C52427A28BFD00310E9F /* AssetSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C52327A28BFD00310E9F /* AssetSection.swift */; };
@@ -42,6 +41,7 @@
 		207327E027B47B9A004024A8 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
 		207327E127B47BA5004024A8 /* Photo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACF279CB4F9006B135B /* Photo+Extension.swift */; };
 		207327E227B4826D004024A8 /* PhotoAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200672D1279D018500BA9C48 /* PhotoAssetImage.swift */; };
+		207327E627B497F9004024A8 /* ApplyTagPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327E527B497F9004024A8 /* ApplyTagPage.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -91,6 +91,7 @@
 		207327D727B3FF6A004024A8 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		207327DA27B4641F004024A8 /* PasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteBoard.swift; sourceTree = "<group>"; };
 		207327DD27B47AFB004024A8 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
+		207327E527B497F9004024A8 /* ApplyTagPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyTagPage.swift; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomarkApp.swift; sourceTree = "<group>"; };
 		2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetListPage.swift; sourceTree = "<group>"; };
@@ -233,6 +234,14 @@
 			path = Activity;
 			sourceTree = "<group>";
 		};
+		207327E427B497F9004024A8 /* ApplyTag */ = {
+			isa = PBXGroup;
+			children = (
+				207327E527B497F9004024A8 /* ApplyTagPage.swift */,
+			);
+			path = ApplyTag;
+			sourceTree = "<group>";
+		};
 		2086F74C279AD67600BBA8D4 = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +283,7 @@
 		2086F763279AD67600BBA8D4 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				207327E427B497F9004024A8 /* ApplyTag */,
 				207327D627B3FF6A004024A8 /* Activity */,
 				2086F764279AD67600BBA8D4 /* macOS.entitlements */,
 			);
@@ -476,13 +486,13 @@
 				207327DF27B47B9A004024A8 /* FetchedResults+Extension.swift in Sources */,
 				2059463E279D335800F5726C /* AlertError.swift in Sources */,
 				207327D927B40006004024A8 /* UIImage+.swift in Sources */,
+				207327E627B497F9004024A8 /* ApplyTagPage.swift in Sources */,
 				2086F7D0279BDA2800BBA8D4 /* ErrorHandleModifier.swift in Sources */,
 				20594641279D35E100F5726C /* Tag+Extension.swift in Sources */,
 				2095BC0327A02544008998A2 /* AssetDownloadButton.swift in Sources */,
 				2026C52527A28BFD00310E9F /* AssetSection.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
-				2026C51F27A2861500310E9F /* PhotoAssetSelectGrid.swift in Sources */,
 				2026C51C27A27CAE00310E9F /* PhotoAssetListPage+.swift in Sources */,
 				2086F768279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
 				2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
