@@ -114,6 +114,7 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
+    .frame(minWidth: NSScreen.main?.frame.width ?? 400)
   }
 }
 
