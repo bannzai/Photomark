@@ -32,89 +32,91 @@ struct PhotoAssetListPage: View {
   }
 
   var body: some View {
-    Group {
-      if assets.isEmpty {
-        VStack(alignment: .center, spacing: 10) {
-          Spacer()
-          ProgressView("読み込み中...")
-          Spacer()
-        }
-        .ignoresSafeArea()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-      } else {
-        VStack(spacing: 8) {
-          TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
-            TagView(tag: tag, isSelected: selectedTags.contains(tag))
-              .onTapGesture {
-                if selectedTags.contains(tag) {
-                  selectedTags.removeAll { $0.id == tag.id }
+    if let mainScreen = NSScreen.main {
+      Group {
+        if assets.isEmpty {
+          VStack(alignment: .center, spacing: 10) {
+            Spacer()
+            ProgressView("読み込み中...")
+            Spacer()
+          }
+          .ignoresSafeArea()
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+          VStack(spacing: 8) {
+            TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
+              TagView(tag: tag, isSelected: selectedTags.contains(tag))
+                .onTapGesture {
+                  if selectedTags.contains(tag) {
+                    selectedTags.removeAll { $0.id == tag.id }
+                  } else {
+                    selectedTags.append(tag)
+                  }
+                }
+            }
+
+            ScrollView(.vertical) {
+              LazyVStack(spacing: 12) {
+                if isSelectingMode {
+                  PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
                 } else {
-                  selectedTags.append(tag)
+                  PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
                 }
               }
+            }
           }
-
-          ScrollView(.vertical) {
-            LazyVStack(spacing: 12) {
-              if isSelectingMode {
-                PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
-              } else {
-                PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
+          .navigationTitle("保存済み")
+          .searchable(text: $searchText)
+          .toolbar(content: {
+            ToolbarItem(placement: .navigation) {
+              Button(action: {
+                isSelectingMode.toggle()
+              }) {
+                Image(systemName: "checklist")
               }
             }
-          }
+          })
         }
-        .navigationTitle("保存済み")
-        .searchable(text: $searchText)
-        .toolbar(content: {
-          ToolbarItem(placement: .navigation) {
-            Button(action: {
-              isSelectingMode.toggle()
-            }) {
-              Image(systemName: "checklist")
-            }
-          }
-        })
       }
-    }
-    .task {
-      switch photoLibrary.authorizationAction() {
-      case .requestAuthorization:
-        let status = await photoLibrary.requestAuthorization()
-        switch status {
-        case .authorized, .limited:
+      .task {
+        switch photoLibrary.authorizationAction() {
+        case .requestAuthorization:
+          let status = await photoLibrary.requestAuthorization()
+          switch status {
+          case .authorized, .limited:
+            fetchFirst()
+          case .notDetermined, .restricted, .denied:
+            alertType = .noPermission
+          @unknown default:
+            assertionFailure("New case \(status)")
+          }
+        case .openSettingApp:
+          alertType = .openSetting
+        case nil:
           fetchFirst()
-        case .notDetermined, .restricted, .denied:
-          alertType = .noPermission
-        @unknown default:
-          assertionFailure("New case \(status)")
         }
-      case .openSettingApp:
-        alertType = .openSetting
-      case nil:
-        fetchFirst()
       }
+      .alert(item: $alertType, content: { alertType in
+        switch alertType {
+        case .openSetting:
+          return Alert(
+            title: Text("画像を選択できません"),
+            message: Text("フォトライブラリのアクセスが許可されていません。設定アプリから許可をしてください"),
+            primaryButton: .default(Text("設定を開く"), action: openSetting),
+            secondaryButton: .cancel()
+          )
+        case .noPermission:
+          return Alert(
+            title: Text("アクセスを拒否しました"),
+            message: Text("フォトライブラリのアクセスが拒否されました。操作を続ける場合は設定アプリから許可をしてください"),
+            primaryButton: .default(Text("設定を開く"), action: openSetting),
+            secondaryButton: .cancel()
+          )
+        }
+      })
+      .handle(error: $error)
+      .frame(minWidth: mainScreen.frame.width / 5)
     }
-    .alert(item: $alertType, content: { alertType in
-      switch alertType {
-      case .openSetting:
-        return Alert(
-          title: Text("画像を選択できません"),
-          message: Text("フォトライブラリのアクセスが許可されていません。設定アプリから許可をしてください"),
-          primaryButton: .default(Text("設定を開く"), action: openSetting),
-          secondaryButton: .cancel()
-        )
-      case .noPermission:
-        return Alert(
-          title: Text("アクセスを拒否しました"),
-          message: Text("フォトライブラリのアクセスが拒否されました。操作を続ける場合は設定アプリから許可をしてください"),
-          primaryButton: .default(Text("設定を開く"), action: openSetting),
-          secondaryButton: .cancel()
-        )
-      }
-    })
-    .handle(error: $error)
-    .frame(minWidth: NSScreen.main?.frame.width ?? 400)
   }
 }
 
