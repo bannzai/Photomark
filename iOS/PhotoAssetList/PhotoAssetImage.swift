@@ -43,6 +43,7 @@ struct PhotoAssetImage: View {
         AssetCopyButton(asset: asset)
           .frame(width: 32, height: 32)
       }
+      .frame(width: maxImageLength, height: maxImageLength)
       .onTapGesture {
         if let photo = photo {
           editingPhoto = photo
@@ -56,5 +57,6 @@ struct PhotoAssetImage: View {
       }
       .handle(error: $error)
     }
+    .frame(width: maxImageLength, height: maxImageLength)
   }
 }
