@@ -41,7 +41,6 @@ struct PhotoAssetListPage: View {
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationBarHidden(true)
       } else {
         VStack(spacing: 8) {
           TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
@@ -66,8 +65,7 @@ struct PhotoAssetListPage: View {
           }
         }
         .navigationTitle("一覧")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
+        .searchable(text: $searchText, placement: .sidebar, prompt: "検索")
         .toolbar(content: {
           ToolbarItem {
             Menu {
@@ -121,12 +119,6 @@ struct PhotoAssetListPage: View {
   }
 }
 
-private func openSetting() {
-  let settingURL = URL(string: UIApplication.openSettingsURLString)!
-  if UIApplication.shared.canOpenURL(settingURL) {
-    UIApplication.shared.open(settingURL)
-  }
-}
 
 struct ContentView_Previews: PreviewProvider {
   static var viewContext: NSManagedObjectContext { PersistenceController.preview.container.viewContext }
