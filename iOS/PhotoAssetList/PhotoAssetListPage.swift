@@ -69,11 +69,13 @@ struct PhotoAssetListPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
         .toolbar(content: {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: {
-              isSelectingMode.toggle()
-            }) {
-              Image(systemName: "checklist")
+          ToolbarItem {
+            Menu {
+              Toggle(isOn: $isSelectingMode) {
+                Label("一括編集", systemImage: "checkmark.circle.fill")
+              }
+            } label: {
+              Label("Filter", systemImage: "slider.horizontal.3")
             }
           }
         })
