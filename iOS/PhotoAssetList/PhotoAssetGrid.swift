@@ -14,7 +14,6 @@ struct PhotoAssetGrid: View {
     self.sections = createSections(assets: assets, photos: photos, tags: tags)
   }
 
-
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
