@@ -55,7 +55,7 @@ struct PhotoAssetListPage: View {
           }
 
           ScrollView(.vertical) {
-            LazyVStack(spacing: 12) {
+            VStack(spacing: 12) {
               if isSelectingMode {
                 PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
               } else {
@@ -116,6 +116,13 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
+    .frame(minWidth: {
+      #if os(iOS)
+      nil
+      #elseif os(macOS)
+      400
+      #endif
+    }())
   }
 }
 

@@ -18,7 +18,7 @@ struct PhotoDetailPage: View {
     if let image = image {
       ScrollView(.vertical) {
         VStack(spacing: 10) {
-          TextField("Input tag name and press Enter",text: $tagName)
+          TextField("Input tag name and press Enter", text: $tagName)
             .padding(8)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .onSubmit {

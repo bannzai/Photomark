@@ -47,7 +47,6 @@ struct PhotoAssetGrid: View {
               }
             }
           }
-
         }
       }
     }
