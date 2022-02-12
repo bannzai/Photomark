@@ -14,21 +14,6 @@ struct PhotoAssetGrid: View {
     self.sections = createSections(assets: assets, photos: photos, tags: tags)
   }
 
-  struct SelectedElement: Hashable {
-    let photo: Photo
-    let asset: Asset
-  }
-  @State var selectedElement: SelectedElement?
-  @State var error: Error?
-
-  private var transitionToDetail: Binding<Bool>  {
-    .init {
-      selectedElement != nil
-    } set: { _ in
-      selectedElement = nil
-    }
-  }
-
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -45,15 +30,7 @@ struct PhotoAssetGrid: View {
 
   var body: some View {
     ZStack {
-      NavigationLink(isActive: transitionToDetail) {
-        if let element = selectedElement {
-          PhotoDetailPage(asset: element.asset, photo: element.photo, tags: tags)
-        }
-      } label: {
-        EmptyView()
-      }
-
-      List(selection: $selectedElement) {
+      List {
         ForEach(0..<sections.count) { i in
           // FIXME: cause out of index when filtering with photo tags
           if i <= sections.count - 1 {
@@ -67,24 +44,10 @@ struct PhotoAssetGrid: View {
                   GridAssetImageGeometryReader { gridItemGeometry in
                     PhotoAssetImage(
                       asset: asset,
+                      photo: photo,
                       tags: tags,
                       maxImageLength: gridItemGeometry.size.width
                     )
-                    .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
-                    .onTapGesture {
-                      if let photo = photo {
-                        selectedElement = .init(photo: photo, asset: asset)
-                      } else {
-                        do {
-                          selectedElement = .init(
-                            photo: try Photo.createAndSave(context: viewContext, asset: asset),
-                            asset: asset
-                          )
-                        } catch {
-                          self.error = error
-                        }
-                      }
-                    }
                   }
                 }
               }
@@ -93,7 +56,6 @@ struct PhotoAssetGrid: View {
         }
       }
       .listStyle(.plain)
-      .handle(error: $error)
     }
   }
 
