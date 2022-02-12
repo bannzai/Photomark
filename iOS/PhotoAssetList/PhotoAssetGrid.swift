@@ -14,8 +14,21 @@ struct PhotoAssetGrid: View {
     self.sections = createSections(assets: assets, photos: photos, tags: tags)
   }
 
-  @State var selectedPhoto: Photo?
+  struct SelectedElement: Hashable {
+    let photo: Photo
+    let asset: Asset
+  }
+  @State var selectedElement: SelectedElement?
   @State var error: Error?
+
+  private var transitionToDetail: Binding<Bool>  {
+    .init {
+      selectedElement != nil
+    } set: { _ in
+      selectedElement = nil
+    }
+  }
+
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -31,29 +44,27 @@ struct PhotoAssetGrid: View {
   }()
 
   var body: some View {
-    List(selection: $selectedPhoto) {
-      ForEach(0..<sections.count) { i in
-        // FIXME: cause out of index when filtering with photo tags
-        if i <= sections.count - 1 {
-          let section = sections[i]
+    ZStack {
+      NavigationLink(isActive: transitionToDetail) {
+        if let element = selectedElement {
+          PhotoDetailPage(asset: element.asset, photo: element.photo, tags: tags)
+        }
+      } label: {
+        EmptyView()
+      }
 
-          LazyVGrid(columns: gridItems, spacing: 1) {
-            Section(header: sectionHeader(section)) {
-              ForEach(section.assets) { asset in
-                let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })
+      List(selection: $selectedElement) {
+        ForEach(0..<sections.count) { i in
+          // FIXME: cause out of index when filtering with photo tags
+          if i <= sections.count - 1 {
+            let section = sections[i]
 
-                GridAssetImageGeometryReader { gridItemGeometry in
-                  ZStack {
-                    NavigationLink(isActive: .constant(
-                      selectedPhoto != nil && selectedPhoto?.id == photo?.id
-                    )) {
-                      if let photo = selectedPhoto {
-                        PhotoDetailPage(asset: asset, photo: photo, tags: tags)
-                      }
-                    } label: {
-                      EmptyView()
-                    }
+            LazyVGrid(columns: gridItems, spacing: 1) {
+              Section(header: sectionHeader(section)) {
+                ForEach(section.assets) { asset in
+                  let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })
 
+                  GridAssetImageGeometryReader { gridItemGeometry in
                     PhotoAssetImage(
                       asset: asset,
                       tags: tags,
@@ -62,25 +73,28 @@ struct PhotoAssetGrid: View {
                     .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
                     .onTapGesture {
                       if let photo = photo {
-                        selectedPhoto = photo
+                        selectedElement = .init(photo: photo, asset: asset)
                       } else {
                         do {
-                          selectedPhoto = try Photo.createAndSave(context: viewContext, asset: asset)
+                          selectedElement = .init(
+                            photo: try Photo.createAndSave(context: viewContext, asset: asset),
+                            asset: asset
+                          )
                         } catch {
                           self.error = error
                         }
                       }
                     }
                   }
-                  .handle(error: $error)
                 }
               }
             }
           }
         }
       }
+      .listStyle(.plain)
+      .handle(error: $error)
     }
-    .listStyle(.plain)
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {
