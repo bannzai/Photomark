@@ -42,39 +42,38 @@ struct PhotoAssetGrid: View {
               ForEach(section.assets) { asset in
                 let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })
 
-                ZStack {
-                  NavigationLink(isActive: .constant(
-                    selectedPhoto != nil && selectedPhoto?.id == photo?.id
-                  )) {
-                    if let photo = selectedPhoto {
-                      PhotoDetailPage(asset: asset, photo: photo, tags: tags)
+                GridAssetImageGeometryReader { gridItemGeometry in
+                  ZStack {
+                    NavigationLink(isActive: .constant(
+                      selectedPhoto != nil && selectedPhoto?.id == photo?.id
+                    )) {
+                      if let photo = selectedPhoto {
+                        PhotoDetailPage(asset: asset, photo: photo, tags: tags)
+                      }
+                    } label: {
+                      EmptyView()
                     }
-                  } label: {
-                    EmptyView()
-                  }
 
-                  Button {
-                    if let photo = photo {
-                      selectedPhoto = photo
-                    } else {
-                      do {
-                        selectedPhoto = try Photo.createAndSave(context: viewContext, asset: asset)
-                      } catch {
-                        self.error = error
+                    PhotoAssetImage(
+                      asset: asset,
+                      tags: tags,
+                      maxImageLength: gridItemGeometry.size.width
+                    )
+                    .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
+                    .onTapGesture {
+                      if let photo = photo {
+                        selectedPhoto = photo
+                      } else {
+                        do {
+                          selectedPhoto = try Photo.createAndSave(context: viewContext, asset: asset)
+                        } catch {
+                          self.error = error
+                        }
                       }
                     }
-                  } label: {
-                    GridAssetImageGeometryReader { gridItemGeometry in
-                      PhotoAssetImage(
-                        asset: asset,
-                        tags: tags,
-                        maxImageLength: gridItemGeometry.size.width
-                      )
-                      .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
-                    }
                   }
+                  .handle(error: $error)
                 }
-                .handle(error: $error)
               }
             }
           }
