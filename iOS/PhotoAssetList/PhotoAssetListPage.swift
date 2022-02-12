@@ -54,14 +54,10 @@ struct PhotoAssetListPage: View {
               }
           }
 
-          ScrollView(.vertical) {
-            VStack(spacing: 12) {
-              if isSelectingMode {
-                PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
-              } else {
-                PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
-              }
-            }
+          if isSelectingMode {
+            PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
+          } else {
+            PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
           }
         }
         .navigationTitle("一覧")

@@ -44,8 +44,8 @@ struct PhotoAssetGrid: View {
 
                 ZStack {
                   NavigationLink(isActive: .constant(
-                    selectedPhoto != nil && selectedPhoto?.id == photo?.id)
-                  ) {
+                    selectedPhoto != nil && selectedPhoto?.id == photo?.id
+                  )) {
                     if let photo = selectedPhoto {
                       PhotoDetailPage(asset: asset, photo: photo, tags: tags)
                     }
@@ -53,25 +53,26 @@ struct PhotoAssetGrid: View {
                     EmptyView()
                   }
 
-                    GridAssetImageGeometryReader { gridItemGeometry in
-                      Button(action: {
-                        if let photo = photo {
-                          selectedPhoto = photo
-                        } else {
-                          do {
-                            selectedPhoto = try Photo.createAndSave(context: viewContext, asset: asset)
-                          } catch {
-                            self.error = error
-                          }
-                        }
-                      }, label: {
-                        PhotoAssetImage(
-                          asset: asset,
-                          tags: tags,
-                          maxImageLength: gridItemGeometry.size.width
-                        )
-                      })
+                  Button {
+                    if let photo = photo {
+                      selectedPhoto = photo
+                    } else {
+                      do {
+                        selectedPhoto = try Photo.createAndSave(context: viewContext, asset: asset)
+                      } catch {
+                        self.error = error
+                      }
                     }
+                  } label: {
+                    GridAssetImageGeometryReader { gridItemGeometry in
+                      PhotoAssetImage(
+                        asset: asset,
+                        tags: tags,
+                        maxImageLength: gridItemGeometry.size.width
+                      )
+                      .frame(width: gridItemGeometry.size.width, height: gridItemGeometry.size.height)
+                    }
+                  }
                 }
                 .handle(error: $error)
               }
@@ -80,6 +81,7 @@ struct PhotoAssetGrid: View {
         }
       }
     }
+    .listStyle(.plain)
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {
