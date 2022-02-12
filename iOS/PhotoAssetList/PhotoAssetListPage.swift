@@ -31,104 +31,40 @@ struct PhotoAssetListPage: View {
     var id: Self { self }
   }
 
+  private let gridItems: [GridItem] = [
+    .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1),
+  ]
   var body: some View {
     Group {
-      if assets.isEmpty {
-        VStack(alignment: .center, spacing: 10) {
-          Spacer()
-          ProgressView("読み込み中...")
-          Spacer()
-        }
-        .ignoresSafeArea()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+      if false {
+        EmptyView()
       } else {
-        VStack(spacing: 8) {
-          TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
-            TagView(tag: tag, isSelected: selectedTags.contains(tag))
-              .onTapGesture {
-                if selectedTags.contains(tag) {
-                  selectedTags.removeAll { $0.id == tag.id }
-                } else {
-                  selectedTags.append(tag)
+        VStack {
+          ScrollView(.vertical) {
+              List {
+                ForEach(0..<100) { i in
+                  Text("\(i)")
                 }
               }
-          }
+            .listStyle(.plain)
 
-          ScrollView(.vertical) {
-            VStack(spacing: 12) {
-              if isSelectingMode {
-                PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
-              } else {
-                PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
-              }
-            }
           }
         }
-        .navigationTitle("一覧")
-        .searchable(text: $searchText, placement: {
-          #if os(iOS)
-          .navigationBarDrawer(displayMode: .always)
-          #elseif os(macOS)
-          .sidebar
-          #endif
-        }(), prompt: "検索")
-        .toolbar(content: {
-          ToolbarItem {
-            Menu {
-              Toggle(isOn: $isSelectingMode) {
-                Label("一括編集", systemImage: "checkmark.circle.fill")
-              }
-            } label: {
-              Label("Filter", systemImage: "slider.horizontal.3")
-            }
-          }
-        })
       }
     }
-    .task {
-      switch photoLibrary.authorizationAction() {
-      case .requestAuthorization:
-        let status = await photoLibrary.requestAuthorization()
-        switch status {
-        case .authorized, .limited:
-          fetchFirst()
-        case .notDetermined, .restricted, .denied:
-          alertType = .noPermission
-        @unknown default:
-          assertionFailure("New case \(status)")
-        }
-      case .openSettingApp:
-        alertType = .openSetting
-      case nil:
-        fetchFirst()
-      }
+  }
+
+  private func sectionHeader() -> some View {
+    HStack {
+      Text("Section")
+        .font(.system(size: 16))
+        .bold()
+      Spacer()
     }
-    .alert(item: $alertType, content: { alertType in
-      switch alertType {
-      case .openSetting:
-        return Alert(
-          title: Text("画像を選択できません"),
-          message: Text("フォトライブラリのアクセスが許可されていません。設定アプリから許可をしてください"),
-          primaryButton: .default(Text("設定を開く"), action: openSetting),
-          secondaryButton: .cancel()
-        )
-      case .noPermission:
-        return Alert(
-          title: Text("アクセスを拒否しました"),
-          message: Text("フォトライブラリのアクセスが拒否されました。操作を続ける場合は設定アプリから許可をしてください"),
-          primaryButton: .default(Text("設定を開く"), action: openSetting),
-          secondaryButton: .cancel()
-        )
-      }
-    })
-    .handle(error: $error)
-    .frame(minWidth: {
-      #if os(iOS)
-      nil
-      #elseif os(macOS)
-      400
-      #endif
-    }())
+    .padding(.top, 12)
+    .padding(.bottom, 8)
   }
 }
 
