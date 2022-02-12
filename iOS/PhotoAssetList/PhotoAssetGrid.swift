@@ -1,17 +1,21 @@
 import SwiftUI
 
 struct PhotoAssetGrid: View {
+  @Environment(\.managedObjectContext) private var viewContext
+
   let assets: [Asset]
   let photos: [Photo]
   let tags: [Tag]
   let sections: [AssetSection]
-
   init(assets: [Asset], photos: [Photo], tags: [Tag]) {
     self.assets = assets
     self.photos = photos
     self.tags = tags
     self.sections = createSections(assets: assets, photos: photos, tags: tags)
   }
+
+  @State var selectedPhoto: Photo?
+  @State var error: Error?
 
   private let gridItems: [GridItem] = [
     .init(.flexible(), spacing: 1),
@@ -27,7 +31,7 @@ struct PhotoAssetGrid: View {
   }()
 
   var body: some View {
-    LazyVStack(spacing: 8) {
+    List(selection: $selectedPhoto) {
       ForEach(0..<sections.count) { i in
         // FIXME: cause out of index when filtering with photo tags
         if i <= sections.count - 1 {
@@ -36,14 +40,40 @@ struct PhotoAssetGrid: View {
           LazyVGrid(columns: gridItems, spacing: 1) {
             Section(header: sectionHeader(section)) {
               ForEach(section.assets) { asset in
-                GridAssetImageGeometryReader { gridItemGeometry in
-                  PhotoAssetImage(
-                    asset: asset,
-                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
-                    tags: tags,
-                    maxImageLength: gridItemGeometry.size.width
-                  )
+                let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })
+
+                ZStack {
+                  NavigationLink(isActive: .constant(
+                    selectedPhoto != nil && selectedPhoto?.id == photo?.id)
+                  ) {
+                    if let photo = selectedPhoto {
+                      PhotoDetailPage(asset: asset, photo: photo, tags: tags)
+                    }
+                  } label: {
+                    EmptyView()
+                  }
+
+                    GridAssetImageGeometryReader { gridItemGeometry in
+                      Button(action: {
+                        if let photo = photo {
+                          selectedPhoto = photo
+                        } else {
+                          do {
+                            selectedPhoto = try Photo.createAndSave(context: viewContext, asset: asset)
+                          } catch {
+                            self.error = error
+                          }
+                        }
+                      }, label: {
+                        PhotoAssetImage(
+                          asset: asset,
+                          tags: tags,
+                          maxImageLength: gridItemGeometry.size.width
+                        )
+                      })
+                    }
                 }
+                .handle(error: $error)
               }
             }
           }
