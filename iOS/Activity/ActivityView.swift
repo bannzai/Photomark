@@ -2,7 +2,6 @@ import SwiftUI
 import UIKit
 
 struct ActivityView: UIViewControllerRepresentable {
-
   let images: [UIImage]
   var onCancel: (() -> Void)?
   var onComplete: ((UIActivity.ActivityType?) -> Void)?

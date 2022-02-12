@@ -17,7 +17,7 @@ struct AssetCopyButton: View {
 
           Task { @MainActor in
             if let image = await photoLibrary.highQualityImage(for: asset) {
-              UIPasteboard.general.image = image
+              Pasteboard.general.image = image
 
               // Delay for user can recognize ProgressView.
               await Task.sleep(2 * (NSEC_PER_SEC / 10))

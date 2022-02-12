@@ -41,7 +41,6 @@ struct PhotoAssetListPage: View {
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationBarHidden(true)
       } else {
         VStack(spacing: 8) {
           TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
@@ -55,25 +54,28 @@ struct PhotoAssetListPage: View {
               }
           }
 
-          ScrollView(.vertical) {
-            VStack(spacing: 12) {
-              if isSelectingMode {
-                PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
-              } else {
-                PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
-              }
-            }
+          if isSelectingMode {
+            PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
+          } else {
+            PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
           }
         }
-        .navigationTitle("保存済み")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
+        .navigationTitle("一覧")
+        .searchable(text: $searchText, placement: {
+          #if os(iOS)
+          .navigationBarDrawer(displayMode: .always)
+          #elseif os(macOS)
+          .sidebar
+          #endif
+        }(), prompt: "検索")
         .toolbar(content: {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: {
-              isSelectingMode.toggle()
-            }) {
-              Image(systemName: "checklist")
+          ToolbarItem {
+            Menu {
+              Toggle(isOn: $isSelectingMode) {
+                Label("一括編集", systemImage: "checkmark.circle.fill")
+              }
+            } label: {
+              Label("Filter", systemImage: "slider.horizontal.3")
             }
           }
         })
@@ -116,15 +118,16 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
+    .frame(minWidth: {
+      #if os(iOS)
+      nil
+      #elseif os(macOS)
+      400
+      #endif
+    }())
   }
 }
 
-private func openSetting() {
-  let settingURL = URL(string: UIApplication.openSettingsURLString)!
-  if UIApplication.shared.canOpenURL(settingURL) {
-    UIApplication.shared.open(settingURL)
-  }
-}
 
 struct ContentView_Previews: PreviewProvider {
   static var viewContext: NSManagedObjectContext { PersistenceController.preview.container.viewContext }

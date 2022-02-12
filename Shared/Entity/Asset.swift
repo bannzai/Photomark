@@ -1,6 +1,5 @@
 import Foundation
 import Photos
-import UIKit
 
 struct Asset: CustomStringConvertible, Identifiable, Hashable {
   var id: String { asset.localIdentifier }

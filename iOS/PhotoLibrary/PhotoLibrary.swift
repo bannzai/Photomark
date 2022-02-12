@@ -1,6 +1,5 @@
 import Foundation
 import Photos
-import class UIKit.UIImage
 import SwiftUI
 import os.log
 
@@ -105,7 +104,11 @@ struct PhotoLibrary {
     }
 
     let imageRef: CGImage = cgImage.cropping(to: .init(origin: position, size: size))!
+    #if os(iOS)
     return .init(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+    #elseif os(macOS)
+    return .init(cgImage: imageRef)
+    #endif
   }
 }
 

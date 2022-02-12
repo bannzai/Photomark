@@ -1,5 +1,4 @@
 import SwiftUI
-import class UIKit.UIImage
 import CoreData
 
 struct PhotoDetailPage: View {
@@ -61,7 +60,6 @@ struct PhotoDetailPage: View {
           }
         }
       }
-      .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: { activitySheetIsPresented = true }) {
