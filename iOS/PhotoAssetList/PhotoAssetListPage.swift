@@ -65,7 +65,13 @@ struct PhotoAssetListPage: View {
           }
         }
         .navigationTitle("一覧")
-        .searchable(text: $searchText, placement: .sidebar, prompt: "検索")
+        .searchable(text: $searchText, placement: {
+          #if os(iOS)
+          .navigationBarDrawer(displayMode: .always)
+          #elseif os(macOS)
+          .sidebar
+          #endif
+        }(), prompt: "検索")
         .toolbar(content: {
           ToolbarItem {
             Menu {

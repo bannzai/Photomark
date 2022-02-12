@@ -60,7 +60,6 @@ struct PhotoDetailPage: View {
           }
         }
       }
-      .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: { activitySheetIsPresented = true }) {
