@@ -17,7 +17,9 @@ struct PhotoAssetSelectGrid: View {
   }
 
   private let gridItems: [GridItem] = [
-    .init(.adaptive(minimum: 200), spacing: 1),
+    .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1),
   ]
 
   let sectionHeaderFomatter: DateIntervalFormatter = {
