@@ -61,9 +61,9 @@ struct PhotoAssetListPage: View {
           }
         }
         .navigationTitle("一覧")
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
+        .searchable(text: $searchText, placement: .toolbar, prompt: "検索")
         .toolbar(content: {
-          ToolbarItem(placement: .navigationBarTrailing) {
+          ToolbarItem(placement: .navigation) {
             Button(action: {
               isSelectingMode.toggle()
             }) {
@@ -110,22 +110,6 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
-  }
-}
-
-
-struct ContentView_Previews: PreviewProvider {
-  static var viewContext: NSManagedObjectContext { PersistenceController.preview.container.viewContext }
-
-  static var previews: some View {
-    Group {
-      PhotoAssetListPage()
-      PhotoAssetListPage()
-        .onAppear {
-          let photo = Photo(context: viewContext)
-          photo.id = .init()
-          try! viewContext.save()
-        }
-    }
+    .frame(minWidth:  400)
   }
 }

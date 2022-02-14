@@ -16,3 +16,8 @@ func openSetting() {
   NSWorkspace.shared.open(.init(string: "x-apple.systempreferences:com.apple.preference.security?Privacy")!)
 }
 #endif
+
+import SwiftUI
+extension SwiftUI.View {
+  
+}

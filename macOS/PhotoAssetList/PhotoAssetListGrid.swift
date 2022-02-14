@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PhotoAssetGrid: View {
+struct PhotoAssetListGrid: View {
   @Environment(\.managedObjectContext) private var viewContext
 
   let assets: [Asset]
@@ -13,12 +13,6 @@ struct PhotoAssetGrid: View {
     self.tags = tags
     self.sections = createSections(assets: assets, photos: photos, tags: tags)
   }
-
-  private let gridItems: [GridItem] = [
-    .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
-  ]
 
   let sectionHeaderFomatter: DateIntervalFormatter = {
     let formatter = DateIntervalFormatter()
@@ -35,13 +29,13 @@ struct PhotoAssetGrid: View {
           if i <= sections.count - 1 {
             let section = sections[i]
 
-            LazyVGrid(columns: gridItems, spacing: 1) {
+            LazyVGrid(columns: gridItems(), alignment: .leading, spacing: 1) {
               Section(header: sectionHeader(section)) {
                 ForEach(section.assets) { asset in
                   let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })
 
                   GridAssetImageGeometryReader { gridItemGeometry in
-                    PhotoAssetImage(
+                    PhotoAssetListImage(
                       asset: asset,
                       photo: photo,
                       tags: tags,
