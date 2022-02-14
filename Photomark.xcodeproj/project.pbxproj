@@ -257,6 +257,7 @@
 		207327C927B3F870004024A8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2086F793279B8C6600BBA8D4 /* Components */,
 				20A2052627B7F3DE0058AA0C /* Modifier */,
 				205E750B27B60C2A0050EE3D /* PhotoLibrary */,
 				207327CC27B3F91A004024A8 /* Bridge */,
@@ -332,7 +333,6 @@
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F7C9279BCFA700BBA8D4 /* Tag */,
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
-				2086F793279B8C6600BBA8D4 /* Components */,
 				200672D0279D000B00BA9C48 /* PhotoAssetList */,
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
 				2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */,
