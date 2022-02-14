@@ -4,7 +4,7 @@ struct EntryView: View {
   let persistenceController = PersistenceController.shared
 
   var body: some View {
-    PhotoAssetDateListPage()
+    PhotoAssetListPage()
       .environment(\.managedObjectContext, persistenceController.container.viewContext)
   }
 }
