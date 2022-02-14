@@ -14,12 +14,6 @@ struct PhotoAssetListGrid: View {
     self.sections = createSections(assets: assets, photos: photos, tags: tags)
   }
 
-  private let gridItems: [GridItem] = [
-    .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
-  ]
-
   let sectionHeaderFomatter: DateIntervalFormatter = {
     let formatter = DateIntervalFormatter()
     formatter.dateStyle = .medium
@@ -35,7 +29,7 @@ struct PhotoAssetListGrid: View {
           if i <= sections.count - 1 {
             let section = sections[i]
 
-            LazyVGrid(columns: gridItems, spacing: 1) {
+            LazyVGrid(columns: gridItems(), spacing: 1) {
               Section(header: sectionHeader(section)) {
                 ForEach(section.assets) { asset in
                   let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })

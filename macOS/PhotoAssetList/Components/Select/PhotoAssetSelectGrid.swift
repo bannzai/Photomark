@@ -16,12 +16,6 @@ struct PhotoAssetSelectGrid: View {
     self.sections = createSections(assets: assets, photos: photos, tags: tags)
   }
 
-  private let gridItems: [GridItem] = [
-    .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
-    .init(.flexible(), spacing: 1),
-  ]
-
   let sectionHeaderFomatter: DateIntervalFormatter = {
     let formatter = DateIntervalFormatter()
     formatter.dateStyle = .medium
@@ -36,7 +30,7 @@ struct PhotoAssetSelectGrid: View {
         if i <= sections.count - 1 {
           let section = sections[i]
 
-          LazyVGrid(columns: gridItems, alignment: .leading, spacing: 1) {
+          LazyVGrid(columns: gridItems(), alignment: .leading, spacing: 1) {
             Section(header: sectionHeader(section)) {
               ForEach(section.assets) { asset in
                 GridAssetImageGeometryReader { gridItemGeometry in

@@ -1,22 +1,23 @@
 import SwiftUI
 
-struct GridItemCountKey: SwiftUI.EnvironmentKey {
-  static var defaultValue: Int {
-    #if os(iOS)
-    3
-    #elseif os(macOS)
-    7
-    #endif
-  }
-}
 
-extension EnvironmentValues {
-  var gridItemCount: Int {
-    get {
-      self[GridItemCountKey.self]
-    }
-    set {
-      self[GridItemCountKey.self] = newValue
-    }
+func gridItems() -> [GridItem] {
+  #if os(iOS)
+  [
+    .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1),
+  ]
+  #elseif os(macOS)
+  guard let mainScreen = NSScreen.main else {
+    return [
+      .init(.flexible(), spacing: 1),
+      .init(.flexible(), spacing: 1),
+      .init(.flexible(), spacing: 1),
+    ]
   }
+  return (0..<Int(floor(mainScreen.frame.width / 200))).map { _ in
+      .init(.flexible(minimum: 200), spacing: 1)
+  }
+  #endif
 }
