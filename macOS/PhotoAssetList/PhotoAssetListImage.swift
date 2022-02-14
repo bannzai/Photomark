@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PhotoAssetImage: View {
+struct PhotoAssetListImage: View {
   @Environment(\.managedObjectContext) private var viewContext
 
   let asset: Asset

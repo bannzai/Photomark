@@ -57,7 +57,7 @@ struct PhotoAssetListPage: View {
           if isSelectingMode {
             PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
           } else {
-            PhotoAssetGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
+            PhotoAssetListGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
           }
         }
       }

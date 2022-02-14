@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PhotoAssetGrid: View {
+struct PhotoAssetListGrid: View {
   @Environment(\.managedObjectContext) private var viewContext
 
   let assets: [Asset]
@@ -41,7 +41,7 @@ struct PhotoAssetGrid: View {
                   let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })
 
                   GridAssetImageGeometryReader { gridItemGeometry in
-                    PhotoAssetImage(
+                    PhotoAssetListImage(
                       asset: asset,
                       photo: photo,
                       tags: tags,
