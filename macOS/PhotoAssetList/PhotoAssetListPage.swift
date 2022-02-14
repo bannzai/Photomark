@@ -62,6 +62,15 @@ struct PhotoAssetListPage: View {
         }
         .navigationTitle("一覧")
         .searchable(text: $searchText, placement: .toolbar, prompt: "検索")
+        .toolbar(content: {
+          ToolbarItem(placement: .navigation) {
+            Button(action: {
+              isSelectingMode.toggle()
+            }) {
+              Image(systemName: "checklist")
+            }
+          }
+        })
       }
     }
     .task {
