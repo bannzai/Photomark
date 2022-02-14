@@ -61,13 +61,7 @@ struct PhotoAssetListPage: View {
           }
         }
         .navigationTitle("一覧")
-        .searchable(text: $searchText, placement: {
-          #if os(iOS)
-          .navigationBarDrawer(displayMode: .always)
-          #elseif os(macOS)
-          .sidebar
-          #endif
-        }(), prompt: "検索")
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
         .toolbar(content: {
           ToolbarItem {
             Menu {
@@ -118,13 +112,6 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
-    .frame(minWidth: {
-      #if os(iOS)
-      nil
-      #elseif os(macOS)
-      400
-      #endif
-    }())
   }
 }
 

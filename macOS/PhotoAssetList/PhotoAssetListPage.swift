@@ -60,6 +60,8 @@ struct PhotoAssetListPage: View {
             PhotoAssetListGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
           }
         }
+        .navigationTitle("一覧")
+        .searchable(text: $searchText, placement: .toolbar, prompt: "検索")
       }
     }
     .task {
@@ -99,12 +101,6 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
-    .frame(minWidth: {
-      #if os(iOS)
-      nil
-      #elseif os(macOS)
-      400
-      #endif
-    }())
+    .frame(minWidth:  400)
   }
 }
