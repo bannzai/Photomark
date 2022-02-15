@@ -43,17 +43,6 @@ struct PhotoAssetListPage: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
       } else {
         VStack(spacing: 8) {
-          TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
-            TagView(tag: tag, isSelected: selectedTags.contains(tag))
-              .onTapGesture {
-                if selectedTags.contains(tag) {
-                  selectedTags.removeAll { $0.id == tag.id }
-                } else {
-                  selectedTags.append(tag)
-                }
-              }
-          }
-
           if isSelectingMode {
             PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
           } else {
