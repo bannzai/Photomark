@@ -17,10 +17,11 @@ struct PhotoAssetListPage: View {
     animation: .default)
   var tags: FetchedResults<Tag>
 
+  let selectedTags: [Tag]
+
   @State var assets: [Asset] = []
   @State var error: Error?
   @State var searchText: String = ""
-  @State var selectedTags: [Tag] = []
   @State var alertType: AlertType?
   @State var isSelectingMode = false
 
