@@ -17,10 +17,11 @@ struct PhotoAssetListPage: View {
     animation: .default)
   var tags: FetchedResults<Tag>
 
+  let selectedTags: [Tag]
+
   @State var assets: [Asset] = []
   @State var error: Error?
   @State var searchText: String = ""
-  @State var selectedTags: [Tag] = []
   @State var alertType: AlertType?
   @State var isSelectingMode = false
 
@@ -43,17 +44,6 @@ struct PhotoAssetListPage: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
       } else {
         VStack(spacing: 8) {
-          TagLine(tags: tags.toArray().filtered(tagName: searchText)) { tag in
-            TagView(tag: tag, isSelected: selectedTags.contains(tag))
-              .onTapGesture {
-                if selectedTags.contains(tag) {
-                  selectedTags.removeAll { $0.id == tag.id }
-                } else {
-                  selectedTags.append(tag)
-                }
-              }
-          }
-
           if isSelectingMode {
             PhotoAssetSelectGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
           } else {

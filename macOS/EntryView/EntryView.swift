@@ -4,8 +4,10 @@ struct EntryView: View {
   let persistenceController = PersistenceController.shared
 
   var body: some View {
-    PhotoAssetListPage()
-      .environment(\.managedObjectContext, persistenceController.container.viewContext)
+    NavigationView {
+      TagList()
+        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+    }
   }
 }
 
