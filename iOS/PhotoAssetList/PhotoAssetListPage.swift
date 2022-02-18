@@ -110,9 +110,6 @@ struct PhotoAssetListPage: View {
       }
     })
     .handle(error: $error)
-    .onAppear {
-      deleteAllCoreData(viewContext: viewContext)
-    }
   }
 }
 
