@@ -1,10 +1,12 @@
 import Foundation
 import CoreData
+import Photos
 
 extension Photo {
-  static func create(context: NSManagedObjectContext, asset: Asset) -> Photo {
+  static func create(context: NSManagedObjectContext, asset: Asset) throws -> Photo {
     let photo = Photo(context: context)
     photo.id = .init()
+    photo.phAssetCloudIdentifier = asset.cloudIdentifier
     photo.phAssetIdentifier = asset.id
     photo.createdDate = .init()
     photo.tagIDs = []
@@ -13,7 +15,7 @@ extension Photo {
 
   @discardableResult
   static func createAndSave(context: NSManagedObjectContext, asset: Asset) throws -> Photo {
-    let photo = create(context: context, asset: asset)
+    let photo = try create(context: context, asset: asset)
     try context.save()
     return photo
   }

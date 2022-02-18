@@ -1,4 +1,5 @@
 import Foundation
+import Photos
 
 extension PhotoAssetListPage {
   var filteredAssets: [Asset] {
@@ -32,7 +33,7 @@ extension PhotoAssetListPage {
       }
 
       return assets.filter { asset in
-        filteredPhotos.contains { tuple in tuple.photo.phAssetIdentifier == asset.id }
+        filteredPhotos.contains { tuple in asset.cloudIdentifier == tuple.photo.phAssetCloudIdentifier }
       }
     }
   }
@@ -47,6 +48,13 @@ extension PhotoAssetListPage {
         return false
       }
     }
-    assets = sortedAssets.map(Asset.init)
+
+    let cloudIdentifiers = PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: sortedAssets.map(\.localIdentifier))
+    assets = sortedAssets.compactMap { asset in
+      guard let cloudIdentifier = try? cloudIdentifiers[asset.localIdentifier]?.get().stringValue else {
+        return nil
+      }
+      return .init(phAsset: asset, cloudIdentifier: cloudIdentifier)
+    }
   }
 }

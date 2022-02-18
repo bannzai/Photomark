@@ -25,14 +25,6 @@ struct PhotoAssetListImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      NavigationLink(isActive: transitionToDetail) {
-        if let element = selectedElement {
-          PhotoDetailPage(asset: element.asset, photo: element.photo, tags: tags)
-        }
-      } label: {
-        EmptyView()
-      }
-
       AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
         image
           .resizable()
@@ -47,6 +39,12 @@ struct PhotoAssetListImage: View {
         .frame(width: 32, height: 32)
     }
     .frame(width: maxImageLength, height: maxImageLength)
+    .sheet(isPresented: transitionToDetail, onDismiss: nil, content: {
+      if let element = selectedElement {
+        PhotoDetailPage(asset: element.asset, photo: element.photo, tags: tags)
+          .environment(\.managedObjectContext, viewContext)
+      }
+    })
     .onTapGesture {
       if let photo = photo {
         selectedElement = .init(photo: photo, asset: asset)

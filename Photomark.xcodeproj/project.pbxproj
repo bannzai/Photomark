@@ -83,6 +83,8 @@
 		20A2052027B7F0ED0058AA0C /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2051F27B7F0ED0058AA0C /* EntryView.swift */; };
 		20A2052827B7F3E60058AA0C /* PhotoLibraryAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */; };
 		20A2052927B7F4830058AA0C /* PhotoLibraryAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */; };
+		20ED928827C044AD0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
+		20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +143,7 @@
 		20A2051B27B7F0B40058AA0C /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		20A2051F27B7F0ED0058AA0C /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAuthorization.swift; sourceTree = "<group>"; };
+		20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAllCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +290,8 @@
 		207327C927B3F870004024A8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				20ED928627C044A60033D328 /* Debug */,
+				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F793279B8C6600BBA8D4 /* Components */,
 				20A2052627B7F3DE0058AA0C /* Modifier */,
@@ -365,7 +370,6 @@
 				20960C2427A6849700D6E4F6 /* ApplyTag */,
 				20594652279D85E700F5726C /* Activity */,
 				2086F7C9279BCFA700BBA8D4 /* Tag */,
-				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
 				200672D0279D000B00BA9C48 /* PhotoAssetList */,
 				2086F757279AD67600BBA8D4 /* Assets.xcassets */,
 				2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */,
@@ -414,7 +418,8 @@
 				2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */,
 				2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */,
 			);
-			path = PhotoLibrary;
+			name = PhotoLibrary;
+			path = StdLib/PhotoLibrary;
 			sourceTree = "<group>";
 		};
 		2086F7C9279BCFA700BBA8D4 /* Tag */ = {
@@ -464,6 +469,14 @@
 			children = (
 			);
 			path = Modifier;
+			sourceTree = "<group>";
+		};
+		20ED928627C044A60033D328 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,6 +610,7 @@
 				205E750D27B60C300050EE3D /* OpenSetting.swift in Sources */,
 				201C2AC9279BDC47006B135B /* String+Extension.swift in Sources */,
 				2086F769279AD67600BBA8D4 /* PhotoAssetListPage.swift in Sources */,
+				20ED928827C044AD0033D328 /* DeleteAllCoreData.swift in Sources */,
 				20594661279E390C00F5726C /* PhotoAssetListGrid.swift in Sources */,
 				20A2051D27B7F0D40058AA0C /* EntryView.swift in Sources */,
 			);
@@ -633,6 +647,7 @@
 				2095BC0327A02544008998A2 /* AssetDownloadButton.swift in Sources */,
 				2086F786279AFA9300BBA8D4 /* CoreDataModelFactory.swift in Sources */,
 				2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */,
+				20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */,
 				2086F768279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
 				20A2052027B7F0ED0058AA0C /* EntryView.swift in Sources */,
 				2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */,

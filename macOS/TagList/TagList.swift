@@ -39,6 +39,7 @@ struct TagList: View {
       NavigationLink(
         isActive: .constant(true), destination: {
           PhotoAssetListPage(selectedTags: selectedElements.compactMap(mappedTag))
+            .environment(\.managedObjectContext, viewContext)
         },
         label: {
           EmptyView()
@@ -67,6 +68,7 @@ struct TagList: View {
       }
       .buttonStyle(.plain)
     }
+    .padding(.top, 20)
   }
 
   private var allElements: [ListElement] {
