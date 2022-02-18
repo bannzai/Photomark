@@ -11,6 +11,9 @@ struct PhotoLibrary {
     case requestAuthorization
   }
 
+  private init() { }
+  static let shared = PhotoLibrary()
+
   func authorizationAction() -> AuthorizationAction? {
     let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
     switch status {
@@ -120,7 +123,7 @@ struct PhotoLibrary {
 }
 
 struct PhotoLibraryKey: SwiftUI.EnvironmentKey {
-  static var defaultValue: PhotoLibrary = .init()
+  static var defaultValue: PhotoLibrary = .shared
 }
 
 extension EnvironmentValues {
