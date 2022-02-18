@@ -1,35 +1,21 @@
 import Foundation
 import Photos
 
-final class Asset: CustomStringConvertible, Identifiable, Hashable {
+struct Asset: CustomStringConvertible, Identifiable, Hashable {
   var id: String { asset.localIdentifier }
-  var cloudIdentifier: String?
-
-  let asset: PHAsset
-  init(phAsset: PHAsset) {
-    self.asset = phAsset
-    asyncSetCloudIdentifier()
+  var cloudIdentifier: String? {
+    get {
+      try? Photos.PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: [asset.localIdentifier])[asset.localIdentifier]?.get().stringValue
+    }
   }
 
-  func asyncSetCloudIdentifier() {
-    DispatchQueue.global().async {
-      let cloudIdentifier = try? Photos.PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: [self.asset.localIdentifier])[self.asset.localIdentifier]?.get().stringValue
+  let asset: PHAsset
 
-      DispatchQueue.main.async {
-        self.cloudIdentifier = cloudIdentifier
-      }
-    }
+  init(phAsset: PHAsset) {
+    self.asset = phAsset
   }
 
   var description: String {
     "asset: \(asset)"
-  }
-
-  static func == (lhs: Asset, rhs: Asset) -> Bool {
-    lhs.asset == rhs.asset
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(asset)
   }
 }
