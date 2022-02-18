@@ -3,16 +3,13 @@ import Photos
 
 struct Asset: CustomStringConvertible, Identifiable, Hashable {
   var id: String { asset.localIdentifier }
-  var cloudIdentifier: String? {
-    get {
-      try? Photos.PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: [asset.localIdentifier])[asset.localIdentifier]?.get().stringValue
-    }
-  }
 
   let asset: PHAsset
+  let cloudIdentifier: String
 
-  init(phAsset: PHAsset) {
+  init(phAsset: PHAsset, cloudIdentifier: String) {
     self.asset = phAsset
+    self.cloudIdentifier = cloudIdentifier
   }
 
   var description: String {
