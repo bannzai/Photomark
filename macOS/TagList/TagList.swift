@@ -39,6 +39,7 @@ struct TagList: View {
       NavigationLink(
         isActive: .constant(true), destination: {
           PhotoAssetListPage(selectedTags: selectedElements.compactMap(mappedTag))
+            .environment(\.managedObjectContext, viewContext)
         },
         label: {
           EmptyView()
