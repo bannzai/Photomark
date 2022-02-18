@@ -67,6 +67,7 @@ struct TagList: View {
       }
       .buttonStyle(.plain)
     }
+    .padding(.top, 20)
   }
 
   private var allElements: [ListElement] {
