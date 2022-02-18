@@ -36,7 +36,7 @@ struct PhotoAssetSelectGrid: View {
                 GridAssetImageGeometryReader { gridItemGeometry in
                   PhotoAssetSelectImage(
                     asset: asset,
-                    photo: photos.first(where: { asset.cloudIdentifier  == $0.phAssetCloudIdentifier }),
+                    photo: photos.first(where: { $0.phAssetIdentifier == asset.id }),
                     tags: tags,
                     maxImageLength: gridItemGeometry.size.width,
                     isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
