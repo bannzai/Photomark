@@ -6,8 +6,7 @@ extension Photo {
   static func create(context: NSManagedObjectContext, asset: Asset) throws -> Photo {
     let photo = Photo(context: context)
     photo.id = .init()
-    let cloudIdentifier = try (Photos.PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: [asset.id])[asset.id]!.get())
-    photo.phAssetCloudIdentifier = cloudIdentifier.stringValue
+    photo.phAssetCloudIdentifier = asset.cloudIdentifier
     photo.phAssetIdentifier = asset.id
     photo.createdDate = .init()
     photo.tagIDs = []
