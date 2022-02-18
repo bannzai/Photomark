@@ -39,8 +39,6 @@ extension PhotoAssetListPage {
   }
   
   func fetchFirst() {
-    print("[DEBUG] photos:", photos.count)
-    
     let phAssets = photoLibrary.fetchAssets().toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {

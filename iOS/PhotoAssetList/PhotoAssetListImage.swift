@@ -62,8 +62,6 @@ struct PhotoAssetListImage: View {
           self.error = error
         }
       }
-
-      print("[DEBUG] photo.cloudIdentifier: \(String(describing: (selectedElement?.photo.phAssetCloudIdentifier))), asset.cloudIdentifier: \(String(describing: selectedElement?.asset.cloudIdentifier))")
     }
     .handle(error: $error)
   }
