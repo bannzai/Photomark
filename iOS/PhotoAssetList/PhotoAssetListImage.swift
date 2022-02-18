@@ -27,7 +27,9 @@ struct PhotoAssetListImage: View {
     ZStack(alignment: .bottomTrailing) {
       NavigationLink(isActive: transitionToDetail) {
         if let element = selectedElement {
+          // Workaround for viewContext.save error
           PhotoDetailPage(asset: element.asset, photo: element.photo, tags: tags)
+            .environment(\.managedObjectContext, viewContext)
         }
       } label: {
         EmptyView()

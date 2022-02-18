@@ -25,9 +25,18 @@ struct PersistenceController {
 
   init(inMemory: Bool = false) {
     container = NSPersistentCloudKitContainer(name: "Photomark")
-    if inMemory {
-      container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+
+    guard let description = container.persistentStoreDescriptions.first else {
+      fatalError("it is necessary first description")
     }
+    if inMemory {
+      description.url = URL(fileURLWithPath: "/dev/null")
+    }
+    description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+    description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+
+    container.viewContext.automaticallyMergesChangesFromParent = true
+    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
         // Replace this implementation with code to handle the error appropriately.
