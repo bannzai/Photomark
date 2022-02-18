@@ -1,4 +1,5 @@
 import Foundation
+import Photos
 
 extension PhotoAssetListPage {
   var filteredAssets: [Asset] {
