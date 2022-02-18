@@ -22,34 +22,34 @@ struct PhotoAssetListGrid: View {
   }()
 
   var body: some View {
-    ZStack {
-      List {
-        ForEach(0..<sections.count) { i in
-          // FIXME: cause out of index when filtering with photo tags
-          if i <= sections.count - 1 {
-            let section = sections[i]
+    List {
+      ForEach(0..<sections.count) { i in
+        // FIXME: cause out of index when filtering with photo tags
+        if i <= sections.count - 1 {
+          let section = sections[i]
 
-            LazyVGrid(columns: gridItems(), spacing: 1) {
-              Section(header: sectionHeader(section)) {
-                ForEach(section.assets) { asset in
-                  let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })
+          LazyVGrid(columns: gridItems(), spacing: 1) {
+            Section(header: sectionHeader(section)) {
+              ForEach(section.assets) { asset in
+                let photo = photos.first(where: { $0.phAssetIdentifier == asset.id })
 
-                  GridAssetImageGeometryReader { gridItemGeometry in
-                    PhotoAssetListImage(
-                      asset: asset,
-                      photo: photo,
-                      tags: tags,
-                      maxImageLength: gridItemGeometry.size.width
-                    )
-                  }
+                GridAssetImageGeometryReader { gridItemGeometry in
+                  PhotoAssetListImage(
+                    asset: asset,
+                    photo: photo,
+                    tags: tags,
+                    maxImageLength: gridItemGeometry.size.width
+                  )
                 }
               }
             }
           }
         }
       }
-      .listStyle(.plain)
+      .listRowInsets(.init())
+      .listRowSeparator(.hidden)
     }
+    .listStyle(.plain)
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {
