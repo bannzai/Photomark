@@ -2,15 +2,19 @@ import Foundation
 import CoreData
 
 #if DEBUG
-func deleteAllCoreData(viewContext: NSManagedObjectContext) {
-  let photos: [Photo] = try! viewContext.fetch(.init(entityName: "Photo"))
-  for photo in photos {
-    viewContext.delete(photo)
-  }
+func deleteAllCoreData() {
+  let viewContext = PersistenceController.shared.container.viewContext
 
-  let tags: [Tag] = try! viewContext.fetch(.init(entityName: "Tag"))
-  for tag in tags {
-    viewContext.delete(tag)
-  }
+  let photosDeleteRequest = NSBatchDeleteRequest(fetchRequest: .init(entityName: "Photo"))
+  try! PersistenceController
+    .shared
+    .container
+    .persistentStoreCoordinator.execute(photosDeleteRequest, with: viewContext)
+
+  let tagsDeleteRequest = NSBatchDeleteRequest(fetchRequest: .init(entityName: "Tag"))
+  try! PersistenceController
+    .shared
+    .container
+    .persistentStoreCoordinator.execute(tagsDeleteRequest, with: viewContext)
 }
 #endif
