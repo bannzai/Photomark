@@ -13,10 +13,13 @@ final class Asset: CustomStringConvertible, Identifiable, Hashable {
 
   func asyncSetCloudIdentifier() {
     DispatchQueue.global().async {
-      let cloudIdentifier = try? Photos.PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: [self.asset.localIdentifier])[self.asset.localIdentifier]?.get().stringValue
-
-      DispatchQueue.main.async {
+      do {
+        let cloudIdentifier = try Photos.PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: [self.asset.localIdentifier])[self.asset.localIdentifier]?.get().stringValue
         self.cloudIdentifier = cloudIdentifier
+        print("[DEBUG] cloudIdentifier: \(cloudIdentifier)")
+      } catch {
+        print("[DEBUG] error: \(error)")
+        self.asyncSetCloudIdentifier()
       }
     }
   }
