@@ -46,7 +46,7 @@ struct ApplyTagPage: View {
           do {
             try targetAssets.forEach { asset in
               let photo: Photo
-              if let _photo = photos.first(where: { $0.phAssetIdentifier == asset.id }) {
+              if let _photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier }) {
                 photo = _photo
               } else {
                 photo = try .createAndSave(context: viewContext, asset: asset)
