@@ -5,7 +5,10 @@ struct Asset: CustomStringConvertible, Identifiable, Hashable {
   var id: String { asset.localIdentifier }
   var cloudIdentifier: String? {
     get {
-      try? Photos.PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: [asset.localIdentifier])[asset.localIdentifier]?.get().stringValue
+      print("[DEBUG] begin: ", Date().timeIntervalSince1970)
+      let id = try? Photos.PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: [asset.localIdentifier])[asset.localIdentifier]?.get().stringValue
+      print("[DEBUG] end: ", Date().timeIntervalSince1970)
+      return id
     }
   }
 
