@@ -32,7 +32,7 @@ extension PhotoAssetListPage {
       }
 
       return assets.filter { asset in
-        filteredPhotos.contains { tuple in tuple.photo.phAssetIdentifier == asset.id }
+        filteredPhotos.contains { tuple in asset.cloudIdentifier == tuple.photo.phAssetCloudIdentifier }
       }
     }
   }
