@@ -28,7 +28,7 @@ extension Tag {
 
     let tag = Tag(context: context)
     tag.id = .init()
-    tag.name = name.trimmed
+    tag.name = name
     tag.createdDate = .init()
     return tag
   }
