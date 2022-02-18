@@ -49,9 +49,11 @@ struct PhotoAssetListImage: View {
     .frame(width: maxImageLength, height: maxImageLength)
     .onTapGesture {
       if let photo = photo {
+        print("[DEBUG] 1 photo.cloudIdentifier: \(String(describing: (photo.phAssetCloudIdentifier))), asset.cloudIdentifier: \(String(describing: asset.cloudIdentifier))")
         selectedElement = .init(photo: photo, asset: asset)
       } else {
         do {
+          print("[DEBUG] 2 photo.cloudIdentifier: \(String(describing: (photo?.phAssetCloudIdentifier))), asset.cloudIdentifier: \(String(describing: asset.cloudIdentifier))")
           selectedElement = .init(
             photo: try Photo.createAndSave(context: viewContext, asset: asset),
             asset: asset
@@ -60,6 +62,7 @@ struct PhotoAssetListImage: View {
           self.error = error
         }
       }
+
     }
     .handle(error: $error)
   }
