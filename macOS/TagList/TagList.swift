@@ -7,7 +7,7 @@ struct TagList: View {
     animation: .default)
   var tags: FetchedResults<Tag>
 
-  @State var selectedElements: Set<ListElement> = [.all]
+  @State var selectedElement: ListElement = .all
 
   enum ListElement: Identifiable, Hashable {
     case all
@@ -38,7 +38,7 @@ struct TagList: View {
     ZStack {
       NavigationLink(
         isActive: .constant(true), destination: {
-          PhotoAssetListPage(selectedTags: selectedElements.compactMap(mappedTag))
+          PhotoAssetListPage(selectedTags: [mappedTag(selectedElement)].compactMap { $0 })
             .environment(\.managedObjectContext, viewContext)
         },
         label: {
@@ -47,19 +47,19 @@ struct TagList: View {
       )
 
 
-      List(allElements, id: \.self, selection: $selectedElements) { tag in
+      List(allElements, id: \.self) { tag in
         Button {
           if tag == .all {
-            selectedElements = [.all]
+            selectedElement = .all
           } else {
-            if let allIndex = selectedElements.firstIndex(of: .all) {
-              selectedElements.remove(at: allIndex)
+            if selectedElement == .all {
+              selectedElement = .all
             }
 
-            if let index = selectedElements.firstIndex(of: tag) {
-              selectedElements.remove(at: index)
+            if selectedElement == tag {
+              selectedElement = .all
             } else {
-              selectedElements.insert(tag)
+              selectedElement = tag
             }
           }
         } label: {
