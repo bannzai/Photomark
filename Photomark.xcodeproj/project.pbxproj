@@ -28,7 +28,6 @@
 		2026C52427A28BFD00310E9F /* AssetSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C52327A28BFD00310E9F /* AssetSection.swift */; };
 		20363DF727BE8A6B00069EDF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20363DF627BE8A6B00069EDF /* CloudKit.framework */; };
 		20363DF927BE8A8300069EDF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20363DF827BE8A8300069EDF /* CloudKit.framework */; };
-		204A578E27C19C5B00476762 /* ListHighlightButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204A578C27C19BF900476762 /* ListHighlightButtonStyle.swift */; };
 		2059463D279D335800F5726C /* AlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059463C279D335800F5726C /* AlertError.swift */; };
 		2059463E279D335800F5726C /* AlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059463C279D335800F5726C /* AlertError.swift */; };
 		20594640279D35E100F5726C /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059463F279D35E100F5726C /* Tag+Extension.swift */; };
@@ -110,7 +109,6 @@
 		20363DF627BE8A6B00069EDF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		20363DF827BE8A8300069EDF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		20363DFA27BF169200069EDF /* Photomark--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Photomark--iOS--Info.plist"; sourceTree = "<group>"; };
-		204A578C27C19BF900476762 /* ListHighlightButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHighlightButtonStyle.swift; sourceTree = "<group>"; };
 		2059463C279D335800F5726C /* AlertError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertError.swift; sourceTree = "<group>"; };
 		2059463F279D35E100F5726C /* Tag+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Extension.swift"; sourceTree = "<group>"; };
 		2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAssetImage.swift; sourceTree = "<group>"; };
@@ -262,14 +260,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		204A578B27C19BEF00476762 /* Modifier */ = {
-			isa = PBXGroup;
-			children = (
-				204A578C27C19BF900476762 /* ListHighlightButtonStyle.swift */,
-			);
-			path = Modifier;
-			sourceTree = "<group>";
-		};
 		20594652279D85E700F5726C /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,7 +389,6 @@
 		2086F763279AD67600BBA8D4 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				204A578B27C19BEF00476762 /* Modifier */,
 				2025C45F27BC4EC600F2237A /* TagList */,
 				200DC18127BA75F70060A555 /* PhotoAssetList */,
 				20A2051E27B7F0E80058AA0C /* EntryView */,
@@ -661,7 +650,6 @@
 				20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */,
 				2086F768279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */,
 				20A2052027B7F0ED0058AA0C /* EntryView.swift in Sources */,
-				204A578E27C19C5B00476762 /* ListHighlightButtonStyle.swift in Sources */,
 				2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */,
 				2086F789279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */,
 				207327DE27B47AFB004024A8 /* Image+.swift in Sources */,
