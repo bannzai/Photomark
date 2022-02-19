@@ -42,11 +42,19 @@ private extension Data {
     return NSBitmapImageRep(data: self)
   }
 }
-func saveImageToPhotoLibrary(image: UIImage) throws{
-  guard let picturesDirectory = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask).first, let pngData = image.tiffRepresentation?.bitmap?.png else {
-    return
+
+enum SaveImageToPhotoLibraryError: Error {
+  case pictureDirectoryNotfound
+  case cannotConvertToPNG
+}
+func saveImageToPhotoLibrary(image: UIImage) throws {
+  guard let picturesDirectory = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask).first else {
+    throw SaveImageToPhotoLibraryError.pictureDirectoryNotfound
+  }
+  guard let pngData = image.tiffRepresentation?.bitmap?.png else {
+    throw SaveImageToPhotoLibraryError.cannotConvertToPNG
   }
   let imageUrl = picturesDirectory.appendingPathComponent("image.png", isDirectory: false)
-  try? pngData.write(to: imageUrl)
+  try pngData.write(to: imageUrl)
 }
 #endif
