@@ -65,8 +65,9 @@ struct TagList: View {
         } label: {
           Text(tag.name)
         }
+        .buttonStyle(.plain)
+        .tag(tag.id)
       }
-      .buttonStyle(.plain)
     }
     .padding(.top, 20)
   }
