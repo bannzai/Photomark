@@ -7,18 +7,80 @@ struct TagList: View {
     animation: .default)
   var tags: FetchedResults<Tag>
 
-  @State var selectedElement: Tag?
+  @State var selectedElement: ListElement = .all
 
-  var body: some View {
-    List(selection: $selectedElement) {
-      ForEach(tags) { tag in
-        NavigationLink(tag.name!) {
-          PhotoAssetListPage(selectedTags: [tag])
-            .environment(\.managedObjectContext, viewContext)
-        }
-        .tag(tag.id!)
+  enum ListElement: Identifiable, Hashable {
+    case all
+    case tag(Tag)
+
+    static let allUUID = UUID()
+
+    var name: String {
+      switch self {
+      case .all:
+          return "すべての写真"
+      case let .tag(tag):
+        return tag.name!
       }
     }
+
+    var id: UUID {
+      switch self {
+      case .all:
+        return ListElement.allUUID
+      case let .tag(tag):
+        return tag.id!
+      }
+    }
+  }
+
+  var body: some View {
+    ZStack {
+      NavigationLink(
+        isActive: .constant(true), destination: {
+          PhotoAssetListPage(selectedTags: [mappedTag(selectedElement)].compactMap { $0 })
+            .environment(\.managedObjectContext, viewContext)
+        },
+        label: {
+          EmptyView()
+        }
+      )
+
+
+      List(allElements, id: \.self) { tag in
+        Button {
+          if tag == .all {
+            selectedElement = .all
+          } else {
+            if selectedElement == .all {
+              selectedElement = .all
+            }
+
+            if selectedElement == tag {
+              selectedElement = .all
+            } else {
+              selectedElement = tag
+            }
+          }
+        } label: {
+          Text(tag.name)
+        }
+        .buttonStyle(.plain)
+        .tag(tag.id)
+      }
+    }
+    .padding(.top, 20)
+  }
+
+  private var allElements: [ListElement] {
+    [.all] + tags.map { .tag($0) }
+  }
+
+  private func mappedTag(_ listElement: ListElement) -> Tag? {
+    if case let .tag(tag) = listElement {
+      return tag
+    }
+    return nil
   }
 }
 
