@@ -7,7 +7,7 @@ struct TagList: View {
     animation: .default)
   var tags: FetchedResults<Tag>
 
-  @State var selectedElement: ListElement = .all
+  @State var selectedElement: ListElement? = .all
 
   enum ListElement: Identifiable, Hashable {
     case all
@@ -46,27 +46,9 @@ struct TagList: View {
         }
       )
 
-
-      List(allElements, id: \.self) { tag in
-        Button {
-          if tag == .all {
-            selectedElement = .all
-          } else {
-            if selectedElement == .all {
-              selectedElement = .all
-            }
-
-            if selectedElement == tag {
-              selectedElement = .all
-            } else {
-              selectedElement = tag
-            }
-          }
-        } label: {
-          Text(tag.name)
-        }
-        .buttonStyle(.plain)
-        .tag(tag.id)
+      List(allElements, id: \.self, selection: $selectedElement) { tag in
+        Text(tag.name)
+          .tag(tag.id)
       }
     }
     .padding(.top, 20)
@@ -76,7 +58,7 @@ struct TagList: View {
     [.all] + tags.map { .tag($0) }
   }
 
-  private func mappedTag(_ listElement: ListElement) -> Tag? {
+  private func mappedTag(_ listElement: ListElement?) -> Tag? {
     if case let .tag(tag) = listElement {
       return tag
     }
