@@ -58,13 +58,13 @@ struct PhotoLibrary {
   func imageStream(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic) -> AsyncStream<UIImage?> {
     // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
     AsyncStream { continuation in
-      fetchImage(for: asset, maxImageLength: maxImageLength, deliveryMode: deliveryMode) { image in
+      imageStream(for: asset, maxImageLength: maxImageLength, deliveryMode: deliveryMode) { image in
         continuation.yield(image)
       }
     }
   }
 
-  func fetchImage(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic, callback: @escaping (UIImage?) -> Void) {
+  func imageStream(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic, callback: @escaping (UIImage?) -> Void) {
     let targetSize: CGSize
     if let maxImageLength = maxImageLength {
       targetSize = .init(width: maxImageLength, height: maxImageLength)
