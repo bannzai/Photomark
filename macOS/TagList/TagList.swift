@@ -65,8 +65,8 @@ struct TagList: View {
         } label: {
           Text(tag.name)
         }
-        .buttonStyle(.plain)
         .tag(tag.id)
+        .listHighlightButtonStyle(isSelected: selectedElement == tag)
       }
     }
     .padding(.top, 20)
