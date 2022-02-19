@@ -16,6 +16,5 @@ func gridItems() -> [GridItem] {
     .init(.flexible(), spacing: 1),
     .init(.flexible(), spacing: 1),
   ]
-}
 #endif
 }
