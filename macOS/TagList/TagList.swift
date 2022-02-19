@@ -35,50 +35,41 @@ struct TagList: View {
   }
 
   var body: some View {
-    GeometryReader { geometry in
-      let width = geometry.size.width
-
-      ZStack {
-        NavigationLink(
-          isActive: .constant(true), destination: {
-            PhotoAssetListPage(selectedTags: selectedElements.compactMap(mappedTag))
-              .environment(\.managedObjectContext, viewContext)
-          },
-          label: {
-            EmptyView()
-          }
-        )
-
-
-        List(allElements, id: \.self, selection: $selectedElements) { tag in
-          Button {
-            if tag == .all {
-              selectedElements = [.all]
-            } else {
-              if let allIndex = selectedElements.firstIndex(of: .all) {
-                selectedElements.remove(at: allIndex)
-              }
-
-              if let index = selectedElements.firstIndex(of: tag) {
-                selectedElements.remove(at: index)
-              } else {
-                selectedElements.insert(tag)
-              }
-            }
-          } label: {
-            Text(tag.name)
-              .frame(width: width)
-              .border(Color.red)
-              .onAppear {
-                print("[DEBUG] width: ", width)
-              }
-          }
-          .buttonStyle(.plain)
-          .tag(tag.id)
+    ZStack {
+      NavigationLink(
+        isActive: .constant(true), destination: {
+          PhotoAssetListPage(selectedTags: selectedElements.compactMap(mappedTag))
+            .environment(\.managedObjectContext, viewContext)
+        },
+        label: {
+          EmptyView()
         }
+      )
+
+
+      List(allElements, id: \.self, selection: $selectedElements) { tag in
+        Button {
+          if tag == .all {
+            selectedElements = [.all]
+          } else {
+            if let allIndex = selectedElements.firstIndex(of: .all) {
+              selectedElements.remove(at: allIndex)
+            }
+
+            if let index = selectedElements.firstIndex(of: tag) {
+              selectedElements.remove(at: index)
+            } else {
+              selectedElements.insert(tag)
+            }
+          }
+        } label: {
+          Text(tag.name)
+        }
+        .buttonStyle(.plain)
+        .tag(tag.id)
       }
-      .padding(.top, 20)
     }
+    .padding(.top, 20)
   }
 
   private var allElements: [ListElement] {
