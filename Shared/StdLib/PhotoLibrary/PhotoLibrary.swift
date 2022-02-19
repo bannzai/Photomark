@@ -74,6 +74,9 @@ struct PhotoLibrary {
 
     let options = PHImageRequestOptions()
     options.deliveryMode = deliveryMode
+    // NOTE: `Photomark` should await thread until completed `requestImage` when deliveryMode is highQualityFormat
+    // This case probably only save data, showing detail image on page.
+    options.isSynchronous = deliveryMode == .highQualityFormat
 
     // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
     PHImageManager.default().requestImage(for: asset.asset, targetSize: targetSize, contentMode: .default, options: options) { image, info in
