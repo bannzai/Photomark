@@ -1,19 +1,30 @@
 import SwiftUI
 
 struct PhotoAssetListTagAddButton: View {
-  @Environment(\.photoLibrary) var photoLibrary
+  @Environment(\.photoLibrary) private var photoLibrary
+  @Environment(\.managedObjectContext) private var viewContext
 
   let asset: Asset
-  @StateObject var photo: Photo
+  var photo: Photo?
 
-  @State var isTagAddPresented = false
+  @State var photoState: Photo?
+  @State var error: Error?
 
   var body: some View {
     Button(action: {
-      isTagAddPresented = true
+      if let photo = photo {
+        photoState = photo
+      } else {
+        do {
+          photoState = try Photo.createAndSave(context: viewContext, asset: asset)
+        } catch {
+          self.error = error
+        }
+      }
     }) {
       Image(systemName: "plus")
     }
+    .handle(error: $error)
   }
 }
 
