@@ -35,8 +35,10 @@ struct PhotoAssetListImage: View {
         Image(systemName: "photo")
       }
 
-      AssetCopyButton(asset: asset)
-        .frame(width: 32, height: 32)
+      HStack {
+        AssetCopyButton(asset: asset)
+          .frame(width: 32, height: 32)
+      }
     }
     .frame(width: maxImageLength, height: maxImageLength)
     .sheet(isPresented: transitionToDetail, onDismiss: nil, content: {
