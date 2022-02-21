@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PhotoAssetListTagAddButton: View {
+struct PhotoAssetListAddTagButton: View {
   @Environment(\.photoLibrary) private var photoLibrary
   @Environment(\.managedObjectContext) private var viewContext
 
