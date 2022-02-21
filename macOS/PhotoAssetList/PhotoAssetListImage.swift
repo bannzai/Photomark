@@ -36,6 +36,7 @@ struct PhotoAssetListImage: View {
       }
 
       HStack {
+        PhotoAssetListTagAddButton(asset: asset, photo: photo)
         AssetCopyButton(asset: asset)
           .frame(width: 32, height: 32)
       }
