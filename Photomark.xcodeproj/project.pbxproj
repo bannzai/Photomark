@@ -51,7 +51,6 @@
 		207327E027B47B9A004024A8 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
 		207327E127B47BA5004024A8 /* Photo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACF279CB4F9006B135B /* Photo+Extension.swift */; };
 		207327E627B497F9004024A8 /* ApplyTagPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327E527B497F9004024A8 /* ApplyTagPage.swift */; };
-		207327EA27B4985D004024A8 /* PhotoDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327E927B4985D004024A8 /* PhotoDetailPage.swift */; };
 		2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F766279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
 		2086F767279AD67600BBA8D4 /* PhotomarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */; };
@@ -122,7 +121,6 @@
 		207327DA27B4641F004024A8 /* PasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteBoard.swift; sourceTree = "<group>"; };
 		207327DD27B47AFB004024A8 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		207327E527B497F9004024A8 /* ApplyTagPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyTagPage.swift; sourceTree = "<group>"; };
-		207327E927B4985D004024A8 /* PhotoDetailPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailPage.swift; sourceTree = "<group>"; };
 		2086F753279AD67600BBA8D4 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		2086F754279AD67600BBA8D4 /* PhotomarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomarkApp.swift; sourceTree = "<group>"; };
 		2086F755279AD67600BBA8D4 /* PhotoAssetListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetListPage.swift; sourceTree = "<group>"; };
@@ -340,14 +338,6 @@
 			path = ApplyTag;
 			sourceTree = "<group>";
 		};
-		207327E727B49847004024A8 /* PhotoDetail */ = {
-			isa = PBXGroup;
-			children = (
-				207327E927B4985D004024A8 /* PhotoDetailPage.swift */,
-			);
-			path = PhotoDetail;
-			sourceTree = "<group>";
-		};
 		207327E827B4984C004024A8 /* PhotoDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,7 +391,6 @@
 				2025C45F27BC4EC600F2237A /* TagList */,
 				200DC18127BA75F70060A555 /* PhotoAssetList */,
 				20A2051E27B7F0E80058AA0C /* EntryView */,
-				207327E727B49847004024A8 /* PhotoDetail */,
 				207327E427B497F9004024A8 /* ApplyTag */,
 				207327D627B3FF6A004024A8 /* Activity */,
 				2086F764279AD67600BBA8D4 /* macOS.entitlements */,
@@ -665,7 +654,6 @@
 				207327DE27B47AFB004024A8 /* Image+.swift in Sources */,
 				205E750E27B60CBD0050EE3D /* OpenSetting.swift in Sources */,
 				2026C51627A2762C00310E9F /* AssetCopyButton.swift in Sources */,
-				207327EA27B4985D004024A8 /* PhotoDetailPage.swift in Sources */,
 				207327E027B47B9A004024A8 /* String+Extension.swift in Sources */,
 				200DC18A27BA75F70060A555 /* PhotoAssetListGrid.swift in Sources */,
 			);
