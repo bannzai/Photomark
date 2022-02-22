@@ -5,8 +5,10 @@ struct EntryView: View {
 
   var body: some View {
     NavigationView {
-      TagList()
-        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+      HSplitView {
+        TagList()
+          .environment(\.managedObjectContext, persistenceController.container.viewContext)
+      }
     }
   }
 }
