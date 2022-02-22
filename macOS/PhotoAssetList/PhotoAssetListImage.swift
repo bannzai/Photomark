@@ -15,14 +15,6 @@ struct PhotoAssetListImage: View {
   @State var selectedElement: SelectedElement?
   @State var error: Error?
 
-  private var transitionToDetail: Binding<Bool>  {
-    .init {
-      selectedElement != nil
-    } set: { _ in
-      selectedElement = nil
-    }
-  }
-
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
       AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
@@ -42,12 +34,6 @@ struct PhotoAssetListImage: View {
       }
     }
     .frame(width: maxImageLength, height: maxImageLength)
-    .sheet(isPresented: transitionToDetail, onDismiss: nil, content: {
-      if let element = selectedElement {
-        PhotoDetailPage(asset: element.asset, photo: element.photo, tags: tags)
-          .environment(\.managedObjectContext, viewContext)
-      }
-    })
     .onTapGesture {
       if let photo = photo {
         selectedElement = .init(photo: photo, asset: asset)
