@@ -7,24 +7,16 @@ struct PhotoAssetListAddTagButton: View {
   let asset: Asset
   var photo: Photo?
 
-  @State var photoState: Photo?
-  @State var error: Error?
+  @State var showsApplyTagPage = false
 
   var body: some View {
-    Button(action: {
-      if let photo = photo {
-        photoState = photo
-      } else {
-        do {
-          photoState = try Photo.createAndSave(context: viewContext, asset: asset)
-        } catch {
-          self.error = error
-        }
+    NavigationLink {
+      ApplyTagPage(targetAssets: [asset]) {
+        // NONE
       }
-    }) {
+    } label: {
       Image(systemName: "plus")
     }
-    .handle(error: $error)
   }
 }
 
