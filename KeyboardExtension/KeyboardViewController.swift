@@ -58,6 +58,8 @@ class KeyboardViewController: UIInputViewController {
 
 struct KeyboardView: View {
 
+  let persistenceController = PersistenceController.shared
+
   let needsInputModeSwitchKey: Bool
   let nextKeyboardAction: Selector
   let inputTextAction: (String) -> Void
@@ -76,6 +78,7 @@ struct KeyboardView: View {
 
   var body: some View {
     PhotoAssetListGrid(assets: [], photos: photos.toArray(), tags: tags.toArray())
+      .environment(\.managedObjectContext, persistenceController.container.viewContext)
   }
 }
 
