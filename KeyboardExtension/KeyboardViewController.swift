@@ -6,55 +6,126 @@
 //
 
 import UIKit
+import SwiftUI
 
 class KeyboardViewController: UIInputViewController {
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-    @IBOutlet var nextKeyboardButton: UIButton!
-    
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        
-        // Add custom view sizing constraints here
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Perform custom UI setup here
-        self.nextKeyboardButton = UIButton(type: .system)
-        
-        self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
-        self.nextKeyboardButton.sizeToFit()
-        self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-        
-        self.view.addSubview(self.nextKeyboardButton)
-        
-        self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    }
-    
-    override func viewWillLayoutSubviews() {
-        self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
-        super.viewWillLayoutSubviews()
-    }
-    
-    override func textWillChange(_ textInput: UITextInput?) {
-        // The app is about to change the document's contents. Perform any preparation here.
-    }
-    
-    override func textDidChange(_ textInput: UITextInput?) {
-        // The app has just changed the document's contents, the document context has been updated.
-        
-        var textColor: UIColor
-        let proxy = self.textDocumentProxy
-        if proxy.keyboardAppearance == UIKeyboardAppearance.dark {
-            textColor = UIColor.white
-        } else {
-            textColor = UIColor.black
+    let nextKeyboardAction = #selector(self.handleInputModeList(from:with:))
+    // カスタムUIのセットアップをここで行う
+    let keyboardView = KeyboardView(needsInputModeSwitchKey: needsInputModeSwitchKey,
+                                    nextKeyboardAction: nextKeyboardAction,
+                                    inputTextAction: { [weak self] text in
+      guard let self else { return }
+      self.textDocumentProxy.insertText(text)
+
+    }, deleteTextAction: { [weak self] in
+      guard let self,
+            self.textDocumentProxy.hasText else { return }
+
+      self.textDocumentProxy.deleteBackward()
+    })
+
+    // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
+    let hostingController = UIHostingController(rootView: keyboardView)
+
+    self.addChild(hostingController)
+    self.view.addSubview(hostingController.view)
+    hostingController.didMove(toParent: self)
+
+    hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      hostingController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
+      hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+      hostingController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
+      hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    ])
+  }
+
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+  }
+
+  override func textWillChange(_ textInput: UITextInput?) {
+    // The app is about to change the document's contents. Perform any preparation here.
+  }
+
+  override func textDidChange(_ textInput: UITextInput?) {
+
+  }
+}
+
+struct KeyboardView: View {
+
+  let needsInputModeSwitchKey: Bool
+  let nextKeyboardAction: Selector
+  let inputTextAction: (String) -> Void
+  let deleteTextAction: () -> Void
+
+  private let helloWorldText = "Hello, world!"
+
+  var body: some View {
+
+    HStack {
+
+      Group {
+
+        // Next Keybaord
+        if needsInputModeSwitchKey {
+
+          NextKeyboardButton(systemName: "globe",
+                             action: nextKeyboardAction)
+          .frame(width: 44, height: 44)
         }
-        self.nextKeyboardButton.setTitleColor(textColor, for: [])
-    }
 
+        // Input Text
+        Button(helloWorldText) {
+          inputTextAction(helloWorldText)
+        }
+        .frame(height: 44)
+        .padding(.horizontal)
+
+        // Delete Text
+        Button {
+          deleteTextAction()
+        } label: {
+          Image(systemName: "xmark")
+            .frame(width: 44, height: 44)
+        }
+      }
+      .background(Color(uiColor: .systemBackground))
+      .clipShape(RoundedRectangle(cornerRadius: 8))
+      .shadow(radius: 8)
+    }
+    .foregroundColor(Color(uiColor: .label))
+    .frame(height: 160)
+  }
+}
+
+struct NextKeyboardButton: View {
+  let systemName: String
+  let action: Selector
+
+  var body: some View {
+    Image(systemName: systemName)
+      .overlay {
+        NextKeyboardButtonOverlay(action: action)
+      }
+  }
+}
+
+struct NextKeyboardButtonOverlay: UIViewRepresentable {
+  let action: Selector
+
+  func makeUIView(context: Context) -> UIButton {
+    // UIButtonを生成し、セレクターをactionに設定
+    let button = UIButton()
+    button.addTarget(nil,
+                     action: action,
+                     for: .allTouchEvents)
+    return button
+  }
+
+  func updateUIView(_ button: UIButton, context: Context) {}
 }
