@@ -83,9 +83,35 @@
 		20A2052027B7F0ED0058AA0C /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2051F27B7F0ED0058AA0C /* EntryView.swift */; };
 		20A2052827B7F3E60058AA0C /* PhotoLibraryAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */; };
 		20A2052927B7F4830058AA0C /* PhotoLibraryAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */; };
+		20D658C12AA0260100298589 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D658C02AA0260100298589 /* KeyboardViewController.swift */; };
+		20D658C52AA0260100298589 /* KeyboardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 20D658BE2AA0260100298589 /* KeyboardExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		20ED928827C044AD0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 		20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20D658C32AA0260100298589 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2086F74D279AD67600BBA8D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20D658BD2AA0260100298589;
+			remoteInfo = KeyboardExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		20D658C92AA0260100298589 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				20D658C52AA0260100298589 /* KeyboardExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		200672D1279D018500BA9C48 /* PhotoAssetListImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetListImage.swift; sourceTree = "<group>"; };
@@ -143,6 +169,9 @@
 		20A2051B27B7F0B40058AA0C /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		20A2051F27B7F0ED0058AA0C /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAuthorization.swift; sourceTree = "<group>"; };
+		20D658BE2AA0260100298589 /* KeyboardExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		20D658C02AA0260100298589 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		20D658C22AA0260100298589 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAllCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +189,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				20363DF727BE8A6B00069EDF /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20D658BB2AA0260100298589 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +389,7 @@
 				207327C927B3F870004024A8 /* Shared */,
 				2086F751279AD67600BBA8D4 /* iOS */,
 				2086F763279AD67600BBA8D4 /* macOS */,
+				20D658BF2AA0260100298589 /* KeyboardExtension */,
 				2086F75D279AD67600BBA8D4 /* Products */,
 				20363DF527BE8A6B00069EDF /* Frameworks */,
 			);
@@ -382,6 +419,7 @@
 			children = (
 				2086F75C279AD67600BBA8D4 /* Photomark.app */,
 				2086F762279AD67600BBA8D4 /* Photomark.app */,
+				20D658BE2AA0260100298589 /* KeyboardExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -471,6 +509,15 @@
 			path = Modifier;
 			sourceTree = "<group>";
 		};
+		20D658BF2AA0260100298589 /* KeyboardExtension */ = {
+			isa = PBXGroup;
+			children = (
+				20D658C02AA0260100298589 /* KeyboardViewController.swift */,
+				20D658C22AA0260100298589 /* Info.plist */,
+			);
+			path = KeyboardExtension;
+			sourceTree = "<group>";
+		};
 		20ED928627C044A60033D328 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -489,10 +536,12 @@
 				2086F758279AD67600BBA8D4 /* Sources */,
 				2086F759279AD67600BBA8D4 /* Frameworks */,
 				2086F75A279AD67600BBA8D4 /* Resources */,
+				20D658C92AA0260100298589 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				20D658C42AA0260100298589 /* PBXTargetDependency */,
 			);
 			name = "Photomark (iOS)";
 			productName = "Photomark (iOS)";
@@ -516,6 +565,23 @@
 			productReference = 2086F762279AD67600BBA8D4 /* Photomark.app */;
 			productType = "com.apple.product-type.application";
 		};
+		20D658BD2AA0260100298589 /* KeyboardExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20D658C62AA0260100298589 /* Build configuration list for PBXNativeTarget "KeyboardExtension" */;
+			buildPhases = (
+				20D658BA2AA0260100298589 /* Sources */,
+				20D658BB2AA0260100298589 /* Frameworks */,
+				20D658BC2AA0260100298589 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeyboardExtension;
+			productName = KeyboardExtension;
+			productReference = 20D658BE2AA0260100298589 /* KeyboardExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -523,7 +589,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1310;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					2086F75B279AD67600BBA8D4 = {
@@ -531,6 +597,9 @@
 					};
 					2086F761279AD67600BBA8D4 = {
 						CreatedOnToolsVersion = 13.1;
+					};
+					20D658BD2AA0260100298589 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
@@ -549,6 +618,7 @@
 			targets = (
 				2086F75B279AD67600BBA8D4 /* Photomark (iOS) */,
 				2086F761279AD67600BBA8D4 /* Photomark (macOS) */,
+				20D658BD2AA0260100298589 /* KeyboardExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -567,6 +637,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2086F76E279AD67600BBA8D4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20D658BC2AA0260100298589 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +738,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20D658BA2AA0260100298589 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20D658C12AA0260100298589 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		20D658C42AA0260100298589 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20D658BD2AA0260100298589 /* KeyboardExtension */;
+			targetProxy = 20D658C32AA0260100298589 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2086F76F279AD67600BBA8D4 /* Debug */ = {
@@ -782,6 +875,7 @@
 		2086F772279AD67600BBA8D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "iOS/Photomark (iOS).entitlements";
@@ -815,6 +909,7 @@
 		2086F773279AD67600BBA8D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "iOS/Photomark (iOS).entitlements";
@@ -902,6 +997,63 @@
 			};
 			name = Release;
 		};
+		20D658C72AA0260100298589 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TQPN82UBBY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KeyboardExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KeyboardExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bannzai.Photomark.KeyboardExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		20D658C82AA0260100298589 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TQPN82UBBY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KeyboardExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KeyboardExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bannzai.Photomark.KeyboardExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -928,6 +1080,15 @@
 			buildConfigurations = (
 				2086F775279AD67600BBA8D4 /* Debug */,
 				2086F776279AD67600BBA8D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20D658C62AA0260100298589 /* Build configuration list for PBXNativeTarget "KeyboardExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20D658C72AA0260100298589 /* Debug */,
+				20D658C82AA0260100298589 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
