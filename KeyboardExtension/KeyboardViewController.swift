@@ -32,7 +32,7 @@ class KeyboardViewController: UIInputViewController {
   }
 
   func setup(assets: [Asset]) {
-    let keyboardView = KeyboardView(assets: assets, selector: #selector(xxCopy(sender:)))
+    let keyboardView = KeyboardView(assets: assets, selector: #selector(self.xxCopy(sender:)))
 
     // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
     let hostingController = UIHostingController(
@@ -106,9 +106,9 @@ struct KeyboardView: View {
   let selector: Selector
 
   var body: some View {
-    PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray(), selector: selector)
+    NextKeyboardButton(systemName: "doc.on.doc", action: selector)
+      .frame(width: 100, height: 100)
   }
-
 }
 
 struct NextKeyboardButton: View {
@@ -128,8 +128,7 @@ struct NextKeyboardButtonOverlay: UIViewRepresentable {
 
   func makeUIView(context: Context) -> UIButton {
     // UIButtonを生成し、セレクターをactionに設定
-    let button = UIButton(type: .custom)
-    button.frame = .init(origin: .zero, size: .init(width: 100, height: 100))
+    let button = UIButton()
     button.addTarget(nil,
                      action: action,
                      for: .allTouchEvents)
@@ -156,24 +155,16 @@ struct PhotoAssetListGrid: View {
   }()
 
   var body: some View {
-    ScrollView(.vertical) {
-      ForEach(assets) { asset in
-        let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+    let asset = assets[0]
+    let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
 
-        GridAssetImageGeometryReader { gridItemGeometry in
-          PhotoAssetListImage(
-            asset: asset,
-            photo: photo,
-            tags: tags,
-            maxImageLength: gridItemGeometry.size.width,
-            selector: selector
-          )
-        }
-      }
-      .listRowInsets(.init())
-      .listRowSeparator(.hidden)
-    }
-    .listStyle(.plain)
+    PhotoAssetListImage(
+      asset: asset,
+      photo: photo,
+      tags: tags,
+      maxImageLength: 100,
+      selector: selector
+    )
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {
@@ -214,20 +205,10 @@ struct PhotoAssetListImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
-        image
-          .resizable()
-          .scaledToFill()
-          .frame(width: maxImageLength, height: maxImageLength)
-          .clipped()
-      } placeholder: {
-        Image(systemName: "photo")
-      }
-
       NextKeyboardButton(systemName: "doc.on.doc", action: selector)
         .frame(width: 100, height: 100)
     }
-    .frame(width: maxImageLength, height: maxImageLength)
+    .frame(width: 100, height: 100)
     .handle(error: $error)
   }
 }
