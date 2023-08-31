@@ -65,41 +65,17 @@ struct KeyboardView: View {
 
   private let helloWorldText = "Hello, world!"
 
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
+    animation: .default)
+  var photos: FetchedResults<Photo>
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
+    animation: .default)
+  var tags: FetchedResults<Tag>
+
   var body: some View {
-
-    HStack {
-
-      Group {
-
-        // Next Keybaord
-        if needsInputModeSwitchKey {
-
-          NextKeyboardButton(systemName: "globe",
-                             action: nextKeyboardAction)
-          .frame(width: 44, height: 44)
-        }
-
-        // Input Text
-        Button(helloWorldText) {
-          inputTextAction(helloWorldText)
-        }
-        .frame(height: 44)
-        .padding(.horizontal)
-
-        // Delete Text
-        Button {
-          deleteTextAction()
-        } label: {
-          Image(systemName: "xmark")
-            .frame(width: 44, height: 44)
-        }
-      }
-      .background(Color(uiColor: .systemBackground))
-      .clipShape(RoundedRectangle(cornerRadius: 8))
-      .shadow(radius: 8)
-    }
-    .foregroundColor(Color(uiColor: .label))
-    .frame(height: 160)
+    PhotoAssetListGrid(assets: [], photos: photos.toArray(), tags: tags.toArray())
   }
 }
 
@@ -128,4 +104,126 @@ struct NextKeyboardButtonOverlay: UIViewRepresentable {
   }
 
   func updateUIView(_ button: UIButton, context: Context) {}
+}
+
+
+struct PhotoAssetListGrid: View {
+  @Environment(\.managedObjectContext) private var viewContext
+
+  let assets: [Asset]
+  let photos: [Photo]
+  let tags: [Tag]
+  let sections: [AssetSection]
+  init(assets: [Asset], photos: [Photo], tags: [Tag]) {
+    self.assets = assets
+    self.photos = photos
+    self.tags = tags
+    self.sections = createSections(assets: assets, photos: photos, tags: tags)
+  }
+
+  let sectionHeaderFomatter: DateIntervalFormatter = {
+    let formatter = DateIntervalFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+    return formatter
+  }()
+
+  var body: some View {
+    List {
+      ForEach(0..<sections.count) { i in
+        // FIXME: cause out of index when filtering with photo tags
+        if i <= sections.count - 1 {
+          let section = sections[i]
+
+          LazyVGrid(columns: gridItems(), spacing: 1) {
+            Section(header: sectionHeader(section)) {
+              ForEach(section.assets) { asset in
+                let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+
+                GridAssetImageGeometryReader { gridItemGeometry in
+                  PhotoAssetListImage(
+                    asset: asset,
+                    photo: photo,
+                    tags: tags,
+                    maxImageLength: gridItemGeometry.size.width
+                  )
+                }
+              }
+            }
+          }
+        }
+      }
+      .listRowInsets(.init())
+      .listRowSeparator(.hidden)
+    }
+    .listStyle(.plain)
+  }
+
+  private func sectionHeader(_ section: AssetSection) -> some View {
+    HStack {
+      Text(section.interval, formatter: sectionHeaderFomatter)
+        .font(.system(size: 16))
+        .bold()
+      Spacer()
+    }
+    .padding(.top, 12)
+    .padding(.bottom, 8)
+  }
+}
+
+struct PhotoAssetListImage: View {
+  @Environment(\.managedObjectContext) private var viewContext
+
+  let asset: Asset
+  let photo: Photo?
+  let tags: [Tag]
+  let maxImageLength: CGFloat
+
+  struct SelectedElement: Hashable {
+    let photo: Photo
+    let asset: Asset
+  }
+  @State var selectedElement: SelectedElement?
+  @State var error: Error?
+
+  private var transitionToDetail: Binding<Bool>  {
+    .init {
+      selectedElement != nil
+    } set: { _ in
+      selectedElement = nil
+    }
+  }
+
+  var body: some View {
+    ZStack(alignment: .bottomTrailing) {
+      AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
+        image
+          .resizable()
+          .scaledToFill()
+          .frame(width: maxImageLength, height: maxImageLength)
+          .clipped()
+      } placeholder: {
+        Image(systemName: "photo")
+      }
+
+      AssetCopyButton(asset: asset)
+        .frame(width: 32, height: 32)
+    }
+    .frame(width: maxImageLength, height: maxImageLength)
+    .onTapGesture {
+      if let photo = photo {
+        selectedElement = .init(photo: photo, asset: asset)
+      } else {
+        do {
+          selectedElement = .init(
+            photo: try Photo.createAndSave(context: viewContext, asset: asset),
+            asset: asset
+          )
+        } catch {
+          self.error = error
+        }
+      }
+    }
+    .handle(error: $error)
+  }
 }
