@@ -76,17 +76,13 @@ struct PhotoLibrary {
     options.deliveryMode = deliveryMode
 
     // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
-    if let asset = asset.asset {
-      PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: .default, options: options) { image, info in
-        if let maxImageLength = maxImageLength {
-          // SwiftUI.Image to display an image retrieved from PHAsset, since .clipped will cause the tap area to be wrong.
-          callback(cropToBounds(image: image, width: maxImageLength, height: maxImageLength))
-        } else {
-          callback(image)
-        }
+    PHImageManager.default().requestImage(for: asset.asset, targetSize: targetSize, contentMode: .default, options: options) { image, info in
+      if let maxImageLength = maxImageLength {
+        // SwiftUI.Image to display an image retrieved from PHAsset, since .clipped will cause the tap area to be wrong.
+        callback(cropToBounds(image: image, width: maxImageLength, height: maxImageLength))
+      } else {
+        callback(image)
       }
-    } else {
-      callback(nil)
     }
   }
 

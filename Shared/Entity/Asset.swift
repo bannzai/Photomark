@@ -1,17 +1,18 @@
 import Foundation
 import Photos
 
-struct Asset: Identifiable, Hashable {
-  let id: String
-  var localIdentifier: String { id }
-  let cloudIdentifier: String?
+struct Asset: CustomStringConvertible, Identifiable, Hashable {
+  var id: String { asset.localIdentifier }
 
-  init(phAsset: PHAsset, cloudIdentifier: String?) {
-    self.id = phAsset.localIdentifier
+  let asset: PHAsset
+  let cloudIdentifier: String
+
+  init(phAsset: PHAsset, cloudIdentifier: String) {
+    self.asset = phAsset
     self.cloudIdentifier = cloudIdentifier
   }
 
-  var asset: PHAsset? {
-    PHAsset.fetchAssets(withLocalIdentifiers: [localIdentifier], options: nil).firstObject
+  var description: String {
+    "asset: \(asset)"
   }
 }
