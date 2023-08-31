@@ -160,15 +160,15 @@ struct PhotoAssetListGrid: View {
       ForEach(assets) { asset in
         let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
 
-        GridAssetImageGeometryReader { gridItemGeometry in
           PhotoAssetListImage(
             asset: asset,
             photo: photo,
             tags: tags,
-            maxImageLength: gridItemGeometry.size.width,
+            maxImageLength: 100,
             selector: selector
           )
-        }
+          .clipped()
+          .aspectRatio(1, contentMode: .fit)
       }
       .listRowInsets(.init())
       .listRowSeparator(.hidden)
