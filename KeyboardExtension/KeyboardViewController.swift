@@ -231,24 +231,3 @@ struct PhotoAssetListImage: View {
     .handle(error: $error)
   }
 }
-
-
-final class Copy: NSObject {
-  let asset: Asset
-  init(asset: Asset) {
-    self.asset = asset
-  }
-  @objc func xCopy() {
-    Task { @MainActor in
-      if let image = await PhotoLibraryKey.defaultValue.highQualityImage(for: asset) {
-        Pasteboard.general.image = image
-
-        // Delay for user can recognize ProgressView.
-        await Task.sleep(2 * (NSEC_PER_SEC / 10))
-      } else {
-        fatalError("image not found")
-      }
-    }
-
-  }
-}
