@@ -10,23 +10,29 @@ import SwiftUI
 import Photos
 
 class KeyboardViewController: UIInputViewController {
+  @objc func xxCopy(sender: AnyObject) {
+    let button = sender as! UIButton
+    let tag = button.tag
+    let asset = assets[tag]
+    Task { @MainActor in
+      if let image = await PhotoLibraryKey.defaultValue.highQualityImage(for: asset) {
+        Pasteboard.general.image = image
+      } else {
+        fatalError("image not found")
+      }
+    }
+  }
+
+
+  var assets: [Asset] = []
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let nextKeyboardAction = #selector(self.handleInputModeList(from:with:))
-    // カスタムUIのセットアップをここで行う
-    let keyboardView = KeyboardView(needsInputModeSwitchKey: needsInputModeSwitchKey,
-                                    nextKeyboardAction: nextKeyboardAction,
-                                    inputTextAction: { [weak self] text in
-      guard let self else { return }
-      self.textDocumentProxy.insertText(text)
+    fetchFirst()
+  }
 
-    }, deleteTextAction: { [weak self] in
-      guard let self,
-            self.textDocumentProxy.hasText else { return }
-
-      self.textDocumentProxy.deleteBackward()
-    })
+  func setup(assets: [Asset]) {
+    let keyboardView = KeyboardView(assets: assets, selector: #selector(xxCopy(sender:)))
 
     // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
     let hostingController = UIHostingController(
@@ -45,6 +51,7 @@ class KeyboardViewController: UIInputViewController {
       hostingController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
       hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
+
   }
 
   override func viewWillLayoutSubviews() {
@@ -58,36 +65,9 @@ class KeyboardViewController: UIInputViewController {
   override func textDidChange(_ textInput: UITextInput?) {
 
   }
-}
-
-struct KeyboardView: View {
-  let needsInputModeSwitchKey: Bool
-  let nextKeyboardAction: Selector
-  let inputTextAction: (String) -> Void
-  let deleteTextAction: () -> Void
-
-  @Environment(\.photoLibrary) var photoLibrary
-  private let helloWorldText = "Hello, world!"
-
-  @State var assets: [Asset] = []
-  @FetchRequest(
-    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
-    animation: .default)
-  var photos: FetchedResults<Photo>
-  @FetchRequest(
-    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
-    animation: .default)
-  var tags: FetchedResults<Tag>
-
-  var body: some View {
-    PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
-      .onAppear {
-        fetchFirst()
-      }
-  }
 
   func fetchFirst() {
-    let phAssets = photoLibrary.fetchAssets().toArray()
+    let phAssets = PhotoLibraryKey.defaultValue.fetchAssets().toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
         return l > r
@@ -104,6 +84,29 @@ struct KeyboardView: View {
       }
       return .init(phAsset: asset, cloudIdentifier: cloudIdentifier)
     }
+
+    setup(assets: assets)
+  }
+}
+
+struct KeyboardView: View {
+  @Environment(\.photoLibrary) var photoLibrary
+  private let helloWorldText = "Hello, world!"
+
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
+    animation: .default)
+  var photos: FetchedResults<Photo>
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
+    animation: .default)
+  var tags: FetchedResults<Tag>
+
+  let assets: [Asset]
+  let selector: Selector
+
+  var body: some View {
+    PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray(), selector: selector)
   }
 
 }
@@ -125,7 +128,8 @@ struct NextKeyboardButtonOverlay: UIViewRepresentable {
 
   func makeUIView(context: Context) -> UIButton {
     // UIButtonを生成し、セレクターをactionに設定
-    let button = UIButton()
+    let button = UIButton(type: .custom)
+    button.frame = .init(origin: .zero, size: .init(width: 100, height: 100))
     button.addTarget(nil,
                      action: action,
                      for: .allTouchEvents)
@@ -142,13 +146,7 @@ struct PhotoAssetListGrid: View {
   let assets: [Asset]
   let photos: [Photo]
   let tags: [Tag]
-  let sections: [AssetSection]
-  init(assets: [Asset], photos: [Photo], tags: [Tag]) {
-    self.assets = assets
-    self.photos = photos
-    self.tags = tags
-    self.sections = createSections(assets: assets, photos: photos, tags: tags)
-  }
+  let selector: Selector
 
   let sectionHeaderFomatter: DateIntervalFormatter = {
     let formatter = DateIntervalFormatter()
@@ -167,7 +165,8 @@ struct PhotoAssetListGrid: View {
             asset: asset,
             photo: photo,
             tags: tags,
-            maxImageLength: gridItemGeometry.size.width
+            maxImageLength: gridItemGeometry.size.width,
+            selector: selector
           )
         }
       }
@@ -196,6 +195,7 @@ struct PhotoAssetListImage: View {
   let photo: Photo?
   let tags: [Tag]
   let maxImageLength: CGFloat
+  let selector: Selector
 
   struct SelectedElement: Hashable {
     let photo: Photo
@@ -224,24 +224,31 @@ struct PhotoAssetListImage: View {
         Image(systemName: "photo")
       }
 
-      AssetCopyButton(asset: asset)
-        .frame(width: 32, height: 32)
+      NextKeyboardButton(systemName: "doc.on.doc", action: selector)
+        .frame(width: 100, height: 100)
     }
     .frame(width: maxImageLength, height: maxImageLength)
-    .onTapGesture {
-      if let photo = photo {
-        selectedElement = .init(photo: photo, asset: asset)
+    .handle(error: $error)
+  }
+}
+
+
+final class Copy: NSObject {
+  let asset: Asset
+  init(asset: Asset) {
+    self.asset = asset
+  }
+  @objc func xCopy() {
+    Task { @MainActor in
+      if let image = await PhotoLibraryKey.defaultValue.highQualityImage(for: asset) {
+        Pasteboard.general.image = image
+
+        // Delay for user can recognize ProgressView.
+        await Task.sleep(2 * (NSEC_PER_SEC / 10))
       } else {
-        do {
-          selectedElement = .init(
-            photo: try Photo.createAndSave(context: viewContext, asset: asset),
-            asset: asset
-          )
-        } catch {
-          self.error = error
-        }
+        fatalError("image not found")
       }
     }
-    .handle(error: $error)
+
   }
 }
