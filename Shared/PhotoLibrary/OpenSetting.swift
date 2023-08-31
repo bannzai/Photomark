@@ -3,10 +3,10 @@ import Foundation
 #if os(iOS)
 import UIKit
 func openSetting() {
-  let settingURL = URL(string: UIApplication.openSettingsURLString)!
-  if UIApplication.shared.canOpenURL(settingURL) {
-    UIApplication.shared.open(settingURL)
-  }
+//  let settingURL = URL(string: UIApplication.openSettingsURLString)!
+//  if UIApplication.shared.canOpenURL(settingURL) {
+//    UIApplication.shared.open(settingURL)
+//  }
 }
 #endif
 

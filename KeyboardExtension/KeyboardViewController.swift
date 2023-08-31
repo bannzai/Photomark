@@ -64,42 +64,11 @@ struct KeyboardView: View {
   let deleteTextAction: () -> Void
 
   private let helloWorldText = "Hello, world!"
+  let persistenceController = PersistenceController.shared
 
   var body: some View {
-
-    HStack {
-
-      Group {
-
-        // Next Keybaord
-        if needsInputModeSwitchKey {
-
-          NextKeyboardButton(systemName: "globe",
-                             action: nextKeyboardAction)
-          .frame(width: 44, height: 44)
-        }
-
-        // Input Text
-        Button(helloWorldText) {
-          inputTextAction(helloWorldText)
-        }
-        .frame(height: 44)
-        .padding(.horizontal)
-
-        // Delete Text
-        Button {
-          deleteTextAction()
-        } label: {
-          Image(systemName: "xmark")
-            .frame(width: 44, height: 44)
-        }
-      }
-      .background(Color(uiColor: .systemBackground))
-      .clipShape(RoundedRectangle(cornerRadius: 8))
-      .shadow(radius: 8)
-    }
-    .foregroundColor(Color(uiColor: .label))
-    .frame(height: 160)
+    PhotoAssetListPage()
+      .environment(\.managedObjectContext, persistenceController.container.viewContext)
   }
 }
 
