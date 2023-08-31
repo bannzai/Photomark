@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Photos
 
 class KeyboardViewController: UIInputViewController {
   override func viewDidLoad() {
@@ -65,8 +66,10 @@ struct KeyboardView: View {
   let inputTextAction: (String) -> Void
   let deleteTextAction: () -> Void
 
+  @Environment(\.photoLibrary) var photoLibrary
   private let helloWorldText = "Hello, world!"
 
+  @State var assets: [Asset] = []
   @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
     animation: .default)
@@ -77,8 +80,32 @@ struct KeyboardView: View {
   var tags: FetchedResults<Tag>
 
   var body: some View {
-    PhotoAssetListGrid(assets: [], photos: photos.toArray(), tags: tags.toArray())
+    PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
+      .onAppear {
+        fetchFirst()
+      }
   }
+
+  func fetchFirst() {
+    let phAssets = photoLibrary.fetchAssets().toArray()
+    let sortedAssets = phAssets.sorted { lhs, rhs in
+      if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
+        return l > r
+      } else {
+        assertionFailure()
+        return false
+      }
+    }
+
+    let cloudIdentifiers = PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: sortedAssets.map(\.localIdentifier))
+    assets = sortedAssets.compactMap { asset in
+      guard let cloudIdentifier = try? cloudIdentifiers[asset.localIdentifier]?.get().stringValue else {
+        return nil
+      }
+      return .init(phAsset: asset, cloudIdentifier: cloudIdentifier)
+    }
+  }
+
 }
 
 struct PhotoAssetListGrid: View {
@@ -103,28 +130,17 @@ struct PhotoAssetListGrid: View {
   }()
 
   var body: some View {
-    List {
-      ForEach(0..<sections.count) { i in
-        // FIXME: cause out of index when filtering with photo tags
-        if i <= sections.count - 1 {
-          let section = sections[i]
+    ScrollView(.vertical) {
+      ForEach(assets) { asset in
+        let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
 
-          LazyVGrid(columns: gridItems(), spacing: 1) {
-            Section(header: sectionHeader(section)) {
-              ForEach(section.assets) { asset in
-                let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
-
-                GridAssetImageGeometryReader { gridItemGeometry in
-                  PhotoAssetListImage(
-                    asset: asset,
-                    photo: photo,
-                    tags: tags,
-                    maxImageLength: gridItemGeometry.size.width
-                  )
-                }
-              }
-            }
-          }
+        GridAssetImageGeometryReader { gridItemGeometry in
+          PhotoAssetListImage(
+            asset: asset,
+            photo: photo,
+            tags: tags,
+            maxImageLength: gridItemGeometry.size.width
+          )
         }
       }
       .listRowInsets(.init())
