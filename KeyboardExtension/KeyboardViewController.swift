@@ -28,7 +28,10 @@ class KeyboardViewController: UIInputViewController {
     })
 
     // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
-    let hostingController = UIHostingController(rootView: keyboardView)
+    let hostingController = UIHostingController(
+      rootView: keyboardView
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+    )
 
     self.addChild(hostingController)
     self.view.addSubview(hostingController.view)
@@ -57,9 +60,6 @@ class KeyboardViewController: UIInputViewController {
 }
 
 struct KeyboardView: View {
-
-  let persistenceController = PersistenceController.shared
-
   let needsInputModeSwitchKey: Bool
   let nextKeyboardAction: Selector
   let inputTextAction: (String) -> Void
@@ -78,7 +78,6 @@ struct KeyboardView: View {
 
   var body: some View {
     PhotoAssetListGrid(assets: [], photos: photos.toArray(), tags: tags.toArray())
-      .environment(\.managedObjectContext, persistenceController.container.viewContext)
   }
 }
 
