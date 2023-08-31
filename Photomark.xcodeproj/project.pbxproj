@@ -85,6 +85,28 @@
 		20A2052927B7F4830058AA0C /* PhotoLibraryAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */; };
 		20D658C12AA0260100298589 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D658C02AA0260100298589 /* KeyboardViewController.swift */; };
 		20D658C52AA0260100298589 /* KeyboardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 20D658BE2AA0260100298589 /* KeyboardExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		20E55FA62AA0563E00343562 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
+		20E55FAC2AA0566000343562 /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059463F279D35E100F5726C /* Tag+Extension.swift */; };
+		20E55FAD2AA0566000343562 /* AssetSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C52327A28BFD00310E9F /* AssetSection.swift */; };
+		20E55FAE2AA0566000343562 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059465D279E33A800F5726C /* Asset.swift */; };
+		20E55FAF2AA0566000343562 /* CoreDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */; };
+		20E55FB02AA0566000343562 /* Photo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACF279CB4F9006B135B /* Photo+Extension.swift */; };
+		20E55FB12AA0567200343562 /* FetchedResults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */; };
+		20E55FB22AA0567200343562 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
+		20E55FB32AA0567200343562 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F756279AD67600BBA8D4 /* Persistence.swift */; };
+		20E55FB52AA0568900343562 /* GridAssetImageGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */; };
+		20E55FB62AA0568E00343562 /* AsyncAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */; };
+		20E55FB72AA0568E00343562 /* AssetCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C51427A2762C00310E9F /* AssetCopyButton.swift */; };
+		20E55FB82AA0568E00343562 /* GridItemCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200DC19127BA8BA30060A555 /* GridItemCount.swift */; };
+		20E55FB92AA0568E00343562 /* AssetDownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095BC0127A02544008998A2 /* AssetDownloadButton.swift */; };
+		20E55FBA2AA0569800343562 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327CA27B3F909004024A8 /* UIImage+.swift */; };
+		20E55FBB2AA0569800343562 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327DD27B47AFB004024A8 /* Image+.swift */; };
+		20E55FBC2AA0569800343562 /* PasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327DA27B4641F004024A8 /* PasteBoard.swift */; };
+		20E55FBD2AA0569D00343562 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
+		20E55FBE2AA0569D00343562 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
+		20E55FBF2AA0569D00343562 /* AlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059463C279D335800F5726C /* AlertError.swift */; };
+		20E55FC02AA056B000343562 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
+		20E55FC12AA056B000343562 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
 		20ED928827C044AD0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 		20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 /* End PBXBuildFile section */
@@ -734,7 +756,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20E55FAC2AA0566000343562 /* Tag+Extension.swift in Sources */,
+				20E55FB62AA0568E00343562 /* AsyncAssetImage.swift in Sources */,
+				20E55FBF2AA0569D00343562 /* AlertError.swift in Sources */,
+				20E55FB22AA0567200343562 /* String+Extension.swift in Sources */,
+				20E55FBB2AA0569800343562 /* Image+.swift in Sources */,
+				20E55FB02AA0566000343562 /* Photo+Extension.swift in Sources */,
+				20E55FC02AA056B000343562 /* PhotoLibrary.swift in Sources */,
+				20E55FBE2AA0569D00343562 /* ErrorHandleModifier.swift in Sources */,
 				20D658C12AA0260100298589 /* KeyboardViewController.swift in Sources */,
+				20E55FBD2AA0569D00343562 /* IdentifiableError.swift in Sources */,
+				20E55FBA2AA0569800343562 /* UIImage+.swift in Sources */,
+				20E55FAE2AA0566000343562 /* Asset.swift in Sources */,
+				20E55FBC2AA0569800343562 /* PasteBoard.swift in Sources */,
+				20E55FAF2AA0566000343562 /* CoreDataModelFactory.swift in Sources */,
+				20E55FB92AA0568E00343562 /* AssetDownloadButton.swift in Sources */,
+				20E55FAD2AA0566000343562 /* AssetSection.swift in Sources */,
+				20E55FB12AA0567200343562 /* FetchedResults+Extension.swift in Sources */,
+				20E55FA62AA0563E00343562 /* Photomark.xcdatamodeld in Sources */,
+				20E55FC12AA056B000343562 /* PHAsset+Extension.swift in Sources */,
+				20E55FB82AA0568E00343562 /* GridItemCount.swift in Sources */,
+				20E55FB32AA0567200343562 /* Persistence.swift in Sources */,
+				20E55FB72AA0568E00343562 /* AssetCopyButton.swift in Sources */,
+				20E55FB52AA0568900343562 /* GridAssetImageGeometryReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
