@@ -53,11 +53,9 @@ struct PhotoDetailPage: View {
               }
           }
 
-          if let image = image {
-            Image(uiImage: image)
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-          }
+          Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
         }
       }
       .toolbar {
