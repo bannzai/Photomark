@@ -224,8 +224,8 @@ struct PhotoAssetListImage: View {
         Image(systemName: "photo")
       }
 
-      NextKeyboardButton(systemName: "doc.on.doc", action: selector)
-        .frame(width: 100, height: 100)
+      AssetCopyButton(asset: asset)
+        .frame(width: 32, height: 32)
     }
     .frame(width: maxImageLength, height: maxImageLength)
     .handle(error: $error)
