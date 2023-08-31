@@ -194,7 +194,6 @@
 		20D658BE2AA0260100298589 /* KeyboardExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		20D658C02AA0260100298589 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		20D658C22AA0260100298589 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20E55FC22AA0584C00343562 /* KeyboardExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeyboardExtension.entitlements; sourceTree = "<group>"; };
 		20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAllCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -527,7 +526,6 @@
 		20D658BF2AA0260100298589 /* KeyboardExtension */ = {
 			isa = PBXGroup;
 			children = (
-				20E55FC22AA0584C00343562 /* KeyboardExtension.entitlements */,
 				20D658C02AA0260100298589 /* KeyboardViewController.swift */,
 				20D658C22AA0260100298589 /* Info.plist */,
 			);
@@ -1039,7 +1037,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = KeyboardExtension/KeyboardExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
@@ -1068,7 +1065,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = KeyboardExtension/KeyboardExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
