@@ -106,9 +106,9 @@ struct KeyboardView: View {
   let selector: Selector
 
   var body: some View {
-    PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray(), selector: selector)
+    NextKeyboardButton(systemName: "doc.on.doc", action: selector)
+      .frame(width: 100, height: 100)
   }
-
 }
 
 struct NextKeyboardButton: View {
@@ -155,24 +155,16 @@ struct PhotoAssetListGrid: View {
   }()
 
   var body: some View {
-    ScrollView(.vertical) {
-      ForEach(assets) { asset in
-        let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+    let asset = assets[0]
+    let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
 
-          PhotoAssetListImage(
-            asset: asset,
-            photo: photo,
-            tags: tags,
-            maxImageLength: 100,
-            selector: selector
-          )
-          .clipped()
-          .aspectRatio(1, contentMode: .fit)
-      }
-      .listRowInsets(.init())
-      .listRowSeparator(.hidden)
-    }
-    .listStyle(.plain)
+    PhotoAssetListImage(
+      asset: asset,
+      photo: photo,
+      tags: tags,
+      maxImageLength: 100,
+      selector: selector
+    )
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {
