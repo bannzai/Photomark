@@ -330,7 +330,6 @@
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F793279B8C6600BBA8D4 /* Components */,
-				20A2052627B7F3DE0058AA0C /* Modifier */,
 				205E750B27B60C2A0050EE3D /* PhotoLibrary */,
 				207327CC27B3F91A004024A8 /* Bridge */,
 				201C2AC7279BDC41006B135B /* StdLib */,
@@ -500,13 +499,6 @@
 				20A2051F27B7F0ED0058AA0C /* EntryView.swift */,
 			);
 			path = EntryView;
-			sourceTree = "<group>";
-		};
-		20A2052627B7F3DE0058AA0C /* Modifier */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modifier;
 			sourceTree = "<group>";
 		};
 		20D658BF2AA0260100298589 /* KeyboardExtension */ = {
