@@ -12,12 +12,15 @@ struct EntryView: View {
           GeometryReader {
             Color.clear.preference(key: ScreenSizePreferenceKey.self, value: $0.size)
           }
+          .onPreferenceChange(ScreenSizePreferenceKey.self, perform: { value in
+            self.screenSize = value
+          })
         }
-        .onPreferenceChange(ScreenSizePreferenceKey.self, perform: { value in
-          self.screenSize = value
-        })
         .environment(\.screenSize, screenSize)
         .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        .onChange(of: screenSize) { newValue in
+          print("screenSize:", screenSize)
+        }
     }
   }
 }
