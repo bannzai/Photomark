@@ -25,7 +25,6 @@ struct EntryView: View {
   }
 }
 
-
 struct ScreenSizeEnvironmentKey: EnvironmentKey {
   static var defaultValue: CGSize = .zero
 }
