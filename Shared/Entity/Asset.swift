@@ -1,7 +1,7 @@
 import Foundation
 import Photos
 
-@dynamicMemberLookup struct Asset: CustomStringConvertible, Identifiable, Hashable {
+@dynamicMemberLookup struct Asset: Identifiable, Hashable {
   var id: String { phAsset.localIdentifier }
 
   let phAsset: PHAsset
@@ -11,11 +11,6 @@ import Photos
     self.phAsset = phAsset
     self.cloudIdentifier = cloudIdentifier
   }
-
-  var description: String {
-    "asset: \(phAsset)"
-  }
-
 
   subscript<U>(dynamicMember keyPath: KeyPath<PHAsset, U>) -> U {
     phAsset[keyPath: keyPath]
