@@ -157,7 +157,7 @@ struct PhotoAssetListGrid: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      ForEach(assets) { asset in
+      ForEach(assets, id: \.localIdentifier) { asset in
         let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
 
           PhotoAssetListImage(
