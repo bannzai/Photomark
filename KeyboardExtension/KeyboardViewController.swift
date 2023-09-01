@@ -27,6 +27,10 @@ class KeyboardViewController: UIInputViewController {
   var assets: [Asset] = []
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
 
     fetchFirst()
   }
@@ -38,6 +42,7 @@ class KeyboardViewController: UIInputViewController {
     let hostingController = UIHostingController(
       rootView: keyboardView
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .environment(\.screenSize, view.window!.screen.bounds.size)
     )
 
     self.addChild(hostingController)
