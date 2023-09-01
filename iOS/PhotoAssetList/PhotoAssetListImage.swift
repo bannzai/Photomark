@@ -34,7 +34,8 @@ struct PhotoAssetListImage: View {
         EmptyView()
       }
 
-      Color.clear
+      Color.black
+        .aspectRatio(1, contentMode: .fit)
         .overlay {
           AsyncAssetImage(asset: asset) { image in
             image
@@ -45,13 +46,11 @@ struct PhotoAssetListImage: View {
             Image(systemName: "photo")
           }
         }
+        .clipped()
 
       AssetCopyButton(asset: asset)
         .frame(width: 32, height: 32)
     }
-    .frame(maxWidth: .infinity)
-    .aspectRatio(1, contentMode: .fit)
-    .clipped()
     .onTapGesture {
       if let photo = photo {
         selectedElement = .init(photo: photo, asset: asset)
