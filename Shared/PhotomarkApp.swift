@@ -4,7 +4,7 @@ import SwiftUI
 struct PhotomarkApp: App {
   var body: some Scene {
     WindowGroup {
-        EntryView()
+      EntryView()
     }
   }
 }
