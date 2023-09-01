@@ -65,12 +65,7 @@ struct PhotoLibrary {
   }
 
   func fetchImage(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic, callback: @escaping (UIImage?) -> Void) {
-    let targetSize: CGSize
-    if let maxImageLength = maxImageLength {
-      targetSize = .init(width: maxImageLength, height: maxImageLength)
-    } else {
-      targetSize = PHImageManagerMaximumSize
-    }
+    let targetSize: CGSize = PHImageManagerMaximumSize
 
     let options = PHImageRequestOptions()
     options.deliveryMode = deliveryMode
