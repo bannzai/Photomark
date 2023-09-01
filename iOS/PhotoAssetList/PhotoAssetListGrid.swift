@@ -22,7 +22,7 @@ struct PhotoAssetListGrid: View {
   }()
 
   var body: some View {
-    List {
+    ScrollView(.vertical) {
       ForEach(0..<sections.count) { i in
         let section = sections[i]
 
@@ -40,10 +40,7 @@ struct PhotoAssetListGrid: View {
           }
         }
       }
-      .listRowInsets(.init())
-      .listRowSeparator(.hidden)
     }
-    .listStyle(.plain)
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {

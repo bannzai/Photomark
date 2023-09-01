@@ -169,10 +169,7 @@ struct PhotoAssetListGrid: View {
           .clipped()
           .aspectRatio(1, contentMode: .fit)
       }
-      .listRowInsets(.init())
-      .listRowSeparator(.hidden)
     }
-    .listStyle(.plain)
   }
 
   private func sectionHeader(_ section: AssetSection) -> some View {

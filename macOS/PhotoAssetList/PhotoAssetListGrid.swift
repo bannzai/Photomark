@@ -22,7 +22,7 @@ struct PhotoAssetListGrid: View {
   }()
 
   var body: some View {
-    List {
+    ScrollView(.vertical) {
       ForEach(0..<sections.count) { i in
         // FIXME: cause out of index when filtering with photo tags
         if i <= sections.count - 1 {
@@ -43,7 +43,6 @@ struct PhotoAssetListGrid: View {
           }
         }
       }
-      .listStyle(.plain)
     }
   }
 
