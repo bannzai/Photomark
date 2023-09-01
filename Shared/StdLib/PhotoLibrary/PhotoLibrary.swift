@@ -65,6 +65,7 @@ struct PhotoLibrary {
   }
 
   func fetchImage(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic, callback: @escaping (UIImage?) -> Void) {
+    // 画質が悪いので基本最大サイズを取得する。その後に必要に応じて cropToBounds で画像を切り取る
     let targetSize: CGSize = PHImageManagerMaximumSize
 
     let options = PHImageRequestOptions()
