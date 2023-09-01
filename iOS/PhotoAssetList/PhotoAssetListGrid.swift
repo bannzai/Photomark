@@ -24,21 +24,18 @@ struct PhotoAssetListGrid: View {
   var body: some View {
     List {
       ForEach(0..<sections.count) { i in
-        // FIXME: cause out of index when filtering with photo tags
-        if i <= sections.count - 1 {
-          let section = sections[i]
+        let section = sections[i]
 
-          LazyVGrid(columns: gridItems(), spacing: 1) {
-            Section(header: sectionHeader(section)) {
-              ForEach(section.assets, id: \.localIdentifier) { asset in
-                let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+        LazyVGrid(columns: gridItems(), spacing: 1) {
+          Section(header: sectionHeader(section)) {
+            ForEach(section.assets, id: \.localIdentifier) { asset in
+              let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
 
-                PhotoAssetListImage(
-                  asset: asset,
-                  photo: photo,
-                  tags: tags
-                )
-              }
+              PhotoAssetListImage(
+                asset: asset,
+                photo: photo,
+                tags: tags
+              )
             }
           }
         }
