@@ -26,7 +26,7 @@ struct PhotoAssetListGrid: View {
       ForEach(0..<sections.count) { i in
         let section = sections[i]
 
-        LazyVGrid(columns: gridItems(), spacing: 1) {
+        LazyVGrid(columns: gridItems()) {
           Section(header: sectionHeader(section)) {
             ForEach(section.assets, id: \.localIdentifier) { asset in
               let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
