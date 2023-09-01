@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PhotoAssetSelectImage: View {
+  @Environment(\.screenSize) var screenSize
   let asset: Asset
   let photo: Photo?
   let tags: [Tag]
@@ -8,7 +9,7 @@ struct PhotoAssetSelectImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      AsyncAssetImage(asset: asset) { image in
+      AsyncAssetImage(asset: asset, maxImageLength: screenSize.width / 3 - 2) { image in
           image
             .resizable()
             .scaledToFill()

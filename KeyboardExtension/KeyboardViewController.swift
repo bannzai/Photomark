@@ -185,6 +185,7 @@ struct PhotoAssetListGrid: View {
 }
 
 struct PhotoAssetListImage: View {
+  @Environment(\.screenSize) var screenSize
   @Environment(\.managedObjectContext) private var viewContext
 
   let asset: Asset
@@ -209,7 +210,7 @@ struct PhotoAssetListImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      AsyncAssetImage(asset: asset) { image in
+      AsyncAssetImage(asset: asset, maxImageLength: screenSize.width / 3 - 2) { image in
         image
           .resizable()
           .scaledToFill()

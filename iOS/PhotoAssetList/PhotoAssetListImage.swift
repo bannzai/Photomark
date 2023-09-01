@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PhotoAssetListImage: View {
+  @Environment(\.screenSize) var screenSize
   @Environment(\.managedObjectContext) private var viewContext
 
   let asset: Asset
@@ -37,7 +38,7 @@ struct PhotoAssetListImage: View {
       Color.black
         .aspectRatio(1, contentMode: .fit)
         .overlay {
-          AsyncAssetImage(asset: asset) { image in
+          AsyncAssetImage(asset: asset, maxImageLength: screenSize.width / 3 - 2) { image in
             image
               .resizable()
               .scaledToFill()
