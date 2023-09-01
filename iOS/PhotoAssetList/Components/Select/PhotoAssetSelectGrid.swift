@@ -32,24 +32,21 @@ struct PhotoAssetSelectGrid: View {
 
           LazyVGrid(columns: gridItems(), spacing: 1) {
             Section(header: sectionHeader(section)) {
-              ForEach(section.assets) { asset in
-                GridAssetImageGeometryReader { gridItemGeometry in
-                  PhotoAssetSelectImage(
-                    asset: asset,
-                    photo: photos.first(where: { asset.cloudIdentifier  == $0.phAssetCloudIdentifier }),
-                    tags: tags,
-                    maxImageLength: gridItemGeometry.size.width,
-                    isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
-                      if isSelected {
-                        selectedAssets.append(asset)
-                      } else {
-                        selectedAssets.removeAll(where: { $0 == asset })
-                      }
-                    })
-                  )
-                }
+              ForEach(section.assets, id: \.localIdentifier) { asset in
+                PhotoAssetSelectImage(
+                  asset: asset,
+                  photo: photos.first(where: { asset.cloudIdentifier  == $0.phAssetCloudIdentifier }),
+                  tags: tags,
+                  isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
+                    if isSelected {
+                      selectedAssets.append(asset)
+                    } else {
+                      selectedAssets.removeAll(where: { $0 == asset })
+                    }
+                  })
+                )
               }
-            }
+              }
           }
         }
       }

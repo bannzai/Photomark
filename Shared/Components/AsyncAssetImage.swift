@@ -7,19 +7,17 @@ struct AsyncAssetImage<Content: View>: View {
   @State var phase: AssetAsyncImagePhase
 
   let asset: Asset
-  let maxImageLength: CGFloat?
   @ViewBuilder let content: (AssetAsyncImagePhase) -> Content
 
-  init(asset: Asset, maxImageLength: CGFloat?, @ViewBuilder content: @escaping (AssetAsyncImagePhase) -> Content) {
+  init(asset: Asset, @ViewBuilder content: @escaping (AssetAsyncImagePhase) -> Content) {
     self.asset = asset
-    self.maxImageLength = maxImageLength
     self.content = content
 
     phase = .empty
   }
 
-  public init<I: View, P: View>(asset: Asset, maxImageLength: CGFloat?, @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P> {
-    self.init(asset: asset, maxImageLength: maxImageLength) { phase in
+  public init<I: View, P: View>(asset: Asset, @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P> {
+    self.init(asset: asset) { phase in
       if let image = phase.image {
         content(image)
       } else {
@@ -54,7 +52,7 @@ struct AsyncAssetImage<Content: View>: View {
   }
 
   private func load() async {
-    for await image in photoLibrary.imageStream(for: asset, maxImageLength: maxImageLength) {
+    for await image in photoLibrary.imageStream(for: asset) {
       if let image = image {
         phase = .success(Image(uiImage: image))
       }

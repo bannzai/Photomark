@@ -164,7 +164,6 @@ struct PhotoAssetListGrid: View {
             asset: asset,
             photo: photo,
             tags: tags,
-            maxImageLength: 100,
             selector: selector
           )
           .clipped()
@@ -194,7 +193,6 @@ struct PhotoAssetListImage: View {
   let asset: Asset
   let photo: Photo?
   let tags: [Tag]
-  let maxImageLength: CGFloat
   let selector: Selector
 
   struct SelectedElement: Hashable {
@@ -214,11 +212,10 @@ struct PhotoAssetListImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
+      AsyncAssetImage(asset: asset) { image in
         image
           .resizable()
           .scaledToFill()
-          .frame(width: maxImageLength, height: maxImageLength)
           .clipped()
       } placeholder: {
         Image(systemName: "photo")
@@ -227,7 +224,6 @@ struct PhotoAssetListImage: View {
       AssetCopyButton(asset: asset)
         .frame(width: 32, height: 32)
     }
-    .frame(width: maxImageLength, height: maxImageLength)
     .handle(error: $error)
   }
 }

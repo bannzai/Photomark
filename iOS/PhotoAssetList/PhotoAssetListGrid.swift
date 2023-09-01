@@ -30,14 +30,13 @@ struct PhotoAssetListGrid: View {
 
           LazyVGrid(columns: gridItems(), spacing: 1) {
             Section(header: sectionHeader(section)) {
-              ForEach(section.assets) { asset in
+              ForEach(section.assets, id: \.localIdentifier) { asset in
                 let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
 
                 PhotoAssetListImage(
                   asset: asset,
                   photo: photo,
-                  tags: tags,
-                  maxImageLength: gridItemGeometry.size.width
+                  tags: tags
                 )
               }
             }

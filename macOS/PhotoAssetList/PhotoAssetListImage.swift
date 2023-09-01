@@ -6,7 +6,6 @@ struct PhotoAssetListImage: View {
   let asset: Asset
   let photo: Photo?
   let tags: [Tag]
-  let maxImageLength: CGFloat
 
   struct SelectedElement: Hashable {
     let photo: Photo
@@ -25,11 +24,10 @@ struct PhotoAssetListImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
+      AsyncAssetImage(asset: asset) { image in
         image
           .resizable()
           .scaledToFill()
-          .frame(width: maxImageLength, height: maxImageLength)
           .clipped()
       } placeholder: {
         Image(systemName: "photo")
@@ -38,7 +36,6 @@ struct PhotoAssetListImage: View {
       AssetCopyButton(asset: asset)
         .frame(width: 32, height: 32)
     }
-    .frame(width: maxImageLength, height: maxImageLength)
     .sheet(isPresented: transitionToDetail, onDismiss: nil, content: {
       if let element = selectedElement {
         PhotoDetailPage(asset: element.asset, photo: element.photo, tags: tags)
