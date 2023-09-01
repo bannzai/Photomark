@@ -7,7 +7,7 @@ extension Photo {
     let photo = Photo(context: context)
     photo.id = .init()
     photo.phAssetCloudIdentifier = asset.cloudIdentifier
-    photo.phAssetIdentifier = asset.id
+    photo.phAssetLocalIdentifier = asset.localIdentifier
     photo.createdDate = .init()
     photo.tagIDs = []
     return photo
