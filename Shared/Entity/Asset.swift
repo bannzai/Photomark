@@ -1,7 +1,7 @@
 import Foundation
 import Photos
 
-struct Asset: CustomStringConvertible, Identifiable, Hashable {
+@dynamicMemberLookup struct Asset: CustomStringConvertible, Identifiable, Hashable {
   var id: String { asset.localIdentifier }
 
   let asset: PHAsset
@@ -14,5 +14,10 @@ struct Asset: CustomStringConvertible, Identifiable, Hashable {
 
   var description: String {
     "asset: \(asset)"
+  }
+
+
+  subscript<U>(dynamicMember keyPath: KeyPath<PHAsset, U>) -> U {
+    asset[keyPath: keyPath]
   }
 }
