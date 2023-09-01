@@ -36,11 +36,12 @@ struct PhotoAssetListImage: View {
 
       Color.black
         .aspectRatio(1, contentMode: .fit)
-        .overlay(alignment: .bottomTrailing) {
+        .overlay {
           AsyncAssetImage(asset: asset) { image in
             image
               .resizable()
               .scaledToFill()
+              .clipped()
           } placeholder: {
             Image(systemName: "photo")
           }

@@ -23,19 +23,22 @@ struct PhotoAssetListGrid: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      ForEach(0..<sections.count) { i in
-        let section = sections[i]
+      Grid(horizontalSpacing: 1, verticalSpacing: 1) {
+        ForEach(0..<sections.count) { i in
+          let section = sections[i]
+          sectionHeader(section)
 
-        LazyVGrid(columns: gridItems()) {
-          Section(header: sectionHeader(section)) {
-            ForEach(section.assets, id: \.localIdentifier) { asset in
-              let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
-
-              PhotoAssetListImage(
-                asset: asset,
-                photo: photo,
-                tags: tags
-              )
+          let chunked = section.assets.chunked(by: 3)
+          ForEach(chunked.indices) { index in
+            GridRow {
+              ForEach(chunked[index], id: \.localIdentifier) { asset in
+                let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+                PhotoAssetListImage(
+                  asset: asset,
+                  photo: photo,
+                  tags: tags
+                )
+              }
             }
           }
         }
