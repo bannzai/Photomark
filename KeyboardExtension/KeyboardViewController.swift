@@ -214,6 +214,7 @@ struct PhotoAssetListImage: View {
         image
           .resizable()
           .scaledToFill()
+          .frame(width: screenSize.width, height: screenSize.height)
           .clipped()
       } placeholder: {
         Image(systemName: "photo")
