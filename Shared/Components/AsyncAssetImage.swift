@@ -45,7 +45,7 @@ struct AsyncAssetImage<Content: View>: View {
 
   public var body: some View {
     content(phase)
-      .animation(.easeInOut, value: phase.image)
+      .animation(.none, value: phase.image)
       .task(id: asset.localIdentifier) {
         await load()
       }
