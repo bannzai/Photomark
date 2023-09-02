@@ -35,32 +35,9 @@ class KeyboardViewController: UIInputViewController {
     fetchFirst()
   }
 
-  func setup(assets: [Asset]) {
-    let keyboardView = KeyboardView(assets: assets)
-
-    // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
-    let hostingController = UIHostingController(
-      rootView: keyboardView
-        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-        .environment(\.screenSize, view.window!.screen.bounds.size)
-    )
-
-    self.addChild(hostingController)
-    self.view.addSubview(hostingController.view)
-    hostingController.didMove(toParent: self)
-
-    hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      hostingController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
-      hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-      hostingController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
-      hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-    ])
-
-  }
-
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
+
   }
 
   override func textWillChange(_ textInput: UITextInput?) {
@@ -71,7 +48,35 @@ class KeyboardViewController: UIInputViewController {
 
   }
 
-  func fetchFirst() {
+  private func setup(assets: [Asset]) {
+    let keyboardView = KeyboardView(assets: assets)
+
+    // viewDidLoad等ではwindowがnilになるので注意
+    let screenSize = view.window!.screen.bounds.size
+
+    // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
+    let hostingController = UIHostingController(
+      rootView: keyboardView
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .environment(\.screenSize, screenSize)
+    )
+
+    addChild(hostingController)
+    view.addSubview(hostingController.view)
+    hostingController.didMove(toParent: self)
+
+    hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      hostingController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
+      hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+      hostingController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
+      hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+      view.heightAnchor.constraint(equalToConstant: screenSize.width)
+    ])
+  }
+
+  private func fetchFirst() {
     let phAssets = PhotoLibraryKey.defaultValue.fetchAssets().toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
