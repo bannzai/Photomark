@@ -126,6 +126,8 @@ struct KeyboardView: View {
             }
           }
       }
+      .padding(.horizontal, 8)
+      .padding(.top, 8)
       PhotoAssetListGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
     }
   }
