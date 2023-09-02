@@ -12,7 +12,7 @@ struct AssetSection {
 
 func createSections(assets: [Asset], photos: [Photo], tags: [Tag]) -> [AssetSection] {
   assets.reduce(into: [AssetSection]()) { partialResult, asset in
-    guard let assetCreationDate = asset.asset.creationDate else {
+    guard let assetCreationDate = asset.phAsset.creationDate else {
       return
     }
 

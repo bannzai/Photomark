@@ -65,18 +65,14 @@ struct PhotoLibrary {
   }
 
   func fetchImage(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic, callback: @escaping (UIImage?) -> Void) {
-    let targetSize: CGSize
-    if let maxImageLength = maxImageLength {
-      targetSize = .init(width: maxImageLength, height: maxImageLength)
-    } else {
-      targetSize = PHImageManagerMaximumSize
-    }
+    // 画質が悪いので基本最大サイズを取得する。その後に必要に応じて cropToBounds で画像を切り取る
+    let targetSize: CGSize = PHImageManagerMaximumSize
 
     let options = PHImageRequestOptions()
     options.deliveryMode = deliveryMode
 
     // NOTE: @param resultHandler A block that is called *one or more times* either synchronously on the current thread or asynchronously on the main thread depending on the options specified in the PHImageRequestOptions options parameter.
-    PHImageManager.default().requestImage(for: asset.asset, targetSize: targetSize, contentMode: .default, options: options) { image, info in
+    PHImageManager.default().requestImage(for: asset.phAsset, targetSize: targetSize, contentMode: .default, options: options) { image, info in
       if let maxImageLength = maxImageLength {
         // SwiftUI.Image to display an image retrieved from PHAsset, since .clipped will cause the tap area to be wrong.
         callback(cropToBounds(image: image, width: maxImageLength, height: maxImageLength))

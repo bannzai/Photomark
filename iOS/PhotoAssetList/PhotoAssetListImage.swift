@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct PhotoAssetListImage: View {
+  @Environment(\.screenSize) var screenSize
   @Environment(\.managedObjectContext) private var viewContext
 
   let asset: Asset
   let photo: Photo?
   let tags: [Tag]
-  let maxImageLength: CGFloat
 
   struct SelectedElement: Hashable {
     let photo: Photo
@@ -35,20 +35,23 @@ struct PhotoAssetListImage: View {
         EmptyView()
       }
 
-      AsyncAssetImage(asset: asset, maxImageLength: maxImageLength) { image in
-        image
-          .resizable()
-          .scaledToFill()
-          .frame(width: maxImageLength, height: maxImageLength)
-          .clipped()
-      } placeholder: {
-        Image(systemName: "photo")
-      }
+      Color.black
+        .aspectRatio(1, contentMode: .fit)
+        .overlay {
+          AsyncAssetImage(asset: asset, maxImageLength: screenSize.width / 3 - 2) { image in
+            image
+              .resizable()
+              .scaledToFill()
+              .clipped()
+          } placeholder: {
+            Image(systemName: "photo")
+          }
+        }
+        .clipped()
 
       AssetCopyButton(asset: asset)
         .frame(width: 32, height: 32)
     }
-    .frame(width: maxImageLength, height: maxImageLength)
     .onTapGesture {
       if let photo = photo {
         selectedElement = .init(photo: photo, asset: asset)

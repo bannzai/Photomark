@@ -66,8 +66,6 @@
 		2086F789279AFD4C00BBA8D4 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
 		2086F78B279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
 		2086F78C279B6D9900BBA8D4 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
-		2086F795279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */; };
-		2086F796279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */; };
 		2086F7C7279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */; };
 		2086F7CB279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
 		2086F7CC279BCFAC00BBA8D4 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
@@ -83,9 +81,63 @@
 		20A2052027B7F0ED0058AA0C /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2051F27B7F0ED0058AA0C /* EntryView.swift */; };
 		20A2052827B7F3E60058AA0C /* PhotoLibraryAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */; };
 		20A2052927B7F4830058AA0C /* PhotoLibraryAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */; };
+		20D658C12AA0260100298589 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D658C02AA0260100298589 /* KeyboardViewController.swift */; };
+		20D658C52AA0260100298589 /* KeyboardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 20D658BE2AA0260100298589 /* KeyboardExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		20E55FA62AA0563E00343562 /* Photomark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2086F752279AD67600BBA8D4 /* Photomark.xcdatamodeld */; };
+		20E55FAC2AA0566000343562 /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059463F279D35E100F5726C /* Tag+Extension.swift */; };
+		20E55FAD2AA0566000343562 /* AssetSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C52327A28BFD00310E9F /* AssetSection.swift */; };
+		20E55FAE2AA0566000343562 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059465D279E33A800F5726C /* Asset.swift */; };
+		20E55FAF2AA0566000343562 /* CoreDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */; };
+		20E55FB02AA0566000343562 /* Photo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACF279CB4F9006B135B /* Photo+Extension.swift */; };
+		20E55FB12AA0567200343562 /* FetchedResults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2ACC279CA5FE006B135B /* FetchedResults+Extension.swift */; };
+		20E55FB22AA0567200343562 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C2AC8279BDC47006B135B /* String+Extension.swift */; };
+		20E55FB32AA0567200343562 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F756279AD67600BBA8D4 /* Persistence.swift */; };
+		20E55FB62AA0568E00343562 /* AsyncAssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */; };
+		20E55FB72AA0568E00343562 /* AssetCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C51427A2762C00310E9F /* AssetCopyButton.swift */; };
+		20E55FB82AA0568E00343562 /* GridItemCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200DC19127BA8BA30060A555 /* GridItemCount.swift */; };
+		20E55FB92AA0568E00343562 /* AssetDownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095BC0127A02544008998A2 /* AssetDownloadButton.swift */; };
+		20E55FBA2AA0569800343562 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327CA27B3F909004024A8 /* UIImage+.swift */; };
+		20E55FBB2AA0569800343562 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327DD27B47AFB004024A8 /* Image+.swift */; };
+		20E55FBC2AA0569800343562 /* PasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207327DA27B4641F004024A8 /* PasteBoard.swift */; };
+		20E55FBD2AA0569D00343562 /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7D1279BDA3C00BBA8D4 /* IdentifiableError.swift */; };
+		20E55FBE2AA0569D00343562 /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */; };
+		20E55FBF2AA0569D00343562 /* AlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2059463C279D335800F5726C /* AlertError.swift */; };
+		20E55FC02AA056B000343562 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */; };
+		20E55FC12AA056B000343562 /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */; };
+		20E55FC72AA1926A00343562 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FC62AA1926A00343562 /* Array+Extension.swift */; };
+		20E55FC82AA1926A00343562 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FC62AA1926A00343562 /* Array+Extension.swift */; };
+		20E55FC92AA1926A00343562 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FC62AA1926A00343562 /* Array+Extension.swift */; };
+		20E55FCC2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
+		20E55FCD2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
+		20E55FCE2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
+		20E55FD22AA34F4E00343562 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
 		20ED928827C044AD0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 		20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20D658C32AA0260100298589 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2086F74D279AD67600BBA8D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20D658BD2AA0260100298589;
+			remoteInfo = KeyboardExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		20D658C92AA0260100298589 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				20D658C52AA0260100298589 /* KeyboardExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		200672D1279D018500BA9C48 /* PhotoAssetListImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetListImage.swift; sourceTree = "<group>"; };
@@ -133,7 +185,6 @@
 		2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModelFactory.swift; sourceTree = "<group>"; };
 		2086F787279AFD4C00BBA8D4 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		2086F78A279B6D9900BBA8D4 /* PHAsset+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Extension.swift"; sourceTree = "<group>"; };
-		2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridAssetImageGeometryReader.swift; sourceTree = "<group>"; };
 		2086F7C6279BCEB300BBA8D4 /* PhotoDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailPage.swift; sourceTree = "<group>"; };
 		2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLine.swift; sourceTree = "<group>"; };
 		2086F7CE279BDA2800BBA8D4 /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
@@ -143,6 +194,12 @@
 		20A2051B27B7F0B40058AA0C /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		20A2051F27B7F0ED0058AA0C /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		20A2052727B7F3E60058AA0C /* PhotoLibraryAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAuthorization.swift; sourceTree = "<group>"; };
+		20D658BE2AA0260100298589 /* KeyboardExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		20D658C02AA0260100298589 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		20D658C22AA0260100298589 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20E55FC32AA058C900343562 /* KeyboardExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeyboardExtension.entitlements; sourceTree = "<group>"; };
+		20E55FC62AA1926A00343562 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		20E55FCB2AA29DD100343562 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAllCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +217,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				20363DF727BE8A6B00069EDF /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20D658BB2AA0260100298589 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +338,7 @@
 				2086F784279AFA9300BBA8D4 /* CoreDataModelFactory.swift */,
 				201C2ACF279CB4F9006B135B /* Photo+Extension.swift */,
 				2059463F279D35E100F5726C /* Tag+Extension.swift */,
+				20E55FC62AA1926A00343562 /* Array+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -290,11 +355,11 @@
 		207327C927B3F870004024A8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				20E55FCA2AA29DC800343562 /* Environment */,
 				20ED928627C044A60033D328 /* Debug */,
 				2086F7C2279BBF9200BBA8D4 /* PhotoLibrary */,
 				2086F7CD279BDA2100BBA8D4 /* Error */,
 				2086F793279B8C6600BBA8D4 /* Components */,
-				20A2052627B7F3DE0058AA0C /* Modifier */,
 				205E750B27B60C2A0050EE3D /* PhotoLibrary */,
 				207327CC27B3F91A004024A8 /* Bridge */,
 				201C2AC7279BDC41006B135B /* StdLib */,
@@ -353,6 +418,7 @@
 				207327C927B3F870004024A8 /* Shared */,
 				2086F751279AD67600BBA8D4 /* iOS */,
 				2086F763279AD67600BBA8D4 /* macOS */,
+				20D658BF2AA0260100298589 /* KeyboardExtension */,
 				2086F75D279AD67600BBA8D4 /* Products */,
 				20363DF527BE8A6B00069EDF /* Frameworks */,
 			);
@@ -382,6 +448,7 @@
 			children = (
 				2086F75C279AD67600BBA8D4 /* Photomark.app */,
 				2086F762279AD67600BBA8D4 /* Photomark.app */,
+				20D658BE2AA0260100298589 /* KeyboardExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -403,7 +470,6 @@
 		2086F793279B8C6600BBA8D4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2086F794279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift */,
 				2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */,
 				2095BC0127A02544008998A2 /* AssetDownloadButton.swift */,
 				2026C51427A2762C00310E9F /* AssetCopyButton.swift */,
@@ -464,11 +530,22 @@
 			path = EntryView;
 			sourceTree = "<group>";
 		};
-		20A2052627B7F3DE0058AA0C /* Modifier */ = {
+		20D658BF2AA0260100298589 /* KeyboardExtension */ = {
 			isa = PBXGroup;
 			children = (
+				20E55FC32AA058C900343562 /* KeyboardExtension.entitlements */,
+				20D658C02AA0260100298589 /* KeyboardViewController.swift */,
+				20D658C22AA0260100298589 /* Info.plist */,
 			);
-			path = Modifier;
+			path = KeyboardExtension;
+			sourceTree = "<group>";
+		};
+		20E55FCA2AA29DC800343562 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				20E55FCB2AA29DD100343562 /* ScreenSize.swift */,
+			);
+			path = Environment;
 			sourceTree = "<group>";
 		};
 		20ED928627C044A60033D328 /* Debug */ = {
@@ -489,10 +566,12 @@
 				2086F758279AD67600BBA8D4 /* Sources */,
 				2086F759279AD67600BBA8D4 /* Frameworks */,
 				2086F75A279AD67600BBA8D4 /* Resources */,
+				20D658C92AA0260100298589 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				20D658C42AA0260100298589 /* PBXTargetDependency */,
 			);
 			name = "Photomark (iOS)";
 			productName = "Photomark (iOS)";
@@ -516,6 +595,23 @@
 			productReference = 2086F762279AD67600BBA8D4 /* Photomark.app */;
 			productType = "com.apple.product-type.application";
 		};
+		20D658BD2AA0260100298589 /* KeyboardExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20D658C62AA0260100298589 /* Build configuration list for PBXNativeTarget "KeyboardExtension" */;
+			buildPhases = (
+				20D658BA2AA0260100298589 /* Sources */,
+				20D658BB2AA0260100298589 /* Frameworks */,
+				20D658BC2AA0260100298589 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeyboardExtension;
+			productName = KeyboardExtension;
+			productReference = 20D658BE2AA0260100298589 /* KeyboardExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -523,14 +619,17 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1310;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					2086F75B279AD67600BBA8D4 = {
 						CreatedOnToolsVersion = 13.1;
 					};
 					2086F761279AD67600BBA8D4 = {
 						CreatedOnToolsVersion = 13.1;
+					};
+					20D658BD2AA0260100298589 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
@@ -549,6 +648,7 @@
 			targets = (
 				2086F75B279AD67600BBA8D4 /* Photomark (iOS) */,
 				2086F761279AD67600BBA8D4 /* Photomark (macOS) */,
+				20D658BD2AA0260100298589 /* KeyboardExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -570,6 +670,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20D658BC2AA0260100298589 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -580,7 +687,7 @@
 				20A2052927B7F4830058AA0C /* PhotoLibraryAuthorization.swift in Sources */,
 				2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
-				2086F795279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */,
+				20E55FC72AA1926A00343562 /* Array+Extension.swift in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				20594650279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */,
 				2026C52127A286AA00310E9F /* PhotoAssetSelectImage.swift in Sources */,
@@ -593,6 +700,7 @@
 				2086F7C7279BCEB300BBA8D4 /* PhotoDetailPage.swift in Sources */,
 				2026C52427A28BFD00310E9F /* AssetSection.swift in Sources */,
 				2026C51527A2762C00310E9F /* AssetCopyButton.swift in Sources */,
+				20E55FCC2AA29DD100343562 /* ScreenSize.swift in Sources */,
 				200DC19027BA762B0060A555 /* PhotoAssetListImage.swift in Sources */,
 				207327DC27B46647004024A8 /* PasteBoard.swift in Sources */,
 				2059463D279D335800F5726C /* AlertError.swift in Sources */,
@@ -620,6 +728,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20E55FCD2AA29DD100343562 /* ScreenSize.swift in Sources */,
 				2025C46227BC501200F2237A /* TagList.swift in Sources */,
 				200DC18F27BA75F70060A555 /* PhotoAssetListPage+.swift in Sources */,
 				200DC18D27BA75F70060A555 /* PhotoAssetSelectImage.swift in Sources */,
@@ -631,8 +740,8 @@
 				2059465F279E33A800F5726C /* Asset.swift in Sources */,
 				200DC19227BA8BA30060A555 /* GridItemCount.swift in Sources */,
 				2086F7D3279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
+				20E55FC82AA1926A00343562 /* Array+Extension.swift in Sources */,
 				207327D827B3FF6A004024A8 /* ActivityView.swift in Sources */,
-				2086F796279B8C6C00BBA8D4 /* GridAssetImageGeometryReader.swift in Sources */,
 				200DC18B27BA75F70060A555 /* PhotoAssetListImage.swift in Sources */,
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				207327DB27B4641F004024A8 /* PasteBoard.swift in Sources */,
@@ -661,7 +770,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20D658BA2AA0260100298589 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20E55FAC2AA0566000343562 /* Tag+Extension.swift in Sources */,
+				20E55FB62AA0568E00343562 /* AsyncAssetImage.swift in Sources */,
+				20E55FBF2AA0569D00343562 /* AlertError.swift in Sources */,
+				20E55FB22AA0567200343562 /* String+Extension.swift in Sources */,
+				20E55FBB2AA0569800343562 /* Image+.swift in Sources */,
+				20E55FB02AA0566000343562 /* Photo+Extension.swift in Sources */,
+				20E55FCE2AA29DD100343562 /* ScreenSize.swift in Sources */,
+				20E55FC02AA056B000343562 /* PhotoLibrary.swift in Sources */,
+				20E55FBE2AA0569D00343562 /* ErrorHandleModifier.swift in Sources */,
+				20D658C12AA0260100298589 /* KeyboardViewController.swift in Sources */,
+				20E55FBD2AA0569D00343562 /* IdentifiableError.swift in Sources */,
+				20E55FBA2AA0569800343562 /* UIImage+.swift in Sources */,
+				20E55FAE2AA0566000343562 /* Asset.swift in Sources */,
+				20E55FBC2AA0569800343562 /* PasteBoard.swift in Sources */,
+				20E55FC92AA1926A00343562 /* Array+Extension.swift in Sources */,
+				20E55FAF2AA0566000343562 /* CoreDataModelFactory.swift in Sources */,
+				20E55FB92AA0568E00343562 /* AssetDownloadButton.swift in Sources */,
+				20E55FD22AA34F4E00343562 /* TagLine.swift in Sources */,
+				20E55FAD2AA0566000343562 /* AssetSection.swift in Sources */,
+				20E55FB12AA0567200343562 /* FetchedResults+Extension.swift in Sources */,
+				20E55FA62AA0563E00343562 /* Photomark.xcdatamodeld in Sources */,
+				20E55FC12AA056B000343562 /* PHAsset+Extension.swift in Sources */,
+				20E55FB82AA0568E00343562 /* GridItemCount.swift in Sources */,
+				20E55FB32AA0567200343562 /* Persistence.swift in Sources */,
+				20E55FB72AA0568E00343562 /* AssetCopyButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		20D658C42AA0260100298589 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20D658BD2AA0260100298589 /* KeyboardExtension */;
+			targetProxy = 20D658C32AA0260100298589 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2086F76F279AD67600BBA8D4 /* Debug */ = {
@@ -698,6 +847,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -715,7 +865,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -759,6 +909,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -770,7 +921,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -782,6 +933,7 @@
 		2086F772279AD67600BBA8D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "iOS/Photomark (iOS).entitlements";
@@ -797,7 +949,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -815,6 +967,7 @@
 		2086F773279AD67600BBA8D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "iOS/Photomark (iOS).entitlements";
@@ -830,7 +983,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -855,6 +1008,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -883,6 +1037,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -899,6 +1054,65 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		20D658C72AA0260100298589 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = KeyboardExtension/KeyboardExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TQPN82UBBY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KeyboardExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KeyboardExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bannzai.Photomark.KeyboardExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		20D658C82AA0260100298589 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = KeyboardExtension/KeyboardExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TQPN82UBBY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KeyboardExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KeyboardExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bannzai.Photomark.KeyboardExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -928,6 +1142,15 @@
 			buildConfigurations = (
 				2086F775279AD67600BBA8D4 /* Debug */,
 				2086F776279AD67600BBA8D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20D658C62AA0260100298589 /* Build configuration list for PBXNativeTarget "KeyboardExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20D658C72AA0260100298589 /* Debug */,
+				20D658C82AA0260100298589 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

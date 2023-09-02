@@ -21,10 +21,10 @@ struct PersistenceController {
     return result
   }()
 
-  let container: NSPersistentCloudKitContainer
+  let container: PersistentCloudKitContainer
 
   init(inMemory: Bool = false) {
-    container = NSPersistentCloudKitContainer(name: "Photomark")
+    container = PersistentCloudKitContainer(name: "Photomark")
 
     guard let description = container.persistentStoreDescriptions.first else {
       fatalError("it is necessary first description")
@@ -54,4 +54,14 @@ struct PersistenceController {
       }
     })
   }
+}
+
+
+final class PersistentCloudKitContainer: NSPersistentCloudKitContainer {
+  override public class func defaultDirectoryURL() -> URL {
+    var storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.bannzai.Photomark")
+    storeURL = storeURL?.appendingPathComponent("Sakura.sqlite")
+    return storeURL!
+  }
+
 }

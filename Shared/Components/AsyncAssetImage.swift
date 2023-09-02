@@ -4,7 +4,7 @@ import Photos
 
 struct AsyncAssetImage<Content: View>: View {
   @Environment(\.photoLibrary) var photoLibrary
-  @State var phase: AssetAsyncImagePhase
+  @State var phase: AssetAsyncImagePhase = .empty
 
   let asset: Asset
   let maxImageLength: CGFloat?
@@ -47,18 +47,17 @@ struct AsyncAssetImage<Content: View>: View {
 
   public var body: some View {
     content(phase)
-      .animation(Transaction().animation, value: phase.image)
-      .task(id: asset.id) {
+      .animation(.none, value: phase.image)
+      .task(id: asset.localIdentifier) {
         await load()
       }
   }
 
   private func load() async {
     for await image in photoLibrary.imageStream(for: asset, maxImageLength: maxImageLength) {
-      if let image = image {
+      if let image {
         phase = .success(Image(uiImage: image))
       }
     }
   }
 }
-
