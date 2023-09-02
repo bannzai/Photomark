@@ -23,12 +23,12 @@ struct PhotoAssetListGrid: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      LazyVGrid(columns: gridItems()) {
+      VStack {
         ForEach(0..<sections.count, id: \.self) { i in
           let section = sections[i]
-          VStack {
-            sectionHeader(section)
+          sectionHeader(section)
 
+          LazyVGrid(columns: gridItems()) {
             ForEach(section.assets, id: \.localIdentifier) { asset in
               let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
               PhotoAssetListImage(
