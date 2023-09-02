@@ -24,7 +24,7 @@ struct PhotoAssetListGrid: View {
   var body: some View {
     ScrollView(.vertical) {
       LazyVGrid(columns: gridItems()) {
-        ForEach(0..<sections.count) { i in
+        ForEach(0..<sections.count, id: \.self) { i in
           let section = sections[i]
           VStack {
             sectionHeader(section)
