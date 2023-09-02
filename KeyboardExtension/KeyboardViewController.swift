@@ -116,35 +116,6 @@ struct KeyboardView: View {
 
 }
 
-struct NextKeyboardButton: View {
-  let systemName: String
-  let action: Selector
-
-  var body: some View {
-    Image(systemName: systemName)
-      .overlay {
-        NextKeyboardButtonOverlay(action: action)
-      }
-  }
-}
-
-struct NextKeyboardButtonOverlay: UIViewRepresentable {
-  let action: Selector
-
-  func makeUIView(context: Context) -> UIButton {
-    // UIButtonを生成し、セレクターをactionに設定
-    let button = UIButton(type: .custom)
-    button.frame = .init(origin: .zero, size: .init(width: 100, height: 100))
-    button.addTarget(nil,
-                     action: action,
-                     for: .allTouchEvents)
-    return button
-  }
-
-  func updateUIView(_ button: UIButton, context: Context) {}
-}
-
-
 struct PhotoAssetListGrid: View {
   @Environment(\.managedObjectContext) private var viewContext
 
