@@ -113,4 +113,120 @@ struct KeyboardView: View {
   var body: some View {
     PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray(), selector: selector)
   }
+
+}
+
+struct NextKeyboardButton: View {
+  let systemName: String
+  let action: Selector
+
+  var body: some View {
+    Image(systemName: systemName)
+      .overlay {
+        NextKeyboardButtonOverlay(action: action)
+      }
+  }
+}
+
+struct NextKeyboardButtonOverlay: UIViewRepresentable {
+  let action: Selector
+
+  func makeUIView(context: Context) -> UIButton {
+    // UIButtonを生成し、セレクターをactionに設定
+    let button = UIButton(type: .custom)
+    button.frame = .init(origin: .zero, size: .init(width: 100, height: 100))
+    button.addTarget(nil,
+                     action: action,
+                     for: .allTouchEvents)
+    return button
+  }
+
+  func updateUIView(_ button: UIButton, context: Context) {}
+}
+
+
+struct PhotoAssetListGrid: View {
+  @Environment(\.managedObjectContext) private var viewContext
+
+  let assets: [Asset]
+  let photos: [Photo]
+  let tags: [Tag]
+  let selector: Selector
+
+  let sectionHeaderFomatter: DateIntervalFormatter = {
+    let formatter = DateIntervalFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+    return formatter
+  }()
+
+  var body: some View {
+    ScrollView(.vertical) {
+      ForEach(assets, id: \.localIdentifier) { asset in
+        let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+
+          PhotoAssetListImage(
+            asset: asset,
+            photo: photo,
+            tags: tags,
+            selector: selector
+          )
+          .clipped()
+          .aspectRatio(1, contentMode: .fit)
+      }
+    }
+  }
+
+  private func sectionHeader(_ section: AssetSection) -> some View {
+    HStack {
+      Text(section.interval, formatter: sectionHeaderFomatter)
+        .font(.system(size: 16))
+        .bold()
+      Spacer()
+    }
+    .padding(.top, 12)
+    .padding(.bottom, 8)
+  }
+}
+
+struct PhotoAssetListImage: View {
+  @Environment(\.screenSize) var screenSize
+  @Environment(\.managedObjectContext) private var viewContext
+
+  let asset: Asset
+  let photo: Photo?
+  let tags: [Tag]
+  let selector: Selector
+
+  struct SelectedElement: Hashable {
+    let photo: Photo
+    let asset: Asset
+  }
+  @State var selectedElement: SelectedElement?
+  @State var error: Error?
+
+  private var transitionToDetail: Binding<Bool>  {
+    .init {
+      selectedElement != nil
+    } set: { _ in
+      selectedElement = nil
+    }
+  }
+
+  var body: some View {
+    ZStack(alignment: .bottomTrailing) {
+      AsyncAssetImage(asset: asset, maxImageLength: screenSize.width / 3 - 2) { image in
+        image
+          .resizable()
+          .scaledToFill()
+          .clipped()
+      } placeholder: {
+        Image(systemName: "photo")
+      }
+
+      AssetCopyButton(asset: asset)
+        .frame(width: 32, height: 32)
+    }
+    .handle(error: $error)
+  }
 }
