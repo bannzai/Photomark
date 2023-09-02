@@ -36,7 +36,7 @@ class KeyboardViewController: UIInputViewController {
   }
 
   func setup(assets: [Asset]) {
-    let keyboardView = KeyboardView(assets: assets, selector: #selector(xxCopy(sender:)))
+    let keyboardView = KeyboardView(assets: assets)
 
     // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
     let hostingController = UIHostingController(
@@ -108,10 +108,9 @@ struct KeyboardView: View {
   var tags: FetchedResults<Tag>
 
   let assets: [Asset]
-  let selector: Selector
 
   var body: some View {
-    PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray(), selector: selector)
+    PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
   }
 
 }
@@ -122,41 +121,20 @@ struct PhotoAssetListGrid: View {
   let assets: [Asset]
   let photos: [Photo]
   let tags: [Tag]
-  let selector: Selector
-
-  let sectionHeaderFomatter: DateIntervalFormatter = {
-    let formatter = DateIntervalFormatter()
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .none
-    return formatter
-  }()
 
   var body: some View {
     ScrollView(.vertical) {
-      ForEach(assets, id: \.localIdentifier) { asset in
-        let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
-
+      LazyVGrid(columns: gridItems(), spacing: 1) {
+        ForEach(assets, id: \.localIdentifier) { asset in
+          let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
           PhotoAssetListImage(
             asset: asset,
             photo: photo,
-            tags: tags,
-            selector: selector
+            tags: tags
           )
-          .clipped()
-          .aspectRatio(1, contentMode: .fit)
+        }
       }
     }
-  }
-
-  private func sectionHeader(_ section: AssetSection) -> some View {
-    HStack {
-      Text(section.interval, formatter: sectionHeaderFomatter)
-        .font(.system(size: 16))
-        .bold()
-      Spacer()
-    }
-    .padding(.top, 12)
-    .padding(.bottom, 8)
   }
 }
 
@@ -167,7 +145,6 @@ struct PhotoAssetListImage: View {
   let asset: Asset
   let photo: Photo?
   let tags: [Tag]
-  let selector: Selector
 
   struct SelectedElement: Hashable {
     let photo: Photo
