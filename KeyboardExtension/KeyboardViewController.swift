@@ -113,4 +113,6 @@ struct KeyboardView: View {
   var body: some View {
     PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray(), selector: selector)
   }
+
 }
+

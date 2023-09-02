@@ -110,6 +110,9 @@
 		20E55FCC2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
 		20E55FCD2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
 		20E55FCE2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
+		20E55FCF2AA34E6D00343562 /* PhotoAssetSelectGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2026C51D27A2861500310E9F /* PhotoAssetSelectGrid.swift */; };
+		20E55FD02AA34E8300343562 /* PhotoAssetListGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20594660279E390C00F5726C /* PhotoAssetListGrid.swift */; };
+		20E55FD12AA34E8D00343562 /* PhotoAssetListImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200672D1279D018500BA9C48 /* PhotoAssetListImage.swift */; };
 		20ED928827C044AD0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 		20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 /* End PBXBuildFile section */
@@ -775,6 +778,7 @@
 			files = (
 				20E55FAC2AA0566000343562 /* Tag+Extension.swift in Sources */,
 				20E55FB62AA0568E00343562 /* AsyncAssetImage.swift in Sources */,
+				20E55FD12AA34E8D00343562 /* PhotoAssetListImage.swift in Sources */,
 				20E55FBF2AA0569D00343562 /* AlertError.swift in Sources */,
 				20E55FB22AA0567200343562 /* String+Extension.swift in Sources */,
 				20E55FBB2AA0569800343562 /* Image+.swift in Sources */,
@@ -788,9 +792,11 @@
 				20E55FAE2AA0566000343562 /* Asset.swift in Sources */,
 				20E55FBC2AA0569800343562 /* PasteBoard.swift in Sources */,
 				20E55FC92AA1926A00343562 /* Array+Extension.swift in Sources */,
+				20E55FD02AA34E8300343562 /* PhotoAssetListGrid.swift in Sources */,
 				20E55FAF2AA0566000343562 /* CoreDataModelFactory.swift in Sources */,
 				20E55FB92AA0568E00343562 /* AssetDownloadButton.swift in Sources */,
 				20E55FAD2AA0566000343562 /* AssetSection.swift in Sources */,
+				20E55FCF2AA34E6D00343562 /* PhotoAssetSelectGrid.swift in Sources */,
 				20E55FB12AA0567200343562 /* FetchedResults+Extension.swift in Sources */,
 				20E55FA62AA0563E00343562 /* Photomark.xcdatamodeld in Sources */,
 				20E55FC12AA056B000343562 /* PHAsset+Extension.swift in Sources */,
