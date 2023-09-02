@@ -96,7 +96,6 @@ class KeyboardViewController: UIInputViewController {
 
 struct KeyboardView: View {
   @Environment(\.photoLibrary) var photoLibrary
-  private let helloWorldText = "Hello, world!"
 
   @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
@@ -106,11 +105,24 @@ struct KeyboardView: View {
     sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
     animation: .default)
   var tags: FetchedResults<Tag>
+  @State var selectedTags: [Tag] = []
 
   let assets: [Asset]
 
   var body: some View {
-    PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
+    VStack {
+      TagLine(tags: tags.toArray()) { tag in
+        TagView(tag: tag, isSelected: selectedTags.contains(tag))
+          .onTapGesture {
+            if selectedTags.contains(tag) {
+              selectedTags.removeAll { $0.id == tag.id }
+            } else {
+              selectedTags.append(tag)
+            }
+          }
+      }
+      PhotoAssetListGrid(assets: assets, photos: photos.toArray(), tags: tags.toArray())
+    }
   }
 
 }

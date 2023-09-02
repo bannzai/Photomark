@@ -110,6 +110,7 @@
 		20E55FCC2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
 		20E55FCD2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
 		20E55FCE2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
+		20E55FD22AA34F4E00343562 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
 		20ED928827C044AD0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 		20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 /* End PBXBuildFile section */
@@ -790,6 +791,7 @@
 				20E55FC92AA1926A00343562 /* Array+Extension.swift in Sources */,
 				20E55FAF2AA0566000343562 /* CoreDataModelFactory.swift in Sources */,
 				20E55FB92AA0568E00343562 /* AssetDownloadButton.swift in Sources */,
+				20E55FD22AA34F4E00343562 /* TagLine.swift in Sources */,
 				20E55FAD2AA0566000343562 /* AssetSection.swift in Sources */,
 				20E55FB12AA0567200343562 /* FetchedResults+Extension.swift in Sources */,
 				20E55FA62AA0563E00343562 /* Photomark.xcdatamodeld in Sources */,
