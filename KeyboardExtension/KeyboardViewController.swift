@@ -170,15 +170,13 @@ struct PhotoAssetListGrid: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      LazyVGrid(columns: gridItems(), spacing: 1) {
-        ForEach(assets, id: \.localIdentifier) { asset in
-          let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
-          PhotoAssetListImage(
-            asset: asset,
-            photo: photo,
-            tags: tags
-          )
-        }
+      VGrid(elements: assets, gridCount: 3, spacing: 1) { asset in
+        let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+        PhotoAssetListImage(
+          asset: asset,
+          photo: photo,
+          tags: tags
+        )
       }
     }
   }
