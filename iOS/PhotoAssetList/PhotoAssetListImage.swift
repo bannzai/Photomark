@@ -46,7 +46,6 @@ struct PhotoAssetListImage: View {
           } placeholder: {
             Image(systemName: "photo")
           }
-          .equatable()
         }
         .clipped()
 
