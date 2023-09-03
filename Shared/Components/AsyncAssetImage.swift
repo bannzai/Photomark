@@ -61,3 +61,10 @@ struct AsyncAssetImage<Content: View>: View {
     }
   }
 }
+
+
+extension AsyncAssetImage: Equatable {
+  static func ==(lhs: AsyncAssetImage, rhs: AsyncAssetImage) -> Bool {
+    lhs.asset.localIdentifier == rhs.asset.localIdentifier
+  }
+}

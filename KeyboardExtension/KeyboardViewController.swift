@@ -217,6 +217,7 @@ struct PhotoAssetListImage: View {
       } placeholder: {
         Image(systemName: "photo")
       }
+      .equatable()
 
       AssetCopyButton(asset: asset)
         .frame(width: 32, height: 32)
