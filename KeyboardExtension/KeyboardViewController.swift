@@ -67,7 +67,8 @@ class KeyboardViewController: UIInputViewController {
   }
 
   private func fetchFirst() {
-    let phAssets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 60).toArray()
+    // iOS keyboard extensionのメモリ制限が77MBらしいので、最新の30件のみを取得してメモリ使用料をセーブする
+    let phAssets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 30).toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
         return l > r
