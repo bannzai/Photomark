@@ -109,9 +109,6 @@
 		20E55FCD2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
 		20E55FCE2AA29DD100343562 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FCB2AA29DD100343562 /* ScreenSize.swift */; };
 		20E55FD22AA34F4E00343562 /* TagLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086F7CA279BCFAC00BBA8D4 /* TagLine.swift */; };
-		20E55FD42AA423DB00343562 /* VGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FD32AA423DB00343562 /* VGrid.swift */; };
-		20E55FD52AA423DB00343562 /* VGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FD32AA423DB00343562 /* VGrid.swift */; };
-		20E55FD62AA423DB00343562 /* VGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E55FD32AA423DB00343562 /* VGrid.swift */; };
 		20ED928827C044AD0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 		20ED928927C0456D0033D328 /* DeleteAllCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */; };
 /* End PBXBuildFile section */
@@ -199,7 +196,6 @@
 		20E55FC32AA058C900343562 /* KeyboardExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeyboardExtension.entitlements; sourceTree = "<group>"; };
 		20E55FC62AA1926A00343562 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		20E55FCB2AA29DD100343562 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
-		20E55FD32AA423DB00343562 /* VGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGrid.swift; sourceTree = "<group>"; };
 		20ED928727C044AD0033D328 /* DeleteAllCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAllCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -469,7 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				2059464F279D6DBC00F5726C /* AsyncAssetImage.swift */,
-				20E55FD32AA423DB00343562 /* VGrid.swift */,
 				2095BC0127A02544008998A2 /* AssetDownloadButton.swift */,
 				2026C51427A2762C00310E9F /* AssetCopyButton.swift */,
 				200DC19127BA8BA30060A555 /* GridItemCount.swift */,
@@ -687,7 +682,6 @@
 				2086F765279AD67600BBA8D4 /* Photomark.xcdatamodeld in Sources */,
 				2086F7D2279BDA3C00BBA8D4 /* IdentifiableError.swift in Sources */,
 				20E55FC72AA1926A00343562 /* Array+Extension.swift in Sources */,
-				20E55FD42AA423DB00343562 /* VGrid.swift in Sources */,
 				2086F76B279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				20594650279D6DBC00F5726C /* AsyncAssetImage.swift in Sources */,
 				2026C52127A286AA00310E9F /* PhotoAssetSelectImage.swift in Sources */,
@@ -744,7 +738,6 @@
 				2086F76C279AD67600BBA8D4 /* Persistence.swift in Sources */,
 				207327DB27B4641F004024A8 /* PasteBoard.swift in Sources */,
 				207327DF27B47B9A004024A8 /* FetchedResults+Extension.swift in Sources */,
-				20E55FD52AA423DB00343562 /* VGrid.swift in Sources */,
 				2059463E279D335800F5726C /* AlertError.swift in Sources */,
 				207327D927B40006004024A8 /* UIImage+.swift in Sources */,
 				207327E627B497F9004024A8 /* ApplyTagPage.swift in Sources */,
@@ -777,7 +770,6 @@
 				20E55FB62AA0568E00343562 /* AsyncAssetImage.swift in Sources */,
 				20E55FBF2AA0569D00343562 /* AlertError.swift in Sources */,
 				20E55FB22AA0567200343562 /* String+Extension.swift in Sources */,
-				20E55FD62AA423DB00343562 /* VGrid.swift in Sources */,
 				20E55FBB2AA0569800343562 /* Image+.swift in Sources */,
 				20E55FB02AA0566000343562 /* Photo+Extension.swift in Sources */,
 				20E55FCE2AA29DD100343562 /* ScreenSize.swift in Sources */,
