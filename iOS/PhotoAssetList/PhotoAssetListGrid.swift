@@ -28,15 +28,15 @@ struct PhotoAssetListGrid: View {
           let section = sections[i]
           sectionHeader(section)
 
-          // 一度下方向にスクロールした後に上方向にスクロールするとカクツクのでLazyVGridは使用しない
-          // たぶん遅延評価されたAsyncAssetImageの画像が読み込まれてFrameが変更されたので起きている
-          VGrid(elements: section.assets, gridCount: 3, spacing: 1) { asset in
-            let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
-            PhotoAssetListImage(
-              asset: asset,
-              photo: photo,
-              tags: tags
-            )
+          LazyVGrid(columns: gridItems(), spacing: 1) {
+            ForEach(section.assets, id: \.localIdentifier) { asset in
+              let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+              PhotoAssetListImage(
+                asset: asset,
+                photo: photo,
+                tags: tags
+              )
+            }
           }
         }
       }
