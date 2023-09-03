@@ -9,10 +9,8 @@ struct VGrid<E, Content: View>: View {
   var body: some View {
     Grid(horizontalSpacing: spacing) {
       let chunkedList = elements.chunked(by: gridCount)
-
       ForEach(0..<chunkedList.count, id: \.self) { i in
         let chunked = chunkedList[i]
-
         GridRow {
           ForEach(0..<chunked.count, id: \.self) { j in
             content(chunked[j])
