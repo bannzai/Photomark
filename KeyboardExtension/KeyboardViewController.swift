@@ -10,20 +10,6 @@ import SwiftUI
 import Photos
 
 class KeyboardViewController: UIInputViewController {
-  @objc func xxCopy(sender: AnyObject) {
-    let button = sender as! UIButton
-    let tag = button.tag
-    let asset = assets[tag]
-    Task { @MainActor in
-      if let image = await PhotoLibraryKey.defaultValue.highQualityImage(for: asset) {
-        Pasteboard.general.image = image
-      } else {
-        fatalError("image not found")
-      }
-    }
-  }
-
-
   var assets: [Asset] = []
   override func viewDidLoad() {
     super.viewDidLoad()
