@@ -67,8 +67,7 @@ struct PhotoLibrary {
   func fetchImage(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic, callback: @escaping (UIImage?) -> Void) {
     let targetSize: CGSize
     if let maxImageLength = maxImageLength {
-      // TODO: *3ではなく解像度をかけるようにする。もしくはx2でもいいかも
-      targetSize = .init(width: maxImageLength * 3, height: maxImageLength * 3)
+      targetSize = .init(width: maxImageLength * UIScreen.main.scale, height: maxImageLength * UIScreen.main.scale)
     } else {
       targetSize = PHImageManagerMaximumSize
     }
