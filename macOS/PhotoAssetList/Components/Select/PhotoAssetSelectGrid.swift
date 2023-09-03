@@ -24,7 +24,7 @@ struct PhotoAssetSelectGrid: View {
   }()
 
   var body: some View {
-    LazyVStack(spacing: 8) {
+    VStack(spacing: 8) {
       ForEach(0..<sections.count) { i in
         // FIXME: cause out of index when filtering with photo tags
         if i <= sections.count - 1 {
