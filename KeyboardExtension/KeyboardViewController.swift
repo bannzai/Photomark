@@ -209,7 +209,8 @@ struct PhotoAssetListImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      AsyncAssetImage(asset: asset, maxImageLength: screenSize.width / 3 - 2) { image in
+      let width = screenSize.width / 3 - 2
+      AsyncAssetImage(asset: asset, maxImageLength: width) { image in
         image
           .resizable()
           .scaledToFill()
@@ -217,6 +218,7 @@ struct PhotoAssetListImage: View {
       } placeholder: {
         Image(systemName: "photo")
       }
+      .frame(width: width, height: width)
 
       AssetCopyButton(asset: asset)
         .frame(width: 32, height: 32)
