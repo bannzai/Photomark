@@ -34,8 +34,14 @@ struct PhotoLibrary {
     }
   }
 
-  func fetchAssets() -> PHFetchResult<PHAsset> {
-    PHAsset.fetchAssets(with: nil)
+  func fetchAssets(fetchLimit: Int? = nil) -> PHFetchResult<PHAsset> {
+    if let fetchLimit {
+      let options = PHFetchOptions()
+      options.fetchLimit = fetchLimit
+      return PHAsset.fetchAssets(with: options)
+    } else {
+      return PHAsset.fetchAssets(with: nil)
+    }
   }
   func fetchFirstAsset(in assetCollection: PHAssetCollection) -> PHAsset? {
     let options = PHFetchOptions()

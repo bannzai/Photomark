@@ -13,6 +13,10 @@ class KeyboardViewController: UIInputViewController {
   var assets: [Asset] = []
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    PHPhotoLibrary.requestAuthorization { (status) in
+      print(status)
+    }
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +67,7 @@ class KeyboardViewController: UIInputViewController {
   }
 
   private func fetchFirst() {
-    let phAssets = PhotoLibraryKey.defaultValue.fetchAssets().toArray()
+    let phAssets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 60).toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
       if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
         return l > r
@@ -73,12 +77,8 @@ class KeyboardViewController: UIInputViewController {
       }
     }
 
-    let cloudIdentifiers = PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: sortedAssets.map(\.localIdentifier))
     assets = sortedAssets.compactMap { asset in
-      guard let cloudIdentifier = try? cloudIdentifiers[asset.localIdentifier]?.get().stringValue else {
-        return nil
-      }
-      return .init(phAsset: asset, cloudIdentifier: cloudIdentifier)
+      return .init(phAsset: asset, cloudIdentifier: nil)
     }
 
     setup(assets: assets)
