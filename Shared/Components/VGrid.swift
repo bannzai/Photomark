@@ -3,15 +3,23 @@ import SwiftUI
 struct VGrid<E, Content: View>: View {
   let elements: [E]
   let gridCount: Int
+  let spacing: CGFloat
   @ViewBuilder let content: (E) -> Content
 
   var body: some View {
     Grid {
       let chunkedList = elements.chunked(by: gridCount)
-      ForEach(chunkedList.indices, id: \.self) { i in
+      ForEach(0..<chunkedList.count, id: \.self) { i in
+        let chunked = chunkedList[i]
+
         GridRow {
-          ForEach(chunkedList[i].indices, id: \.self) { j in
-            content(chunkedList[i][j])
+          ForEach(0..<chunked.count, id: \.self) { j in
+            content(chunked[j])
+
+            if chunked.count - 1 != j {
+              Spacer()
+                .frame(width: spacing)
+            }
           }
         }
       }
