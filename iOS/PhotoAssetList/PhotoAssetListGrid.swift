@@ -23,7 +23,7 @@ struct PhotoAssetListGrid: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      VStack {
+      LazyVStack {
         ForEach(0..<sections.count, id: \.self) { i in
           let section = sections[i]
           sectionHeader(section)
