@@ -40,11 +40,9 @@ struct PhotoAssetListImage: View {
         image
           .resizable()
           .scaledToFill()
-          .frame(width: width, height: width)
           .clipped()
       } placeholder: {
         Image(systemName: "photo")
-          .frame(width: width, height: width)
       }
       .frame(width: width, height: width)
 
