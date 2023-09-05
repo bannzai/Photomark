@@ -94,6 +94,7 @@ struct KeyboardView: View {
       if selectedTags.isEmpty {
         ScrollView(.vertical) {
           AssetGridRecentlyCopied()
+          AssetGridRecentlyDownloaded()
         }
       }
     }
@@ -192,6 +193,47 @@ struct AssetGridRecentlyCopied: View {
   private func fetch() {
     // .filterの条件のプロパティを変更する
     let phAssets = photoLibrary.fetch(localIdentifiers: .init(photos.filter { $0.lastCopiedDateTime != nil }.localIdentifiers.prefix(4)))
+    assets = phAssets.toArray().map { asset in
+      .init(phAsset: asset, cloudIdentifier: nil)
+    }
+  }
+}
+
+struct AssetGridRecentlyDownloaded: View {
+  @Environment(\.photoLibrary) var photoLibrary
+
+  // sortDescriptors:keyPathを変更
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.lastAssetDownloadedDateTime, ascending: false)],
+    animation: .default)
+  var photos: FetchedResults<Photo>
+
+  @State var assets: [Asset] = []
+
+  var body: some View {
+    VStack(alignment: .leading) {
+      // タイトルを変える
+      Text("最近ダウンロードした画像")
+        .font(.callout)
+        .fontWeight(.semibold)
+        .padding(.horizontal)
+
+      VGrid(elements: assets, gridCount: 4, spacing: 1) { asset in
+        let photo = photos.first(where: { asset.localIdentifier == $0.phAssetLocalIdentifier })
+        PhotoAssetListImage(
+          asset: asset,
+          photo: photo
+        )
+      }
+    }
+    .onAppear {
+      fetch()
+    }
+  }
+
+  private func fetch() {
+    // .filterの条件のプロパティを変更する
+    let phAssets = photoLibrary.fetch(localIdentifiers: .init(photos.filter { $0.lastAssetDownloadedDateTime != nil }.localIdentifiers.prefix(4)))
     assets = phAssets.toArray().map { asset in
       .init(phAsset: asset, cloudIdentifier: nil)
     }
