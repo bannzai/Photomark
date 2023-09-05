@@ -4,7 +4,7 @@
         <attribute name="createdDateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="lastCopiedDateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="lastTagAddedDateTime" optional="YES"/>
+        <attribute name="lastTagAddedDateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="phAssetCloudIdentifier" optional="YES" attributeType="String"/>
         <attribute name="phAssetLocalIdentifier" optional="YES" attributeType="String"/>
         <attribute name="tagIDs" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[String]"/>
