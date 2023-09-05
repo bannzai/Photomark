@@ -171,7 +171,10 @@ struct AssetGridRecentlyCopied: View {
 
   var body: some View {
     Group {
-      if !assets.isEmpty {
+      if assets.isEmpty {
+        // assetが無い場合はViewを非表示。EmptyViewだとonAppearが発火されない
+        Color.clear
+      } else {
         VStack(alignment: .leading) {
           // タイトルを変える
           Text("最近コピーされた画像")
@@ -217,7 +220,10 @@ struct AssetGridRecentlyDownloaded: View {
   var body: some View {
 
     Group {
-      if !assets.isEmpty {
+      if assets.isEmpty {
+        // assetが無い場合はViewを非表示。EmptyViewだとonAppearが発火されない
+        Color.clear
+      } else {
         VStack(alignment: .leading) {
           // タイトルを変える
           Text("最近ダウンロードされた画像")
