@@ -18,8 +18,7 @@ class KeyboardViewController: UIInputViewController {
     // viewDidLoad等ではwindowがnilになるので注意
     let screenSize = view.window!.screen.bounds.size
 
-    let assets = fetch()
-    setup(screenSize: screenSize, assets: assets)
+    setup(screenSize: screenSize)
 }
 
   override func viewWillLayoutSubviews() {
@@ -35,8 +34,8 @@ class KeyboardViewController: UIInputViewController {
 
   }
 
-  private func setup(screenSize: CGSize, assets: [Asset]) {
-    let keyboardView = KeyboardView(assets: assets)
+  private func setup(screenSize: CGSize) {
+    let keyboardView = KeyboardView()
 
     // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
     let hostingController = UIHostingController(
@@ -60,22 +59,6 @@ class KeyboardViewController: UIInputViewController {
     ])
   }
 
-  private func fetch() -> [Asset] {
-    // iOS keyboard extensionのメモリ制限が77MBらしいので、最新の30件のみを取得してメモリ使用料をセーブする
-    let phAssets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 30).toArray()
-    let sortedAssets = phAssets.sorted { lhs, rhs in
-      if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
-        return l > r
-      } else {
-        assertionFailure()
-        return false
-      }
-    }
-
-    return sortedAssets.compactMap { asset in
-      return .init(phAsset: asset, cloudIdentifier: nil)
-    }
-  }
 }
 
 struct KeyboardView: View {
@@ -89,9 +72,9 @@ struct KeyboardView: View {
     sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
     animation: .default)
   var tags: FetchedResults<Tag>
-  @State var selectedTags: [Tag] = []
 
-  let assets: [Asset]
+  @State var selectedTags: [Tag] = []
+  @State var assets: [Asset] = []
 
   var body: some View {
     VStack {
@@ -107,7 +90,17 @@ struct KeyboardView: View {
       }
       .padding(.horizontal, 8)
       .padding(.top, 8)
-      PhotoAssetListGrid(assets: filteredAssets, photos: photos.toArray(), tags: tags.toArray())
+
+      ScrollView(.vertical) {
+        VGrid(elements: assets, gridCount: 3, spacing: 1) { asset in
+          let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+          PhotoAssetListImage(
+            asset: asset,
+            photo: photo,
+            tags: tags.toArray()
+          )
+        }
+      }
     }
   }
 
@@ -137,26 +130,20 @@ struct KeyboardView: View {
     }
   }
 
-
-}
-
-struct PhotoAssetListGrid: View {
-  @Environment(\.managedObjectContext) private var viewContext
-
-  let assets: [Asset]
-  let photos: [Photo]
-  let tags: [Tag]
-
-  var body: some View {
-    ScrollView(.vertical) {
-      VGrid(elements: assets, gridCount: 3, spacing: 1) { asset in
-        let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
-        PhotoAssetListImage(
-          asset: asset,
-          photo: photo,
-          tags: tags
-        )
+  private func fetch() {
+    // iOS keyboard extensionのメモリ制限が77MBらしいので、最新の30件のみを取得してメモリ使用料をセーブする
+    let phAssets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 10).toArray()
+    let sortedAssets = phAssets.sorted { lhs, rhs in
+      if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
+        return l > r
+      } else {
+        assertionFailure()
+        return false
       }
+    }
+
+    assets = sortedAssets.compactMap { asset in
+      return .init(phAsset: asset, cloudIdentifier: nil)
     }
   }
 }
@@ -172,16 +159,6 @@ struct PhotoAssetListImage: View {
   struct SelectedElement: Hashable {
     let photo: Photo
     let asset: Asset
-  }
-  @State var selectedElement: SelectedElement?
-  @State var error: Error?
-
-  private var transitionToDetail: Binding<Bool>  {
-    .init {
-      selectedElement != nil
-    } set: { _ in
-      selectedElement = nil
-    }
   }
 
   var body: some View {
@@ -200,6 +177,5 @@ struct PhotoAssetListImage: View {
       AssetCopyButton(asset: asset)
         .frame(width: 32, height: 32)
     }
-    .handle(error: $error)
   }
 }
