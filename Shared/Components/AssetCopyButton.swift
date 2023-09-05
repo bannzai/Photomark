@@ -21,7 +21,7 @@ struct AssetCopyButton: View {
                 Pasteboard.general.image = image
 
                 // Delay for user can recognize ProgressView.
-                await Task.sleep(2 * (NSEC_PER_SEC / 10))
+                try? await Task.sleep(nanoseconds: 2 * (NSEC_PER_SEC / 10))
                 isDownloading = false
               } else {
                 error = AlertError("画像を保存できませんでした", "再度お試しください")
