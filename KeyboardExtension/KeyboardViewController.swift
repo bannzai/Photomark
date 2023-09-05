@@ -65,11 +65,11 @@ struct KeyboardView: View {
   @Environment(\.photoLibrary) var photoLibrary
 
   @FetchRequest(
-    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDate, ascending: false)],
+    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.createdDateTime, ascending: false)],
     animation: .default)
   var photos: FetchedResults<Photo>
   @FetchRequest(
-    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
+    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDateTime, ascending: false)],
     animation: .default)
   var tags: FetchedResults<Tag>
 

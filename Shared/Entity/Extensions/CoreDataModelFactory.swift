@@ -8,7 +8,9 @@ extension Photo {
     photo.id = .init()
     photo.phAssetCloudIdentifier = asset.cloudIdentifier
     photo.phAssetLocalIdentifier = asset.localIdentifier
-    photo.createdDate = .init()
+    photo.createdDateTime = .init()
+    photo.lastCopiedDateTime = nil
+    photo.lastTagAddedDateTime = nil
     photo.tagIDs = []
     return photo
   }
@@ -31,7 +33,7 @@ extension Tag {
     let tag = Tag(context: context)
     tag.id = .init()
     tag.name = name
-    tag.createdDate = .init()
+    tag.createdDateTime = .init()
     return tag
   }
 
