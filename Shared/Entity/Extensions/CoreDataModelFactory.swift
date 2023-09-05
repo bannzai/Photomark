@@ -2,6 +2,8 @@ import Foundation
 import CoreData
 import Photos
 
+// PhotoはAssetをもとに作られる。Assetは存在しているがPhotoは存在していない場合がある。PhotoはAssetに対して何かしらアクションを行われた時に作成される
+// これはPHAssetをしたらPhotoを作成する。あるいは以前まで存在していたPHAssetが消されてPhotoが存在しない場合も考慮に入れ、AssetとPhotoの存在性を強く結び付けないためである。なので、Photoはコンポーネントの引数に渡されるときは基本的にOptionalになる
 extension Photo {
   private static func create(context: NSManagedObjectContext, asset: Asset) throws -> Photo {
     let photo = Photo(context: context)
