@@ -3,7 +3,7 @@ import Photos
 import SwiftUI
 import os.log
 
-private let logger = Logger(subsystem: "com.photomark.log", category: "photoLibrary")
+private let logger = Logger(subsystem: "com.bannzai.photomark.log", category: "photoLibrary")
 
 struct PhotoLibrary {
   enum AuthorizationAction {
