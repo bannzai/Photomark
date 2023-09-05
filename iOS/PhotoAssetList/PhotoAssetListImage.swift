@@ -46,7 +46,7 @@ struct PhotoAssetListImage: View {
       }
       .frame(width: width, height: width)
 
-      AssetCopyButton(asset: asset)
+      AssetCopyButton(asset: asset, photo: photo)
         .frame(width: 32, height: 32)
     }
     .onTapGesture {

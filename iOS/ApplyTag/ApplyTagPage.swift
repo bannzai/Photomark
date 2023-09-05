@@ -59,6 +59,7 @@ struct ApplyTagPage: View {
                   }
                   if !photoTagIDs.contains(selectedTagID) {
                     photo.tagIDs?.append(selectedTagID)
+                    photo.lastTagAddedDateTime = .now
                   }
                 }
               }

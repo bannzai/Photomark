@@ -65,10 +65,10 @@ struct PhotoDetailPage: View {
           }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          AssetDownloadButton(asset: asset)
+          AssetDownloadButton(asset: asset, photo: photo)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          AssetCopyButton(asset: asset)
+          AssetCopyButton(asset: asset, photo: photo)
         }
       }
       .sheet(isPresented: $activitySheetIsPresented, content: {

@@ -3,7 +3,7 @@ import CoreData
 import Photos
 
 extension Photo {
-  static func create(context: NSManagedObjectContext, asset: Asset) throws -> Photo {
+  private static func create(context: NSManagedObjectContext, asset: Asset) throws -> Photo {
     let photo = Photo(context: context)
     photo.id = .init()
     photo.phAssetCloudIdentifier = asset.cloudIdentifier
@@ -25,7 +25,7 @@ extension Photo {
 }
 
 extension Tag {
-  static func create(context: NSManagedObjectContext, name _name: String) -> Tag? {
+  private static func create(context: NSManagedObjectContext, name _name: String) -> Tag? {
     let name = _name.trimmed
     if name.isEmpty {
       return nil
