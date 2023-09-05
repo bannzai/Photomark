@@ -10,16 +10,17 @@ import SwiftUI
 import Photos
 
 class KeyboardViewController: UIInputViewController {
-  var assets: [Asset] = []
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
+  let photoLibrary = PhotoLibrary()
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    fetchFirst()
-  }
+    // viewDidLoad等ではwindowがnilになるので注意
+    let screenSize = view.window!.screen.bounds.size
+
+    let assets = fetch()
+    setup(screenSize: screenSize, assets: assets)
+}
 
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
@@ -34,11 +35,8 @@ class KeyboardViewController: UIInputViewController {
 
   }
 
-  private func setup(assets: [Asset]) {
+  private func setup(screenSize: CGSize, assets: [Asset]) {
     let keyboardView = KeyboardView(assets: assets)
-
-    // viewDidLoad等ではwindowがnilになるので注意
-    let screenSize = view.window!.screen.bounds.size
 
     // keyboardViewのSuperViewのSuperView(UIHostingController)の背景を透明にする
     let hostingController = UIHostingController(
@@ -62,7 +60,7 @@ class KeyboardViewController: UIInputViewController {
     ])
   }
 
-  private func fetchFirst() {
+  private func fetch() -> [Asset] {
     // iOS keyboard extensionのメモリ制限が77MBらしいので、最新の30件のみを取得してメモリ使用料をセーブする
     let phAssets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 30).toArray()
     let sortedAssets = phAssets.sorted { lhs, rhs in
@@ -74,11 +72,9 @@ class KeyboardViewController: UIInputViewController {
       }
     }
 
-    assets = sortedAssets.compactMap { asset in
+    return sortedAssets.compactMap { asset in
       return .init(phAsset: asset, cloudIdentifier: nil)
     }
-
-    setup(assets: assets)
   }
 }
 
