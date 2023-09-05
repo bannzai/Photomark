@@ -11,6 +11,7 @@ extension Photo {
     photo.createdDateTime = .init()
     photo.lastCopiedDateTime = nil
     photo.lastTagAddedDateTime = nil
+    photo.lastAssetDownloadedDateTime = nil
     photo.tagIDs = []
     return photo
   }

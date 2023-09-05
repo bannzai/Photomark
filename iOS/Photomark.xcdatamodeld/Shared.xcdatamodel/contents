@@ -3,6 +3,7 @@
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
         <attribute name="createdDateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lastAssetDownloadedDateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastCopiedDateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastTagAddedDateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="phAssetCloudIdentifier" optional="YES" attributeType="String"/>
