@@ -170,6 +170,9 @@ struct AssetGridRecentlyCopied: View {
   var body: some View {
     VStack(alignment: .leading) {
       Text("最近コピーされた画像")
+        .font(.callout)
+        .fontWeight(.semibold)
+        .padding(.horizontal)
       VGrid(elements: assets, gridCount: 4, spacing: 1) { asset in
         let photo = photos.first(where: { asset.localIdentifier == $0.phAssetLocalIdentifier })
         PhotoAssetListImage(
