@@ -102,6 +102,9 @@ struct KeyboardView: View {
         }
       }
     }
+    .onAppear {
+      fetch()
+    }
   }
 
   var filteredAssets: [Asset] {

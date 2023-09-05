@@ -35,12 +35,14 @@ struct PhotoLibrary {
   }
 
   func fetchAssets(fetchLimit: Int? = nil) -> PHFetchResult<PHAsset> {
+    let options = PHFetchOptions()
+    options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+
     if let fetchLimit {
-      let options = PHFetchOptions()
       options.fetchLimit = fetchLimit
       return PHAsset.fetchAssets(with: options)
     } else {
-      return PHAsset.fetchAssets(with: nil)
+      return PHAsset.fetchAssets(with: options)
     }
   }
   func fetchFirstAsset(in assetCollection: PHAssetCollection) -> PHAsset? {
