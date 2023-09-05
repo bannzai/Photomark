@@ -13,10 +13,6 @@ class KeyboardViewController: UIInputViewController {
   var assets: [Asset] = []
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    PHPhotoLibrary.requestAuthorization { (status) in
-      print(status)
-    }
   }
 
   override func viewDidAppear(_ animated: Bool) {
