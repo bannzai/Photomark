@@ -92,7 +92,7 @@ struct KeyboardView: View {
       .padding(.top, 8)
 
       ScrollView(.vertical) {
-        VGrid(elements: assets, gridCount: 3, spacing: 1) { asset in
+        VGrid(elements: assets, gridCount: 4, spacing: 1) { asset in
           let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
           PhotoAssetListImage(
             asset: asset,
@@ -135,7 +135,7 @@ struct KeyboardView: View {
 
   private func fetch() {
     // iOS keyboard extensionのメモリ制限が77MBらしいので、最新の30件のみを取得してメモリ使用料をセーブする
-    assets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 10).toArray().compactMap { asset in
+    assets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 12).toArray().compactMap { asset in
       return .init(phAsset: asset, cloudIdentifier: nil)
     }
   }
@@ -156,7 +156,7 @@ struct PhotoAssetListImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      let width = screenSize.width / 3 - 2
+      let width = screenSize.width / 4 - 3
       AsyncAssetImage(asset: asset, maxImageLength: width) { image in
         image
           .resizable()
