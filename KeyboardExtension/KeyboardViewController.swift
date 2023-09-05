@@ -135,17 +135,7 @@ struct KeyboardView: View {
 
   private func fetch() {
     // iOS keyboard extensionのメモリ制限が77MBらしいので、最新の30件のみを取得してメモリ使用料をセーブする
-    let phAssets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 10).toArray()
-    let sortedAssets = phAssets.sorted { lhs, rhs in
-      if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
-        return l > r
-      } else {
-        assertionFailure()
-        return false
-      }
-    }
-
-    assets = sortedAssets.compactMap { asset in
+    assets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 10).toArray().compactMap { asset in
       return .init(phAsset: asset, cloudIdentifier: nil)
     }
   }

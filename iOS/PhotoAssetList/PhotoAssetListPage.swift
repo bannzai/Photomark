@@ -153,17 +153,8 @@ extension PhotoAssetListPage {
 
   func fetchFirst() {
     let phAssets = photoLibrary.fetchAssets().toArray()
-    let sortedAssets = phAssets.sorted { lhs, rhs in
-      if let l = lhs.creationDate?.timeIntervalSinceReferenceDate, let r = rhs.creationDate?.timeIntervalSinceReferenceDate {
-        return l > r
-      } else {
-        assertionFailure()
-        return false
-      }
-    }
-
-    let cloudIdentifiers = PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: sortedAssets.map(\.localIdentifier))
-    assets = sortedAssets.compactMap { asset in
+    let cloudIdentifiers = PHPhotoLibrary.shared().cloudIdentifierMappings(forLocalIdentifiers: phAssets.map(\.localIdentifier))
+    assets = phAssets.compactMap { asset in
       guard let cloudIdentifier = try? cloudIdentifiers[asset.localIdentifier]?.get().stringValue else {
         return nil
       }
