@@ -10,8 +10,8 @@ extension Photo {
   }
 }
 
-extension FetchedResults<Photo> {
+extension [Photo] {
   var localIdentifiers: [String] {
-    toArray().compactMap(\.phAssetLocalIdentifier)
+    compactMap(\.phAssetLocalIdentifier)
   }
 }

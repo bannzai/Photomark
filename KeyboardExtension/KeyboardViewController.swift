@@ -74,9 +74,7 @@ struct KeyboardView: View {
   var tags: FetchedResults<Tag>
 
   @State var selectedTags: [Tag] = []
-  @State var recentlyCopiedAssets: [Asset] = []
-  @State var recentlyAddedTagAssets: [Asset] = []
-  @State var filterByTagsAssets: [Asset] = []
+  @State var assets: [Asset] = []
 
   var body: some View {
     VStack {
@@ -95,28 +93,15 @@ struct KeyboardView: View {
 
       if selectedTags.isEmpty {
         ScrollView(.vertical) {
-          VStack(alignment: .leading) {
-            Text("最近追加された画像")
-            VGrid(elements: recentlyAssets, gridCount: 4, spacing: 1) { asset in
-              let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
-              PhotoAssetListImage(
-                asset: asset,
-                photo: photo,
-                tags: tags.toArray()
-              )
-            }
-          }
+          AssetGridRecentlyCopied()
         }
       }
-    }
-    .onAppear {
-      fetch()
     }
   }
 
   var filteredAssets: [Asset] {
     if selectedTags.isEmpty {
-      return filterByTagsAssets
+      return assets
     } else {
       let filteredPhotos: [(photo: Photo, photoTagIDs: [String])] = photos.toArray().compactMap { photo in
         if let tagIDs = photo.tagIDs {
@@ -134,18 +119,10 @@ struct KeyboardView: View {
         }
       }
 
-      return filterByTagsAssets.filter { asset in
+      return assets.filter { asset in
         filteredPhotos.contains { tuple in asset.cloudIdentifier == tuple.photo.phAssetCloudIdentifier }
       }
     }
-  }
-
-  private func fetch() {
-    // iOS keyboard extensionのメモリ制限が77MBらしいので、最新の30件のみを取得してメモリ使用料をセーブする
-    recentlyAssets = photoLibrary.fetchAssets(fetchLimit: 4).toArray().compactMap { asset in
-      return .init(phAsset: asset, cloudIdentifier: nil)
-    }
-    // TODO: local identifiers でfetch
   }
 }
 
@@ -180,7 +157,6 @@ struct PhotoAssetListImage: View {
   }
 }
 
-// MARK: - Components
 struct AssetGridRecentlyCopied: View {
   @Environment(\.photoLibrary) var photoLibrary
 
@@ -208,7 +184,7 @@ struct AssetGridRecentlyCopied: View {
   }
 
   private func fetch() {
-    let phAssets = photoLibrary.fetch(localIdentifiers: photos.localIdentifiers)
+    let phAssets = photoLibrary.fetch(localIdentifiers: .init(photos.filter { $0.lastCopiedDateTime != nil }.localIdentifiers.prefix(4)))
     assets = phAssets.toArray().map { asset in
       .init(phAsset: asset, cloudIdentifier: nil)
     }
