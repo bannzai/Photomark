@@ -74,7 +74,10 @@ struct KeyboardView: View {
   var tags: FetchedResults<Tag>
 
   @State var selectedTags: [Tag] = []
-  @State var assets: [Asset] = []
+  @State var recentlyAssets: [Asset] = []
+  @State var recentlyCopiedAssets: [Asset] = []
+  @State var recentlyAddedTagAssets: [Asset] = []
+  @State var filterByTagsAssets: [Asset] = []
 
   var body: some View {
     VStack {
@@ -91,14 +94,19 @@ struct KeyboardView: View {
       .padding(.horizontal, 8)
       .padding(.top, 8)
 
-      ScrollView(.vertical) {
-        VGrid(elements: assets, gridCount: 4, spacing: 1) { asset in
-          let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
-          PhotoAssetListImage(
-            asset: asset,
-            photo: photo,
-            tags: tags.toArray()
-          )
+      if selectedTags.isEmpty {
+        ScrollView(.vertical) {
+          VStack(alignment: .leading) {
+            Text("最近追加された画像")
+            VGrid(elements: recentlyAssets, gridCount: 4, spacing: 1) { asset in
+              let photo = photos.first(where: { asset.cloudIdentifier == $0.phAssetCloudIdentifier })
+              PhotoAssetListImage(
+                asset: asset,
+                photo: photo,
+                tags: tags.toArray()
+              )
+            }
+          }
         }
       }
     }
@@ -109,7 +117,7 @@ struct KeyboardView: View {
 
   var filteredAssets: [Asset] {
     if selectedTags.isEmpty {
-      return assets
+      return filterByTagsAssets
     } else {
       let filteredPhotos: [(photo: Photo, photoTagIDs: [String])] = photos.toArray().compactMap { photo in
         if let tagIDs = photo.tagIDs {
@@ -127,7 +135,7 @@ struct KeyboardView: View {
         }
       }
 
-      return assets.filter { asset in
+      return filterByTagsAssets.filter { asset in
         filteredPhotos.contains { tuple in asset.cloudIdentifier == tuple.photo.phAssetCloudIdentifier }
       }
     }
@@ -135,9 +143,10 @@ struct KeyboardView: View {
 
   private func fetch() {
     // iOS keyboard extensionのメモリ制限が77MBらしいので、最新の30件のみを取得してメモリ使用料をセーブする
-    assets = PhotoLibraryKey.defaultValue.fetchAssets(fetchLimit: 12).toArray().compactMap { asset in
+    recentlyAssets = photoLibrary.fetchAssets(fetchLimit: 4).toArray().compactMap { asset in
       return .init(phAsset: asset, cloudIdentifier: nil)
     }
+    // TODO: local identifiers でfetch
   }
 }
 
