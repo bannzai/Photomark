@@ -74,7 +74,6 @@ struct KeyboardView: View {
   var tags: FetchedResults<Tag>
 
   @State var selectedTags: [Tag] = []
-  @State var recentlyAssets: [Asset] = []
   @State var recentlyCopiedAssets: [Asset] = []
   @State var recentlyAddedTagAssets: [Asset] = []
   @State var filterByTagsAssets: [Asset] = []
@@ -156,7 +155,6 @@ struct PhotoAssetListImage: View {
 
   let asset: Asset
   let photo: Photo?
-  let tags: [Tag]
 
   struct SelectedElement: Hashable {
     let photo: Photo
@@ -178,6 +176,41 @@ struct PhotoAssetListImage: View {
 
       AssetCopyButton(asset: asset, photo: photo)
         .frame(width: 32, height: 32)
+    }
+  }
+}
+
+// MARK: - Components
+struct AssetGridRecentlyCopied: View {
+  @Environment(\.photoLibrary) var photoLibrary
+
+  @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Photo.lastCopiedDateTime, ascending: false)],
+    animation: .default)
+  var photos: FetchedResults<Photo>
+
+  @State var assets: [Asset] = []
+
+  var body: some View {
+    VStack(alignment: .leading) {
+      Text("最近コピーされた画像")
+      VGrid(elements: assets, gridCount: 4, spacing: 1) { asset in
+        let photo = photos.first(where: { asset.localIdentifier == $0.phAssetLocalIdentifier })
+        PhotoAssetListImage(
+          asset: asset,
+          photo: photo
+        )
+      }
+    }
+    .onAppear {
+      fetch()
+    }
+  }
+
+  private func fetch() {
+    let phAssets = photoLibrary.fetch(localIdentifiers: photos.localIdentifiers)
+    assets = phAssets.toArray().map { asset in
+      .init(phAsset: asset, cloudIdentifier: nil)
     }
   }
 }

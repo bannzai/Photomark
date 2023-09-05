@@ -34,6 +34,12 @@ struct PhotoLibrary {
     }
   }
 
+  func fetch(localIdentifiers: [String]) -> PHFetchResult<PHAsset> {
+    let options = PHFetchOptions()
+    options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+    return PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: options)
+  }
+
   func fetchAssets(fetchLimit: Int? = nil) -> PHFetchResult<PHAsset> {
     let options = PHFetchOptions()
     options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
