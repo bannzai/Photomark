@@ -23,8 +23,11 @@ struct AssetCopyButton: View {
               if let image = await photoLibrary.highQualityImage(for: asset) {
                 Pasteboard.general.image = image
 
-
                 if let photo {
+                  photo.lastCopiedDateTime = .now
+                  try viewContext.save()
+                } else {
+                  let photo = try Photo.createAndSave(context: viewContext, asset: asset)
                   photo.lastCopiedDateTime = .now
                   try viewContext.save()
                 }

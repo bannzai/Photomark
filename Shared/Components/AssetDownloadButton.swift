@@ -29,6 +29,10 @@ struct AssetDownloadButton: View {
               if let photo {
                 photo.lastAssetDownloadedDateTime = .now
                 try viewContext.save()
+              } else {
+                let photo = try Photo.createAndSave(context: viewContext, asset: asset)
+                photo.lastAssetDownloadedDateTime = .now
+                try viewContext.save()
               }
 
               // Delay for user can recognize ProgressView.
