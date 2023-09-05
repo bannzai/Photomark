@@ -160,6 +160,7 @@ struct PhotoAssetListImage: View {
 struct AssetGridRecentlyCopied: View {
   @Environment(\.photoLibrary) var photoLibrary
 
+  // sortDescriptors:keyPathを変更
   @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \Photo.lastCopiedDateTime, ascending: false)],
     animation: .default)
@@ -169,10 +170,12 @@ struct AssetGridRecentlyCopied: View {
 
   var body: some View {
     VStack(alignment: .leading) {
+      // タイトルを変える
       Text("最近コピーされた画像")
         .font(.callout)
         .fontWeight(.semibold)
         .padding(.horizontal)
+
       VGrid(elements: assets, gridCount: 4, spacing: 1) { asset in
         let photo = photos.first(where: { asset.localIdentifier == $0.phAssetLocalIdentifier })
         PhotoAssetListImage(
@@ -187,6 +190,7 @@ struct AssetGridRecentlyCopied: View {
   }
 
   private func fetch() {
+    // .filterの条件のプロパティを変更する
     let phAssets = photoLibrary.fetch(localIdentifiers: .init(photos.filter { $0.lastCopiedDateTime != nil }.localIdentifiers.prefix(4)))
     assets = phAssets.toArray().map { asset in
       .init(phAsset: asset, cloudIdentifier: nil)
