@@ -35,21 +35,18 @@ struct PhotoAssetListImage: View {
         EmptyView()
       }
 
-      Color.black
-        .aspectRatio(1, contentMode: .fit)
-        .overlay {
-          AsyncAssetImage(asset: asset, maxImageLength: screenSize.width / 3 - 2) { image in
-            image
-              .resizable()
-              .scaledToFill()
-              .clipped()
-          } placeholder: {
-            Image(systemName: "photo")
-          }
-        }
-        .clipped()
+      let width = screenSize.width / 3 - 2
+      AsyncAssetImage(asset: asset, maxImageLength: width) { image in
+        image
+          .resizable()
+          .scaledToFill()
+          .clipped()
+      } placeholder: {
+        Image(systemName: "photo")
+      }
+      .frame(width: width, height: width)
 
-      AssetCopyButton(asset: asset)
+      AssetCopyButton(asset: asset, photo: photo)
         .frame(width: 32, height: 32)
     }
     .onTapGesture {

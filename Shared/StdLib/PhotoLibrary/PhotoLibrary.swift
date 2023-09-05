@@ -3,7 +3,7 @@ import Photos
 import SwiftUI
 import os.log
 
-private let logger = Logger(subsystem: "com.photomark.log", category: "photoLibrary")
+private let logger = Logger(subsystem: "com.bannzai.photomark.log", category: "photoLibrary")
 
 struct PhotoLibrary {
   enum AuthorizationAction {
@@ -34,8 +34,22 @@ struct PhotoLibrary {
     }
   }
 
-  func fetchAssets() -> PHFetchResult<PHAsset> {
-    PHAsset.fetchAssets(with: nil)
+  func fetch(localIdentifiers: [String]) -> PHFetchResult<PHAsset> {
+    let options = PHFetchOptions()
+    options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+    return PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: options)
+  }
+
+  func fetchAssets(fetchLimit: Int? = nil) -> PHFetchResult<PHAsset> {
+    let options = PHFetchOptions()
+    options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+
+    if let fetchLimit {
+      options.fetchLimit = fetchLimit
+      return PHAsset.fetchAssets(with: options)
+    } else {
+      return PHAsset.fetchAssets(with: options)
+    }
   }
   func fetchFirstAsset(in assetCollection: PHAssetCollection) -> PHAsset? {
     let options = PHFetchOptions()
@@ -65,8 +79,12 @@ struct PhotoLibrary {
   }
 
   func fetchImage(for asset: Asset, maxImageLength: CGFloat?, deliveryMode: PHImageRequestOptionsDeliveryMode = .opportunistic, callback: @escaping (UIImage?) -> Void) {
-    // 画質が悪いので基本最大サイズを取得する。その後に必要に応じて cropToBounds で画像を切り取る
-    let targetSize: CGSize = PHImageManagerMaximumSize
+    let targetSize: CGSize
+    if let maxImageLength = maxImageLength {
+      targetSize = .init(width: maxImageLength * UIScreen.main.scale, height: maxImageLength * UIScreen.main.scale)
+    } else {
+      targetSize = PHImageManagerMaximumSize
+    }
 
     let options = PHImageRequestOptions()
     options.deliveryMode = deliveryMode

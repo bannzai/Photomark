@@ -8,7 +8,7 @@ struct PersistenceController {
     let viewContext = result.container.viewContext
     for _ in 0..<10 {
       let newItem = Photo(context: viewContext)
-      newItem.createdDate = Date()
+      newItem.createdDateTime = Date()
     }
     do {
       try viewContext.save()
@@ -60,7 +60,7 @@ struct PersistenceController {
 final class PersistentCloudKitContainer: NSPersistentCloudKitContainer {
   override public class func defaultDirectoryURL() -> URL {
     var storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.bannzai.Photomark")
-    storeURL = storeURL?.appendingPathComponent("Sakura.sqlite")
+    storeURL = storeURL?.appendingPathComponent("Photomark.sqlite")
     return storeURL!
   }
 

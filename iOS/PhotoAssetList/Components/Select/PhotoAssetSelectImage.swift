@@ -9,7 +9,8 @@ struct PhotoAssetSelectImage: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      AsyncAssetImage(asset: asset, maxImageLength: screenSize.width / 3 - 2) { image in
+      let width = screenSize.width / 3 - 2
+      AsyncAssetImage(asset: asset, maxImageLength: width) { image in
           image
             .resizable()
             .scaledToFill()
@@ -17,6 +18,7 @@ struct PhotoAssetSelectImage: View {
       } placeholder: {
           Image(systemName: "photo")
       }
+      .frame(width: width, height: width)
 
       Group {
         if isSelected {

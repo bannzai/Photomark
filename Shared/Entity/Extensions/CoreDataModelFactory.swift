@@ -2,13 +2,18 @@ import Foundation
 import CoreData
 import Photos
 
+// PhotoはAssetをもとに作られる。Assetは存在しているがPhotoは存在していない場合がある。PhotoはAssetに対して何かしらアクションを行われた時に作成される
+// これはPHAssetをしたらPhotoを作成する。あるいは以前まで存在していたPHAssetが消されてPhotoが存在しない場合も考慮に入れ、AssetとPhotoの存在性を強く結び付けないためである。なので、Photoはコンポーネントの引数に渡されるときは基本的にOptionalになる
 extension Photo {
-  static func create(context: NSManagedObjectContext, asset: Asset) throws -> Photo {
+  private static func create(context: NSManagedObjectContext, asset: Asset) throws -> Photo {
     let photo = Photo(context: context)
     photo.id = .init()
     photo.phAssetCloudIdentifier = asset.cloudIdentifier
     photo.phAssetLocalIdentifier = asset.localIdentifier
-    photo.createdDate = .init()
+    photo.createdDateTime = .init()
+    photo.lastCopiedDateTime = nil
+    photo.lastTagAddedDateTime = nil
+    photo.lastAssetDownloadedDateTime = nil
     photo.tagIDs = []
     return photo
   }
@@ -22,7 +27,7 @@ extension Photo {
 }
 
 extension Tag {
-  static func create(context: NSManagedObjectContext, name _name: String) -> Tag? {
+  private static func create(context: NSManagedObjectContext, name _name: String) -> Tag? {
     let name = _name.trimmed
     if name.isEmpty {
       return nil
@@ -31,7 +36,7 @@ extension Tag {
     let tag = Tag(context: context)
     tag.id = .init()
     tag.name = name
-    tag.createdDate = .init()
+    tag.createdDateTime = .init()
     return tag
   }
 

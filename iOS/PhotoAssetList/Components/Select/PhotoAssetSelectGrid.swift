@@ -25,26 +25,24 @@ struct PhotoAssetSelectGrid: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      VStack {
+      LazyVStack {
         ForEach(0..<sections.count, id: \.self) { i in
           let section = sections[i]
           sectionHeader(section)
 
-          LazyVGrid(columns: gridItems(), spacing: 1) {
-            ForEach(section.assets, id: \.localIdentifier) { asset in
-              PhotoAssetSelectImage(
-                asset: asset,
-                photo: photos.first(where: { asset.cloudIdentifier  == $0.phAssetCloudIdentifier }),
-                tags: tags,
-                isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
-                  if isSelected {
-                    selectedAssets.append(asset)
-                  } else {
-                    selectedAssets.removeAll(where: { $0 == asset })
-                  }
-                })
-              )
-            }
+          VGrid(elements: section.assets, gridCount: 3, spacing: 1) { asset in
+            PhotoAssetSelectImage(
+              asset: asset,
+              photo: photos.first(where: { asset.cloudIdentifier  == $0.phAssetCloudIdentifier }),
+              tags: tags,
+              isSelected: .init(get: { selectedAssets.contains(asset) }, set: { isSelected in
+                if isSelected {
+                  selectedAssets.append(asset)
+                } else {
+                  selectedAssets.removeAll(where: { $0 == asset })
+                }
+              })
+            )
           }
         }
       }

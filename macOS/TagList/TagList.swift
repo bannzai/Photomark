@@ -3,7 +3,7 @@ import SwiftUI
 struct TagList: View {
   @Environment(\.managedObjectContext) var viewContext
   @FetchRequest(
-    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDate, ascending: false)],
+    sortDescriptors: [NSSortDescriptor(keyPath: \Tag.createdDateTime, ascending: false)],
     animation: .default)
   var tags: FetchedResults<Tag>
 

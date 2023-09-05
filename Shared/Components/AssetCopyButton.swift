@@ -2,10 +2,13 @@ import SwiftUI
 
 struct AssetCopyButton: View {
   @Environment(\.photoLibrary) var photoLibrary
-  let asset: Asset
+  @Environment(\.managedObjectContext) var viewContext
 
   @State var isDownloading: Bool = false
   @State var error: Error?
+
+  let asset: Asset
+  let photo: Photo?
 
   var body: some View {
     Group {
@@ -20,8 +23,17 @@ struct AssetCopyButton: View {
               if let image = await photoLibrary.highQualityImage(for: asset) {
                 Pasteboard.general.image = image
 
+                if let photo {
+                  photo.lastCopiedDateTime = .now
+                  try viewContext.save()
+                } else {
+                  let photo = try Photo.createAndSave(context: viewContext, asset: asset)
+                  photo.lastCopiedDateTime = .now
+                  try viewContext.save()
+                }
+
                 // Delay for user can recognize ProgressView.
-                await Task.sleep(2 * (NSEC_PER_SEC / 10))
+                try? await Task.sleep(nanoseconds: 2 * (NSEC_PER_SEC / 10))
                 isDownloading = false
               } else {
                 error = AlertError("画像を保存できませんでした", "再度お試しください")
